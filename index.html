@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Yalla — Libanais</title>
+<!-- ── Mode application iPhone ── -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Yalla">
+<meta name="theme-color" content="#F6F0E4">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAKa0lEQVR42u2cfWwT9x2H73x+f4ntJE7iQF4hJAFKeAkJUBKVlzZbaEGwgYS6QrUNqaNj1UangUBjmqjWoVImdZvWMU1rNyiTipZqlLIMUWhZoRTCWyDklQQcTBI7fo9j39m3P8JQB5Tm7Dvn7vx5/oP4Lr/cPf58f293ZNHKOgKAR6HAJQCQA0AOADkA5ACQA0AOADkA5ACQA0AOAB5EKYZGtL37Hu7Ew1RuWD+xDSAnauENQohflFTLASckZEnq5IAWklMkFXJAC4kqIqwc0ELSigglB7SQgSIKmCEPhLjmCpgBP1JRVqCFzEqMAmYgQoSVA2bI0g8FzIAfQskBM2TsB5bsgTByIDbkHR4KmAE/eJYDZqSDH+hzAF7lQGykSXggOQB/ciA20ic8kByAJzkQG2kVHkgOwIcciI10Cw8kB4AcQDg5UFPSsLIgOQDkAJADpFoOdDjSs9uB5ACQA0AOADkA5ACQA0AOADkA5ACQA0AOACAHgBwAcgDIASAHgBwAcgDIASAHgBwAQA4AOQDkAEKgxCXgBsvSfi/tG45HRuPRCEtHCYJUqNSkWq1QqZUZFpUlk1RQkCMtiLoHR252hPv7wo7eyF0H7fWw8djjDiBJldmqycnXF081lJQbplRQBiPkkA/xaMR/9UKg7VKwvTU6PMQ5WrzDtHc42NFKEASpoEzTqyzVdZY5taRSBTkkTGTQOdjc5G35LB4Z5acKxWP+1hZ/a4uzKSv3G2uyFj9NkCTkkF5aOJv+5v60mY3HhTg/7XU7Du33fH6qYMMPNTl2jFYkA+1xd7z+M9epYwKZcZ/QzY7OPduDndchhzRgAr6ufT+PDPSn5tfFwqGe3+0O9bRDDglw++Afou7BlA6Habr37V/T3mHIIWpCXdf9V85PQFwFA45D+yGHqHF90jxRv9p/9XywvRVyiJex2YiJYrD5HxjKircrygR8CRxIKihdYYnWXkAZTJRGy8YY2u8NO3rDt28SLDv+8wTar9I+j8pshRyiIzYSSuAoS/XiSd/aqMywPPyjqHvwzuF3fJfPjbtryvqvfJFV9wzKihwwTptZ9OKPHmkGQRDqrJziTa9a5i7i0CMW8Zg2rZNDaczgesikdd/7mvlvkrSvfmH8k2mqr/AMckwwlN5AKlUsQ4//kMjgHa198uM/o87MLt60VQbXJ73LCkkaSqZxOqLvz/ucHxxggoG0SNY070OYKquCndfG/3mWYQabm4ZOHMmYMTdj1nxTZZVoxxqQI1kyn1w2cOxwPBrhdBTLML7L58ZGJVr7ZFNFlWnmXOO0GbLZAwY57vVJbcufGzj6fsJnGHU6Rp2OoY8/VBpM5jm1mYuW6YumQg6ZkNe4LuzoTX6FhQkF3KePu08f1xWW5jasNlfVSmhfDzqkX9ktLfrujzMXLuHrfOFbPb3797b/6qehruuQQ/pjNpW64DubCzduUWi0fJ1ztL+va98ux8G3uXZoIIcYsdbUl+9401pTz2M5cP/neOeebZx3KUMOEaLOshVu3FK+Y6959gK+hh6jTkfXGzsiA3cghxzQ2guKN22d/vr+gudfMlXMIhXJXiXa5+n57e7EVoAxWnkcoe4b3b/5BUFwWAq3LV9pX/V8spfGYMpctCxz0TIm4PNePOu98Fmou43TivyXiQ4P3f7r70s2b4cc/MGyd97/y9c8ZPbAn2Qy5zSs4fMamczZ9Q3Z9Q20z+NrOeM598nIre4EzuO/1uI+/e+sxU9DDn7wXf6c653IbVxLaXVCNEZltmYvacxe0hi+1XP3yN/911q4nsHZdMAy70lKp0efgweGz5zkOii11tQL3SpdYWnJ5u0FL7xMKrl9u2LhkOvkUXRIeYAJBQJtlzgdYp5dK1BsPEzmgqeKXnyF61Guk0eFfnQqLeQIdbWxsRinQzKeqE5lC81zFpirargZHwyM3OyAHMkSvtXDOfALSlLcyATm3QPXL0GOpOXo7+P2x2h1GlteqidF8ou4HhJxDUCOpPscAS+30YTJnPqFUE67DMcQ/4OQEpAjFg5z+jypUqe+kf7WlgSMghzJwvUNKoqUvzonMtA/cIzzRiGlXhovghL1JJhCxe1m035vKpsXutnR96e9CTwZpc0vgBzJQhkziKG7XGq5O9Rzw1BaIXy9Gxk8dnjoxIec5vXvoy8phxxJN477Q0eOg3+cunW3cPPTtM/jOnXMfbo5FgomaLzOYKqYBTmSRV9Y6r/KbWvnqPN2975dRZu28jumjY+GfVfPe774NNh2JbG0uI+1tp7rpDvkeASGqZUJHBXu721/7Se2JStsS59VmsyJj1HjsbCjN9R53X+tJYG52kePpygqZ/kqQiKIOzlKplFaXWw0zPm+0vS9R49mVmc8Mc9QMk2dlfP47ysbizEBb2RoIDLQH7nbH3b0jvR18b79M7dxrcqaBTl4Ga2orQuXuD5OcBmTZRjfpbO+S2cJgiBIUmnMoPRGSqcnlcqxLYAsHY0zTDwaiQX9zEgw4Y0848RYNj3nmdWEdBB78bM91eg6+REPt41lE35VCz8lsrSi+KVtye84TOmXU+TtU2fn2pY+S0gcc1VN6ZadKdtLkC7JQRCE/bn1/tYLUty9PVYZ7Ws2ZNc3SLLx4m8iqVIVf38rpTdI7uJa5i4s3/mmRM0gpPKsrDa/sPTlnd1v/TLOfeQyETqTpumz8775bT3Hl39AjkSHtcVTp7yyq2//G9Fhl3hzWK2x1tTblq7Q5E4ipI+UnrLXF04p27bn1jtvBa5dFFdSKChj5Szr/DpzVY1CrSHkgsRewaA0mEp/sN1z/rTzgwO0xz2xjaEMRlNFVcbMuaYZc5QGEyE7JPh+DpK0zq8zz651nTgydPIjJrXL9JROry8tN06pMJTN0BeXSWveIg3k+N8QMadhjW35Kt/FM65T/wr13BCuG6HNL9RNLtYVlOhLynT5RVJ/JYv85bgXIhRlqV5sqV5M+zyhrrZwf190yBkddjEBLxPwc10ZUag1ygyL2pqttuVpcuyaHLs2b5LaZpd3PMhWjvuozFbLvEWWef/36mA2FouFR+KR0TgdZekIyzBsPM7GmLHJeJZlSYpSKFWkWq1Qa1Ums0JqM5iQI6lcURpNhNGE25xgScUlAJADQA6APgcn2HiMiD30YDul+PJbv1iGeXjXCKlUps/ANU3luPvPQ4PNTQ/8Z27j2rwV6+7/s3PP9nB/7wOfKXv1NakvnqGsAMgBIAeAHAByAMgB5AdZtLJuPJ9re/c9XCw5UblhPZIDoKwAyAHEKMd4ShSQU4cDyQEgBxBaDlSWtKopSA7AnxwIj/SJDSQH4FUOhEeaxAaSA/AtB8IjHWIDyQEEkAPhIfvYSCo54Ie8zUi2rMAPGZuBPgcQUg6Eh1xjg5/kgB+yNIO3sgI/5GcGn30O+CEzM4jxP5owfvAQgwy0EGq0ggiRhxlCDWXhhwzMEKSsoMTIQItUyAFFJKpF6uSAIhIt3KmTA4pIrj+XajlgiYT6+BMmB0QR/6BPFHIAcYIlewA5AOQAkANADgA5AOQAkANADgA5QPryX13ZuJq/+j1KAAAAAElFTkSuQmCC">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAKa0lEQVR42u2cfWwT9x2H73x+f4ntJE7iQF4hJAFKeAkJUBKVlzZbaEGwgYS6QrUNqaNj1UangUBjmqjWoVImdZvWMU1rNyiTipZqlLIMUWhZoRTCWyDklQQcTBI7fo9j39m3P8JQB5Tm7Dvn7vx5/oP4Lr/cPf58f293ZNHKOgKAR6HAJQCQA0AOADkA5ACQA0AOADkA5ACQA0AOAB5EKYZGtL37Hu7Ew1RuWD+xDSAnauENQohflFTLASckZEnq5IAWklMkFXJAC4kqIqwc0ELSigglB7SQgSIKmCEPhLjmCpgBP1JRVqCFzEqMAmYgQoSVA2bI0g8FzIAfQskBM2TsB5bsgTByIDbkHR4KmAE/eJYDZqSDH+hzAF7lQGykSXggOQB/ciA20ic8kByAJzkQG2kVHkgOwIcciI10Cw8kB4AcQDg5UFPSsLIgOQDkAJADpFoOdDjSs9uB5ACQA0AOADkA5ACQA0AOADkA5ACQA0AOACAHgBwAcgDIASAHgBwAcgDIASAHgBwAQA4AOQDkAEKgxCXgBsvSfi/tG45HRuPRCEtHCYJUqNSkWq1QqZUZFpUlk1RQkCMtiLoHR252hPv7wo7eyF0H7fWw8djjDiBJldmqycnXF081lJQbplRQBiPkkA/xaMR/9UKg7VKwvTU6PMQ5WrzDtHc42NFKEASpoEzTqyzVdZY5taRSBTkkTGTQOdjc5G35LB4Z5acKxWP+1hZ/a4uzKSv3G2uyFj9NkCTkkF5aOJv+5v60mY3HhTg/7XU7Du33fH6qYMMPNTl2jFYkA+1xd7z+M9epYwKZcZ/QzY7OPduDndchhzRgAr6ufT+PDPSn5tfFwqGe3+0O9bRDDglw++Afou7BlA6Habr37V/T3mHIIWpCXdf9V85PQFwFA45D+yGHqHF90jxRv9p/9XywvRVyiJex2YiJYrD5HxjKircrygR8CRxIKihdYYnWXkAZTJRGy8YY2u8NO3rDt28SLDv+8wTar9I+j8pshRyiIzYSSuAoS/XiSd/aqMywPPyjqHvwzuF3fJfPjbtryvqvfJFV9wzKihwwTptZ9OKPHmkGQRDqrJziTa9a5i7i0CMW8Zg2rZNDaczgesikdd/7mvlvkrSvfmH8k2mqr/AMckwwlN5AKlUsQ4//kMjgHa198uM/o87MLt60VQbXJ73LCkkaSqZxOqLvz/ucHxxggoG0SNY070OYKquCndfG/3mWYQabm4ZOHMmYMTdj1nxTZZVoxxqQI1kyn1w2cOxwPBrhdBTLML7L58ZGJVr7ZFNFlWnmXOO0GbLZAwY57vVJbcufGzj6fsJnGHU6Rp2OoY8/VBpM5jm1mYuW6YumQg6ZkNe4LuzoTX6FhQkF3KePu08f1xWW5jasNlfVSmhfDzqkX9ktLfrujzMXLuHrfOFbPb3797b/6qehruuQQ/pjNpW64DubCzduUWi0fJ1ztL+va98ux8G3uXZoIIcYsdbUl+9401pTz2M5cP/neOeebZx3KUMOEaLOshVu3FK+Y6959gK+hh6jTkfXGzsiA3cghxzQ2guKN22d/vr+gudfMlXMIhXJXiXa5+n57e7EVoAxWnkcoe4b3b/5BUFwWAq3LV9pX/V8spfGYMpctCxz0TIm4PNePOu98Fmou43TivyXiQ4P3f7r70s2b4cc/MGyd97/y9c8ZPbAn2Qy5zSs4fMamczZ9Q3Z9Q20z+NrOeM598nIre4EzuO/1uI+/e+sxU9DDn7wXf6c653IbVxLaXVCNEZltmYvacxe0hi+1XP3yN/911q4nsHZdMAy70lKp0efgweGz5zkOii11tQL3SpdYWnJ5u0FL7xMKrl9u2LhkOvkUXRIeYAJBQJtlzgdYp5dK1BsPEzmgqeKXnyF61Guk0eFfnQqLeQIdbWxsRinQzKeqE5lC81zFpirargZHwyM3OyAHMkSvtXDOfALSlLcyATm3QPXL0GOpOXo7+P2x2h1GlteqidF8ou4HhJxDUCOpPscAS+30YTJnPqFUE67DMcQ/4OQEpAjFg5z+jypUqe+kf7WlgSMghzJwvUNKoqUvzonMtA/cIzzRiGlXhovghL1JJhCxe1m035vKpsXutnR96e9CTwZpc0vgBzJQhkziKG7XGq5O9Rzw1BaIXy9Gxk8dnjoxIec5vXvoy8phxxJN477Q0eOg3+cunW3cPPTtM/jOnXMfbo5FgomaLzOYKqYBTmSRV9Y6r/KbWvnqPN2975dRZu28jumjY+GfVfPe774NNh2JbG0uI+1tp7rpDvkeASGqZUJHBXu721/7Se2JStsS59VmsyJj1HjsbCjN9R53X+tJYG52kePpygqZ/kqQiKIOzlKplFaXWw0zPm+0vS9R49mVmc8Mc9QMk2dlfP47ysbizEBb2RoIDLQH7nbH3b0jvR18b79M7dxrcqaBTl4Ga2orQuXuD5OcBmTZRjfpbO+S2cJgiBIUmnMoPRGSqcnlcqxLYAsHY0zTDwaiQX9zEgw4Y0848RYNj3nmdWEdBB78bM91eg6+REPt41lE35VCz8lsrSi+KVtye84TOmXU+TtU2fn2pY+S0gcc1VN6ZadKdtLkC7JQRCE/bn1/tYLUty9PVYZ7Ws2ZNc3SLLx4m8iqVIVf38rpTdI7uJa5i4s3/mmRM0gpPKsrDa/sPTlnd1v/TLOfeQyETqTpumz8775bT3Hl39AjkSHtcVTp7yyq2//G9Fhl3hzWK2x1tTblq7Q5E4ipI+UnrLXF04p27bn1jtvBa5dFFdSKChj5Szr/DpzVY1CrSHkgsRewaA0mEp/sN1z/rTzgwO0xz2xjaEMRlNFVcbMuaYZc5QGEyE7JPh+DpK0zq8zz651nTgydPIjJrXL9JROry8tN06pMJTN0BeXSWveIg3k+N8QMadhjW35Kt/FM65T/wr13BCuG6HNL9RNLtYVlOhLynT5RVJ/JYv85bgXIhRlqV5sqV5M+zyhrrZwf190yBkddjEBLxPwc10ZUag1ygyL2pqttuVpcuyaHLs2b5LaZpd3PMhWjvuozFbLvEWWef/36mA2FouFR+KR0TgdZekIyzBsPM7GmLHJeJZlSYpSKFWkWq1Qa1Ums0JqM5iQI6lcURpNhNGE25xgScUlAJADQA6APgcn2HiMiD30YDul+PJbv1iGeXjXCKlUps/ANU3luPvPQ4PNTQ/8Z27j2rwV6+7/s3PP9nB/7wOfKXv1NakvnqGsAMgBIAeAHAByAMgB5AdZtLJuPJ9re/c9XCw5UblhPZIDoKwAyAHEKMd4ShSQU4cDyQEgBxBaDlSWtKopSA7AnxwIj/SJDSQH4FUOhEeaxAaSA/AtB8IjHWIDyQEEkAPhIfvYSCo54Ie8zUi2rMAPGZuBPgcQUg6Eh1xjg5/kgB+yNIO3sgI/5GcGn30O+CEzM4jxP5owfvAQgwy0EGq0ggiRhxlCDWXhhwzMEKSsoMTIQItUyAFFJKpF6uSAIhIt3KmTA4pIrj+XajlgiYT6+BMmB0QR/6BPFHIAcYIlewA5AOQAkANADgA5AOQAkANADgA5QPryX13ZuJq/+j1KAAAAAElFTkSuQmCC">
+<link rel="manifest" href='data:application/manifest+json,{"name":"Yalla — Libanais","short_name":"Yalla","display":"standalone","background_color":"%23F6F0E4","theme_color":"%231F4E3D","start_url":"."}'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F6F0E4; --paper:#FFFDF7; --line:#E8DFCC; --line2:#EFE8D8;
+  --cedar:#1F4E3D; --terra:#C75B39; --terra-soft:#F8EBE3; --terra-deep:#A04428;
+  --ink:#2B2620; --ink-soft:#5C5343; --sand:#9A8F7E; --sand-light:#B5AB99;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{min-height:100vh;background:var(--cream);font-family:'Inter',sans-serif;color:var(--ink);
+  padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+button{cursor:pointer;font-family:'Inter',sans-serif;border:none;background:none}
+button:focus-visible{outline:3px solid var(--terra);outline-offset:2px}
+.wrap{max-width:560px;margin:0 auto;padding:0 22px}
+header{display:flex;justify-content:space-between;align-items:flex-start;padding-top:24px}
+.logo{font-family:'Amiri',serif;font-size:36px;font-weight:700;color:var(--cedar);line-height:1}
+.logo span{font-family:'Fraunces',serif;font-size:19px;font-weight:600;color:var(--terra);margin-left:6px}
+.tagline{font-size:12.5px;color:var(--sand);margin-top:6px}
+.streak{text-align:center;background:var(--cedar);color:var(--cream);border-radius:14px;padding:9px 15px;min-width:74px}
+.streak b{font-family:'Fraunces',serif;font-size:25px;font-weight:700;line-height:1;display:block}
+.streak small{font-size:10px;opacity:.85}
+nav{display:flex;gap:8px;margin-top:14px}
+nav button{flex:1;border:1.5px solid #D8CDB8;border-radius:999px;padding:9px 4px;font-size:13px;color:var(--ink-soft);font-weight:500;background:none}
+nav button.on{background:var(--cedar);border-color:var(--cedar);color:var(--cream)}
+main{padding:18px 0 40px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:32px 26px;text-align:center;box-shadow:0 4px 24px rgba(43,38,32,.06)}
+.hero-ar{font-family:'Amiri',serif;font-size:48px;color:var(--cedar);line-height:1.2}
+.hero-tr{font-family:'Fraunces',serif;font-size:15px;font-style:italic;color:var(--terra);margin-top:6px}
+.hero-sub{font-size:15px;color:var(--ink-soft);margin-top:16px;line-height:1.5}
+.big-btn{margin-top:22px;background:var(--terra);color:var(--paper);border-radius:999px;padding:15px 32px;font-size:16px;font-weight:600}
+.stats{display:flex;gap:11px;margin-top:15px}
+.stat{flex:1;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:15px 6px;text-align:center}
+.stat b{font-family:'Fraunces',serif;font-size:25px;font-weight:700;color:var(--cedar);display:block}
+.stat small{font-size:10.5px;color:var(--sand)}
+.pbar{height:6px;background:var(--line);border-radius:99px;overflow:hidden}
+.pbar div{height:6px;background:var(--cedar);border-radius:99px;transition:width .25s ease}
+.plabel{font-size:12px;color:var(--sand);text-align:right;margin-top:6px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:30px 24px;text-align:center;margin-top:12px;
+  min-height:340px;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  box-shadow:0 4px 24px rgba(43,38,32,.06);user-select:none;-webkit-user-select:none;transition:transform .15s ease}
+.card:active{transform:scale(.985)}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+.chip{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--terra);background:var(--terra-soft);border-radius:99px;padding:4px 12px;margin-bottom:13px}
+.card-ar{font-family:'Amiri',serif;font-size:54px;color:var(--cedar);line-height:1.25}
+.card-tr{font-family:'Fraunces',serif;font-style:italic;font-size:19px;color:var(--terra);margin-top:8px}
+.audio-btn{margin-top:10px;background:var(--cream);border:1px solid #E0D6C2;border-radius:999px;padding:8px 16px;font-size:13px;color:var(--ink-soft)}
+.hint{font-size:12px;color:var(--sand-light);margin-top:22px}
+.divider{width:50px;height:2px;background:var(--line);margin:17px 0 13px;border-radius:2px}
+.card-fr{font-family:'Fraunces',serif;font-size:25px;font-weight:600}
+.ex{margin-top:15px;background:var(--cream);border-radius:14px;padding:13px 17px;width:100%}
+.ex-ar{font-family:'Amiri',serif;font-size:22px;color:var(--cedar);direction:rtl}
+.ex-tr{font-size:14px;font-weight:600;color:#7A7060;margin-top:4px}
+.ex-fr{font-size:13px;color:#7A7060;margin-top:3px;font-style:italic}
+.answers{display:flex;gap:12px;margin-top:15px}
+.answers button{flex:1;border-radius:16px;padding:15px 10px;font-size:16px;font-weight:600;line-height:1.3}
+.answers small{font-size:11px;font-weight:400;opacity:.8;display:block}
+.btn-no{background:#F3E6DD;color:var(--terra-deep)}
+.btn-yes{background:var(--cedar);color:var(--cream)}
+.tabs{display:flex;gap:8px}
+.tabs button{flex:1;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:9px 3px;font-size:12px;color:var(--ink-soft);font-weight:500}
+.tabs button.on{background:var(--terra);border-color:var(--terra);color:var(--paper)}
+.search{width:100%;margin-top:12px;border:1px solid var(--line);border-radius:12px;padding:11px 14px;font-size:14px;font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink)}
+.word{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:13px 15px;margin-top:11px}
+.word-top{display:flex;align-items:center;gap:11px}
+.word-ar{font-family:'Amiri',serif;font-size:25px;color:var(--cedar)}
+.word-tr{font-family:'Fraunces',serif;font-style:italic;font-size:14.5px;color:var(--terra);margin-left:7px}
+.word-fr{font-size:13.5px;color:var(--ink-soft);margin-top:2px}
+.mini-audio{background:var(--cream);border:1px solid #E0D6C2;border-radius:999px;padding:6px 10px;font-size:13px;flex-shrink:0}
+.lvl-row{display:flex;align-items:center;gap:10px;margin-top:9px}
+.lvl-track{display:flex;gap:3px;flex:0 0 88px}
+.lvl-track i{height:6px;flex:1;border-radius:99px;background:var(--line)}
+.lvl-text{font-size:11.5px;color:var(--sand)}
+h2.cat{font-family:'Fraunces',serif;font-size:19px;color:var(--cedar);border-bottom:2px solid var(--line);padding-bottom:6px;margin:26px 0 4px}
+.drow{display:flex;align-items:center;gap:11px;padding:10px 2px;border-bottom:1px solid var(--line2)}
+.drow .ar{font-family:'Amiri',serif;font-size:24px;color:var(--cedar);min-width:86px;text-align:right}
+.drow .mid{flex:1;min-width:0}
+.drow .tr{font-family:'Fraunces',serif;font-style:italic;font-size:14.5px;color:var(--terra)}
+.drow .fr{font-size:12.5px;color:var(--ink-soft)}
+.dot{width:10px;height:10px;border-radius:99px;flex-shrink:0;background:#E3DACB}
+footer{text-align:center;font-size:11px;color:var(--sand-light);padding:14px 20px 26px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="logo">يلا <span>Yalla</span></div>
+      <div class="tagline">Le libanais, un peu chaque jour · niveau A2</div>
+    </div>
+    <div class="streak"><b id="streakN">0</b><small id="streakL">jour de suite</small></div>
+  </header>
+
+  <nav>
+    <button id="nav-home" class="on">Aujourd'hui</button>
+    <button id="nav-words">Mes mots</button>
+    <button id="nav-dict">Dictionnaire</button>
+  </nav>
+
+  <main>
+    <!-- ACCUEIL -->
+    <section id="view-home">
+      <div class="panel">
+        <div class="hero-ar">صباح الخير</div>
+        <div class="hero-tr">sabah el kher — bonjour</div>
+        <div class="hero-sub" id="home-msg"></div>
+        <button class="big-btn" id="start-btn">Yalla, on révise →</button>
+      </div>
+      <div class="stats">
+        <div class="stat"><b id="st-learning">0</b><small>en apprentissage</small></div>
+        <div class="stat"><b id="st-mastered">0</b><small>maîtrisés</small></div>
+        <div class="stat"><b id="st-remaining">0</b><small>à découvrir</small></div>
+      </div>
+    </section>
+
+    <!-- SESSION -->
+    <section id="view-study" class="hidden">
+      <div id="study-card-zone">
+        <div class="pbar"><div id="pbar-fill" style="width:0%"></div></div>
+        <div class="plabel" id="plabel">0 / 0</div>
+        <div class="card" id="flashcard">
+          <div class="chip" id="fc-cat"></div>
+          <div class="card-ar" id="fc-ar"></div>
+          <div class="card-tr" id="fc-tr"></div>
+          <button class="audio-btn" id="fc-audio">🔊 écouter</button>
+          <div class="hint" id="fc-hint">touche la carte pour voir la traduction</div>
+          <div id="fc-back" class="hidden" style="width:100%">
+            <div class="divider" style="margin-left:auto;margin-right:auto"></div>
+            <div class="card-fr" id="fc-fr"></div>
+            <div class="ex" id="fc-ex">
+              <div class="ex-ar" id="fc-ex-ar"></div>
+              <div class="ex-tr" id="fc-ex-tr"></div>
+              <div class="ex-fr" id="fc-ex-fr"></div>
+              <button class="audio-btn" id="fc-ex-audio" style="margin-top:8px">🔊 écouter l'exemple</button>
+            </div>
+          </div>
+        </div>
+        <div class="answers hidden" id="answers">
+          <button class="btn-no" id="btn-no">Pas encore<small>à revoir</small></button>
+          <button class="btn-yes" id="btn-yes">Je connais<small>mnih !</small></button>
+        </div>
+      </div>
+      <div id="study-done" class="panel hidden">
+        <div class="hero-ar">مبروك!</div>
+        <div class="hero-tr">mabrouk — bravo !</div>
+        <div class="hero-sub" id="done-msg"></div>
+        <button class="big-btn" id="back-home-btn">Retour à l'accueil</button>
+      </div>
+    </section>
+
+    <!-- MES MOTS -->
+    <section id="view-words" class="hidden">
+      <div class="tabs">
+        <button data-tab="all" class="on" id="tab-all">Tous</button>
+        <button data-tab="learning" id="tab-learning">En cours</button>
+        <button data-tab="mastered" id="tab-mastered">Maîtrisés</button>
+      </div>
+      <input class="search" id="word-search" type="search" placeholder="Chercher un mot… (français, phonétique, arabe)">
+      <div id="words-list"></div>
+    </section>
+
+    <!-- DICTIONNAIRE -->
+    <section id="view-dict" class="hidden">
+      <input class="search" id="dict-search" type="search" placeholder="Chercher dans les 340 mots…" style="margin-top:0">
+      <div id="dict-list"></div>
+    </section>
+  </main>
+
+  <footer id="footer"></footer>
+</div>
+
+<script>
+// ════════════════════════════════════════════
+// VOCABULAIRE — arabe levantin (libanais) · niveau A1-A2
+// format: [ar, tr, fr, cat, ex?, exTr?, exFr?]
+// ════════════════════════════════════════════
+const W = [
+// ── ESSENTIELS ──
+["مرحبا","marhaba","Bonjour / Salut","Essentiels","مرحبا! كيفك؟","Marhaba ! Kifak ?","Salut ! Comment vas-tu ?"],
+["كيفك؟","kifak ? / kifik ?","Comment vas-tu ? (h. / f.)","Essentiels","كيفك اليوم؟","Kifak el yom ?","Comment vas-tu aujourd'hui ?"],
+["منيح","mnih / mniha","Bien (h. / f.)","Essentiels","أنا منيح، وإنت؟","Ana mnih, w enta ?","Je vais bien, et toi ?"],
+["شكراً","shukran","Merci","Essentiels","شكراً كتير!","Shukran ktir !","Merci beaucoup !"],
+["عفواً","afwan","De rien / Pardon","Essentiels","عفواً، ما في مشكلة.","Afwan, ma fi mishkle.","De rien, pas de problème."],
+["يلا","yalla","Allez ! / On y va !","Essentiels","يلا، منروح؟","Yalla, mnrouh ?","Allez, on y va ?"],
+["اي","eh","Oui","Essentiels","اي، أكيد!","Eh, akid !","Oui, bien sûr !"],
+["لأ","la2","Non","Essentiels","لأ، ما بدّي.","La2, ma baddé.","Non, je ne veux pas."],
+["شو","shu","Quoi / Qu'est-ce que","Essentiels","شو في ما في؟","Shu fi ma fi ?","Quoi de neuf ?"],
+["وين","wen","Où","Essentiels","وين رايح؟","Wen rayih ?","Où vas-tu ?"],
+["قديش","addesh","Combien","Essentiels","قديش حقّه؟","Addesh ha22o ?","Combien ça coûte ?"],
+["ليش","lesh","Pourquoi","Essentiels","ليش لأ؟","Lesh la2 ?","Pourquoi pas ?"],
+["مين","min","Qui","Essentiels","مين هيدا؟","Min hayda ?","Qui est-ce ?"],
+["إيمتى","emta","Quand","Essentiels","إيمتى بتجي؟","Emta btejé ?","Quand viens-tu ?"],
+["كيف","kif","Comment","Essentiels","كيف بقول هيدا؟","Kif b2oul hayda ?","Comment dit-on ça ?"],
+["معليش","ma3lesh","C'est pas grave","Essentiels","معليش، بكرا أحسن.","Ma3lesh, bukra ahsan.","C'est pas grave, demain sera mieux."],
+["إن شاء الله","inshallah","Si Dieu le veut / J'espère","Essentiels","منشوفك بكرا إن شاء الله.","Mnshufak bukra inshallah.","On se voit demain j'espère."],
+["لو سمحت","law samaht","S'il te plaît / Excuse-moi","Essentiels","لو سمحت، وين الحمّام؟","Law samaht, wen el hammem ?","S'il te plaît, où sont les toilettes ?"],
+["أنا","ana","Moi / Je","Essentiels","أنا من فرنسا.","Ana mn Fransa.","Je viens de France."],
+["إنت","enta / enté","Toi (h. / f.)","Essentiels","إنت من وين؟","Enta mn wen ?","Tu viens d'où ?"],
+["هوّي","huwwe","Lui / Il","Essentiels","هوّي صاحبي.","Huwwe sahbé.","C'est mon ami."],
+["هيّي","hiyye","Elle","Essentiels","هيّي من بيروت.","Hiyye mn Beyrut.","Elle est de Beyrouth."],
+["نحنا","nehna","Nous","Essentiels","نحنا جيران.","Nehna jiran.","Nous sommes voisins."],
+["إسمي","esmé","Je m'appelle","Essentiels","إسمي مالك.","Esmé Malek.","Je m'appelle Malek."],
+["ما بفهم","ma befham","Je ne comprends pas","Essentiels","ما بفهم، عيد لو سمحت.","Ma befham, 3id law samaht.","Je ne comprends pas, répète s'il te plaît."],
+["شوي شوي","shway shway","Doucement / Petit à petit","Essentiels","إحكي شوي شوي!","Ehké shway shway !","Parle doucement !"],
+["هيدا","hayda / haydé","Ça / Celui-ci (h. / f.)","Essentiels","شو هيدا؟","Shu hayda ?","Qu'est-ce que c'est ?"],
+["كمان","kamén","Aussi / Encore","Essentiels","أنا كمان!","Ana kamén !","Moi aussi !"],
+["بس","bas","Mais / Seulement","Essentiels","بدّي إجي بس ما فيّي.","Baddé ejé bas ma fiyyé.","Je veux venir mais je ne peux pas."],
+["مع","ma3","Avec","Essentiels","تعا معي.","Ta3a ma3é.","Viens avec moi."],
+
+// ── GENS & FAMILLE ──
+["حبيبي","habibi / habibté","Mon chéri / Ma chérie","Gens & famille","يلا حبيبي!","Yalla habibi !","Allez mon cher !"],
+["صاحبي","sahbé","Mon ami","Gens & famille","هوّي صاحبي من زمان.","Huwwe sahbé mn zamen.","C'est mon ami de longue date."],
+["بيّ","bayyé","Mon père","Gens & famille","بيّي بالبيت.","Bayyé bil bet.","Mon père est à la maison."],
+["إمي","emmé","Ma mère","Gens & famille","إمي بتطبخ أحلى طبخة.","Emmé btetbokh ahla tabkha.","Ma mère cuisine le meilleur plat."],
+["خيّ","khayyé","Mon frère","Gens & famille","خيّي أكبر منّي.","Khayyé akbar minné.","Mon frère est plus âgé que moi."],
+["أختي","ekhté","Ma sœur","Gens & famille","أختي عم تدرس.","Ekhté 3am tedros.","Ma sœur est en train d'étudier."],
+["إبن","eben","Fils","Gens & famille","إبنه بيحكي تلات لغات.","Ebno byehké tlet lughat.","Son fils parle trois langues."],
+["بنت","bent","Fille","Gens & famille","البنت الزغيرة عم تلعب.","El bent el zghiré 3am tel3ab.","La petite fille joue."],
+["جيران","jiran","Voisins","Gens & famille","الجيران كتير مناح.","El jiran ktir mnah.","Les voisins sont très gentils."],
+["عيلة","3ayle","Famille","Gens & famille","العيلة كلّها هون.","El 3ayle kella hon.","Toute la famille est là."],
+["رجّال","rejjel","Homme","Gens & famille","هيدا الرجّال بيشتغل معي.","Hayda el rejjel byeshtghel ma3é.","Cet homme travaille avec moi."],
+["مرا","mara","Femme","Gens & famille","هالمرا دكتورة.","Hal mara doktora.","Cette femme est médecin."],
+["جدّو","jeddo","Grand-père","Gens & famille","جدّو بيخبّر قصص حلوة.","Jeddo bikhabber 2osas helwé.","Grand-père raconte de belles histoires."],
+["تيتا","teta","Grand-mère","Gens & famille","تيتا عملت كبّة.","Teta 3emlet kebbé.","Grand-mère a fait du kebbé."],
+["جوز","joz","Mari","Gens & famille"],
+["مرتي","marté","Ma femme (épouse)","Gens & famille"],
+["ولد","walad","Enfant / Garçon","Gens & famille"],
+["ولاد","wled","Enfants","Gens & famille"],
+["عمّو","3ammo","Oncle (paternel) / Monsieur","Gens & famille"],
+["خالتو","khalto","Tante (maternelle) / Madame","Gens & famille"],
+
+// ── NOURRITURE ──
+["صحتين","sahtein","Bon appétit","Nourriture","صحتين على قلبك!","Sahtein 3a albak !","Bon appétit !"],
+["أكل","akel","Nourriture","Nourriture","الأكل كتير طيّب.","El akel ktir tayyeb.","La nourriture est très bonne."],
+["طيّب","tayyeb","Délicieux / Bon","Nourriture","هيدا المنقوشة طيّب!","Hayda l man2oushé tayyeb !","Ce man'ouché est délicieux !"],
+["جوعان","ju3an / ju3ané","J'ai faim (h. / f.)","Nourriture","أنا كتير جوعان!","Ana ktir ju3an !","J'ai très faim !"],
+["عطشان","3atshan","J'ai soif","Nourriture","عطشان، بدّي ميّ.","3atshan, baddé mayy.","J'ai soif, je veux de l'eau."],
+["ميّ","mayy","Eau","Nourriture","بدّي شوي ميّ.","Baddé shway mayy.","Je veux un peu d'eau."],
+["قهوة","ahwé","Café","Nourriture","تفضّل، إشرب قهوة.","Tfaddal, shrab ahwé.","Je t'en prie, bois un café."],
+["شاي","shay","Thé","Nourriture","بتحب الشاي ولا القهوة؟","Bteheb el shay walla l ahwé ?","Tu préfères le thé ou le café ?"],
+["خبز","khebez","Pain","Nourriture","جيب خبز من الفرن.","Jib khebez mn el ferren.","Apporte du pain de la boulangerie."],
+["لحمة","lahmé","Viande","Nourriture","ما بآكل لحمة.","Ma bekol lahmé.","Je ne mange pas de viande."],
+["دجاج","djej","Poulet","Nourriture","الدجاج مع توم.","El djej ma3 toum.","Le poulet avec de l'ail."],
+["سمك","samak","Poisson","Nourriture","السمك طازة اليوم.","El samak taza el yom.","Le poisson est frais aujourd'hui."],
+["خضرا","khodra","Légumes","Nourriture","بدنا خضرا من السوق.","Badna khodra mn el sou2.","Il nous faut des légumes du marché."],
+["فواكه","fweké","Fruits","Nourriture","الفواكه حلوة بالصيف.","El fweké helwé bil sef.","Les fruits sont bons en été."],
+["حلو","helo (dessert)","Sucré / Dessert","Nourriture","بعد الأكل، في حلو.","Ba3d el akel, fi helo.","Après le repas, il y a un dessert."],
+["بدّي آكل","baddé ekol","Je veux manger","Nourriture","بدّي آكل تبّولة.","Baddé ekol tabboulé.","Je veux manger du taboulé."],
+["شبعان","sheb3an","Rassasié","Nourriture","خلص، أنا شبعان!","Khalas, ana sheb3an !","C'est bon, je n'ai plus faim !"],
+["مطعم","mat3am","Restaurant","Nourriture","في مطعم منيح هون؟","Fi mat3am mnih hon ?","Il y a un bon restaurant ici ?"],
+["جبنة","jebné","Fromage","Nourriture"],
+["لبن","laban","Yaourt","Nourriture"],
+["حليب","halib","Lait","Nourriture"],
+["بيض","bayd","Œufs","Nourriture"],
+["رز","rez","Riz","Nourriture"],
+["معكرونة","ma3karona","Pâtes","Nourriture"],
+["سكر","sekkar","Sucre","Nourriture"],
+["ملح","meleh","Sel","Nourriture"],
+["زيت","zet","Huile","Nourriture"],
+["زيتون","zeytoun","Olives","Nourriture"],
+["تفاحة","teffeha","Pomme","Nourriture"],
+["موز","mawz","Banane","Nourriture"],
+["ليمون","leymoun","Orange / Citron","Nourriture"],
+["بطاطا","batata","Pommes de terre","Nourriture"],
+["بندورة","banadoura","Tomates","Nourriture"],
+["خيار","khyar","Concombre","Nourriture"],
+["فطور","ftour","Petit-déjeuner","Nourriture"],
+["غدا","ghada","Déjeuner","Nourriture"],
+["عشا","3asha","Dîner","Nourriture"],
+
+// ── MAISON ──
+["بيت","bet","Maison","Maison","رايح عالبيت.","Rayih 3al bet.","Je rentre à la maison."],
+["أوضة","oda","Chambre / Pièce","Maison"],
+["مطبخ","matbakh","Cuisine","Maison"],
+["حمّام","hammem","Salle de bain / Toilettes","Maison"],
+["صالون","salon","Salon","Maison"],
+["باب","beb","Porte","Maison"],
+["شباك","shebbék","Fenêtre","Maison"],
+["طاولة","tawlé","Table","Maison"],
+["كرسي","kersé","Chaise","Maison"],
+["تخت","takhet","Lit","Maison"],
+["برّاد","berrad","Frigo","Maison"],
+["فرن","forn","Four / Boulangerie","Maison"],
+["ضو","daww","Lumière","Maison"],
+["كهربا","kahraba","Électricité","Maison","ما في كهربا اليوم.","Ma fi kahraba el yom.","Il n'y a pas d'électricité aujourd'hui."],
+["مفتاح","mefteh","Clé","Maison"],
+["سطوح","stouh","Toit / Terrasse","Maison"],
+["شقة","sha22a","Appartement","Maison"],
+["حديقة","hadi2a","Jardin","Maison"],
+
+// ── VILLE & TRANSPORT ──
+["سيارة","sayyara","Voiture","Ville & transport","السيارة عطلانة.","El sayyara 3atlané.","La voiture est en panne."],
+["طريق","tari2","Route / Chemin","Ville & transport","الطريق فيها عجقة.","El tari2 fiha 3aj2a.","Il y a des embouteillages sur la route."],
+["عجقة","3aj2a","Embouteillage / Foule","Ville & transport","في عجقة كبيرة ببيروت.","Fi 3aj2a kbiré b Beyrut.","Il y a un gros embouteillage à Beyrouth."],
+["بوسطة","bosta","Bus","Ville & transport"],
+["سرفيس","serviss","Taxi collectif (service)","Ville & transport"],
+["تاكسي","taksé","Taxi","Ville & transport"],
+["محطة","mahatta","Station / Arrêt","Ville & transport"],
+["بنزين","banzin","Essence","Ville & transport"],
+["بناية","binéyé","Immeuble","Ville & transport"],
+["شارع","shére3","Rue","Ville & transport"],
+["جسر","jeser","Pont","Ville & transport"],
+["دوار","dowwar","Rond-point","Ville & transport"],
+["محل","mahal","Magasin","Ville & transport"],
+["صيدلية","saydaliyé","Pharmacie","Ville & transport"],
+["بنك","bank","Banque","Ville & transport"],
+["جامع","jéme3","Mosquée","Ville & transport"],
+["كنيسة","knisé","Église","Ville & transport"],
+["سوق","sou2","Marché","Ville & transport","رايحة عالسوق.","Rayha 3al sou2.","Je vais au marché."],
+["مدينة","madiné","Ville","Ville & transport","بيروت أكبر مدينة.","Beyrut akbar madiné.","Beyrouth est la plus grande ville."],
+["ضيعة","day3a","Village","Ville & transport","بالويكاند منروح عالضيعة.","Bil weekend mnrouh 3al day3a.","Le weekend on va au village."],
+
+// ── DIRECTIONS ──
+["هون","hon","Ici","Directions","تعا هون!","Ta3a hon !","Viens ici !"],
+["هونيك","honik","Là-bas","Directions","البيت هونيك.","El bet honik.","La maison est là-bas."],
+["يمين","yamin","Droite","Directions","خود يمين بعد الجامع.","Khud yamin ba3d el jéme3.","Prends à droite après la mosquée."],
+["شمال","shmel","Gauche","Directions","البنك عالشمال.","El bank 3al shmel.","La banque est à gauche."],
+["دغري","dughré","Tout droit","Directions","روح دغري وبتوصل.","Ruh dughré w btusal.","Va tout droit et tu arrives."],
+["قريب","2arib","Proche","Directions","المطعم قريب من هون.","El mat3am 2arib mn hon.","Le restaurant est proche d'ici."],
+["بعيد","b3id","Loin","Directions","المطار بعيد شوي.","El matar b3id shway.","L'aéroport est un peu loin."],
+["فوق","fo2","En haut / Dessus","Directions"],
+["تحت","tahet","En bas / Dessous","Directions"],
+["جوّا","juwwa","Dedans / À l'intérieur","Directions"],
+["برّا","barra","Dehors","Directions"],
+["حدّ","hadd","À côté de","Directions"],
+["وراء","wara","Derrière","Directions"],
+["قدّام","2eddém","Devant","Directions"],
+
+// ── TEMPS ──
+["اليوم","el yom","Aujourd'hui","Temps","شو عم تعمل اليوم؟","Shu 3am ta3mol el yom ?","Que fais-tu aujourd'hui ?"],
+["بكرا","bukra","Demain","Temps","منحكي بكرا.","Mnehké bukra.","On parle demain."],
+["مبارح","mbereh","Hier","Temps","شفته مبارح.","Shefto mbereh.","Je l'ai vu hier."],
+["هلّق","halla2","Maintenant","Temps","تعا هلّق!","Ta3a halla2 !","Viens maintenant !"],
+["بعدين","ba3den","Après / Plus tard","Temps","منشوف بعدين.","Mnshuf ba3den.","On verra plus tard."],
+["قبل","abel","Avant","Temps","وصلت قبل ساعة.","Wselet abel se3a.","Je suis arrivé il y a une heure."],
+["ساعة","se3a","Heure / Montre","Temps","قديش الساعة؟","Addesh el se3a ?","Quelle heure est-il ?"],
+["دقيقة","da2i2a","Minute","Temps"],
+["صبح","sobh","Matin","Temps","صباح الخير!","Sabah el kher !","Bonjour ! (le matin)"],
+["ليل","lel","Nuit","Temps","بالليل بيهدا كل شي.","Bil lel byehda kel shi.","La nuit, tout se calme."],
+["جمعة","jem3a","Semaine / Vendredi","Temps","الجمعة الجاي مسافر.","El jem3a l jey msefer.","La semaine prochaine je voyage."],
+["شهر","shaher","Mois","Temps"],
+["سنة","sené","Année","Temps"],
+["صيف","sef","Été","Temps"],
+["شتي","shté","Hiver / Pluie","Temps","عم تشتّي برّا.","3am tshatté barra.","Il pleut dehors."],
+["ربيع","rabi3","Printemps","Temps"],
+["خريف","khrif","Automne","Temps"],
+["بكير","bakkir","Tôt","Temps"],
+["متأخر","met2akhar","En retard / Tard","Temps","دايماً متأخّر!","Dayman met2akhar !","Toujours en retard !"],
+["دايماً","dayman","Toujours","Temps"],
+["أبداً","abadan","Jamais / Pas du tout","Temps","ما بكذب أبداً.","Ma bekzob abadan.","Je ne mens jamais."],
+["أحياناً","ahyanan","Parfois","Temps"],
+["كل يوم","kel yom","Tous les jours","Temps"],
+
+// ── NOMBRES ──
+["واحد","wahad","Un","Nombres","بدّي واحد بس.","Baddé wahad bas.","J'en veux un seul."],
+["تنين","tnen","Deux","Nombres","قهوتين لو سمحت.","Ahwten law samaht.","Deux cafés s'il te plaît."],
+["تلاتة","tleté","Trois","Nombres"],
+["أربعة","arb3a","Quatre","Nombres"],
+["خمسة","khamsé","Cinq","Nombres"],
+["ستة","setté","Six","Nombres"],
+["سبعة","sab3a","Sept","Nombres"],
+["تمانة","tméné","Huit","Nombres"],
+["تسعة","tes3a","Neuf","Nombres"],
+["عشرة","3ashra","Dix","Nombres"],
+["عشرين","3eshrin","Vingt","Nombres"],
+["تلاتين","tlétin","Trente","Nombres"],
+["مية","miyyé","Cent","Nombres"],
+["ألف","alf","Mille","Nombres"],
+["نص","nos","Moitié / Demi","Nombres","الساعة تلاتة ونص.","El se3a tleté w nos.","Il est trois heures et demie."],
+["أول","awwal","Premier","Nombres"],
+["آخر","ékher","Dernier","Nombres"],
+
+// ── COULEURS ──
+["لون","lon","Couleur","Couleurs"],
+["أحمر","ahmar","Rouge","Couleurs"],
+["أزرق","azra2","Bleu","Couleurs"],
+["أخضر","akhdar","Vert","Couleurs"],
+["أصفر","asfar","Jaune","Couleurs"],
+["أبيض","abyad","Blanc","Couleurs"],
+["أسود","aswad","Noir","Couleurs"],
+["زهر","zaher","Rose","Couleurs"],
+["بني","benné","Marron","Couleurs"],
+["رمادي","ramadé","Gris","Couleurs"],
+
+// ── CORPS & SANTÉ ──
+["راس","ras","Tête","Corps & santé"],
+["عين","3en","Œil","Corps & santé"],
+["دينة","deyné","Oreille","Corps & santé"],
+["تم","temm","Bouche","Corps & santé"],
+["سنان","snén","Dents","Corps & santé"],
+["إيد","id","Main","Corps & santé"],
+["إجر","ejer","Jambe / Pied","Corps & santé"],
+["قلب","aleb","Cœur","Corps & santé"],
+["بطن","baten","Ventre","Corps & santé"],
+["شعر","sha3er","Cheveux","Corps & santé"],
+["مريض","marid","Malade","Corps & santé"],
+["وجع","waja3","Douleur / Mal","Corps & santé","عندي وجع راس.","3andé waja3 ras.","J'ai mal à la tête."],
+["دكتور","doktor","Médecin","Corps & santé"],
+["دوا","dawa","Médicament","Corps & santé"],
+["مستشفى","mostashfa","Hôpital","Corps & santé"],
+
+// ── VÊTEMENTS ──
+["تياب","tyéb","Vêtements","Vêtements"],
+["قميص","amis","Chemise","Vêtements"],
+["بنطلون","bantalon","Pantalon","Vêtements"],
+["فستان","fostan","Robe","Vêtements"],
+["صباط","sabbat","Chaussures","Vêtements"],
+["جاكيت","jaket","Veste","Vêtements"],
+["كلسات","kalsét","Chaussettes","Vêtements"],
+["شنطة","shanta","Sac / Valise","Vêtements"],
+["عوينات","3wenét","Lunettes","Vêtements"],
+["خاتم","khétem","Bague","Vêtements"],
+
+// ── TRAVAIL & ÉTUDES ──
+["شغل","sheghel","Travail","Travail & études","عندي كتير شغل اليوم.","3andé ktir sheghel el yom.","J'ai beaucoup de travail aujourd'hui."],
+["مكتب","maktab","Bureau","Travail & études"],
+["إجتماع","ejtimé3","Réunion","Travail & études"],
+["مدير","mudir","Chef / Directeur","Travail & études"],
+["زميل","zamil","Collègue","Travail & études"],
+["مشروع","mashrou3","Projet","Travail & études","عم إشتغل على مشروع جديد.","3am eshtghel 3ala mashrou3 jdid.","Je travaille sur un nouveau projet."],
+["إيميل","imél","Email","Travail & études"],
+["كمبيوتر","kompyuter","Ordinateur","Travail & études"],
+["ورقة","wara2a","Papier / Feuille","Travail & études"],
+["قلم","alam","Stylo","Travail & études"],
+["درس","dars","Cours / Leçon","Travail & études"],
+["مدرسة","madrasé","École","Travail & études","الولاد بالمدرسة.","El wled bil madrasé.","Les enfants sont à l'école."],
+["جامعة","jém3a","Université","Travail & études"],
+["طالب","taleb","Étudiant","Travail & études"],
+["موظف","mwazzaf","Employé","Travail & études"],
+["إجازة","ejéze","Congé / Vacances","Travail & études"],
+["معاش","ma3ash","Salaire","Travail & études"],
+["كتاب","kteb","Livre","Travail & études","عم إقرا كتاب حلو.","3am e2ra kteb helo.","Je lis un beau livre."],
+["لغة","lugha","Langue","Travail & études","العربي لغة حلوة.","El 3arabé lugha helwé.","L'arabe est une belle langue."],
+
+// ── VOYAGE ──
+["سفر","safar","Voyage","Voyage"],
+["طيارة","tayyara","Avion","Voyage"],
+["مطار","matar","Aéroport","Voyage","رايح عالمطار هلّق.","Rayih 3al matar halla2.","Je vais à l'aéroport maintenant."],
+["تذكرة","tazkara","Billet / Ticket","Voyage"],
+["جواز","jawéz","Passeport","Voyage"],
+["أوتيل","otel","Hôtel","Voyage"],
+["خريطة","kharita","Carte (géographique)","Voyage"],
+["صورة","soura","Photo","Voyage"],
+["أجنبي","ajnabé","Étranger","Voyage"],
+["عطلة","3otlé","Vacances","Voyage"],
+["بلد","balad","Pays","Voyage"],
+["حدود","hudud","Frontière","Voyage"],
+
+// ── NATURE & MÉTÉO ──
+["بحر","bahr","Mer","Nature & météo","يلا عالبحر!","Yalla 3al bahr !","Allez, à la mer !"],
+["جبل","jabal","Montagne","Nature & météo","بالشتي منطلع عالجبل.","Bil shté mnetla3 3al jabal.","En hiver on monte à la montagne."],
+["طقس","ta2s","Météo / Temps qu'il fait","Nature & météo","الطقس حلو اليوم.","El ta2s helo el yom.","Il fait beau aujourd'hui."],
+["شمس","shams","Soleil","Nature & météo","في شمس قوية.","Fi shams awiyé.","Le soleil tape fort."],
+["شجرة","shajra","Arbre","Nature & météo"],
+["ورد","ward","Fleurs","Nature & météo"],
+["قمر","2amar","Lune","Nature & météo"],
+["نجمة","nejmé","Étoile","Nature & météo"],
+["سما","sama","Ciel","Nature & météo"],
+["أرض","ared","Terre / Sol","Nature & météo"],
+["هوا","hawa","Air / Vent","Nature & météo"],
+["نار","nar","Feu","Nature & météo"],
+["تلج","talj","Neige","Nature & météo"],
+["غيم","ghaym","Nuages","Nature & météo"],
+["شوب","shob","Il fait chaud","Nature & météo","اليوم كتير شوب!","El yom ktir shob !","Il fait très chaud aujourd'hui !"],
+["برد","bard","Il fait froid","Nature & météo","في برد عالجبل.","Fi bard 3al jabal.","Il fait froid à la montagne."],
+
+// ── ANIMAUX ──
+["كلب","kaleb","Chien","Animaux"],
+["بسة","bissé","Chat","Animaux"],
+["حصان","hsan","Cheval","Animaux"],
+["عصفور","3asfour","Oiseau","Animaux"],
+["بقرة","ba2ara","Vache","Animaux"],
+["خروف","kharouf","Mouton","Animaux"],
+["دب","debb","Ours","Animaux"],
+["فار","far","Souris","Animaux"],
+
+// ── VERBES ──
+["بدّي","baddé","Je veux","Verbes","بدّي روح عالبيت.","Baddé ruh 3al bet.","Je veux rentrer à la maison."],
+["في","fi","Il y a","Verbes","في حدا هون؟","Fi hada hon ?","Il y a quelqu'un ici ?"],
+["ما في","ma fi","Il n'y a pas","Verbes","ما في وقت.","Ma fi wa2et.","Il n'y a pas le temps."],
+["روح","ruh","Aller / Va !","Verbes","روح نام، تأخّر الوقت.","Ruh nem, t2akhar el wa2et.","Va dormir, il est tard."],
+["تعا","ta3a","Viens","Verbes","تعا لعندي بكرا.","Ta3a la 3andé bukra.","Viens chez moi demain."],
+["شوف","shuf","Regarde / Voir","Verbes","شوف هالمنظر!","Shuf hal manzar !","Regarde cette vue !"],
+["إسمع","esma3","Écoute","Verbes","إسمعني شوي.","Esma3né shway.","Écoute-moi un peu."],
+["إحكي","ehké","Parle / Parler","Verbes","إحكي معي بالعربي.","Ehké ma3é bil 3arabé.","Parle-moi en arabe."],
+["إكتب","ektob","Écris / Écrire","Verbes","إكتبلي رقمك.","Ektobli ra2mak.","Écris-moi ton numéro."],
+["إقرا","e2ra","Lis / Lire","Verbes"],
+["نام","nem","Dormir","Verbes","بدّي نام بكير الليلة.","Baddé nem bakkir el leylé.","Je veux dormir tôt ce soir."],
+["فيق","fi2","Se réveiller","Verbes","بفيق الساعة سبعة.","Bfi2 el se3a sab3a.","Je me réveille à sept heures."],
+["إشتغل","eshtghel","Travailler","Verbes","عم إشتغل من البيت.","3am eshtghel mn el bet.","Je travaille depuis la maison."],
+["إلعب","el3ab","Jouer","Verbes","الولاد عم يلعبو برّا.","El wled 3am yel3abo barra.","Les enfants jouent dehors."],
+["ساعد","sé3ed","Aider","Verbes","فيك تساعدني؟","Fik tsé3edné ?","Tu peux m'aider ?"],
+["فكّر","fakkar","Penser / Réfléchir","Verbes","خلّيني فكّر شوي.","Khalliné fakkir shway.","Laisse-moi réfléchir un peu."],
+["نسيت","nsit","J'ai oublié","Verbes","نسيت مفاتيحي!","Nsit mafatihé !","J'ai oublié mes clés !"],
+["بعرف","ba3ref","Je sais / Je connais","Verbes","ما بعرف وين هوّي.","Ma ba3ref wen huwwe.","Je ne sais pas où il est."],
+["فيّي","fiyyé","Je peux","Verbes","فيّي ساعدك؟","Fiyyé sé3dak ?","Je peux t'aider ?"],
+["إستنّى","stanna","Attends","Verbes","إستنّاني خمس دقايق.","Stannéné khams da2aye2.","Attends-moi cinq minutes."],
+["خود","khud","Prends","Verbes"],
+["عطي","3até","Donne","Verbes","عطيني هيدا لو سمحت.","3atiné hayda law samaht.","Donne-moi ça s'il te plaît."],
+["إشتري","eshtré","Acheter","Verbes","بدّي إشتري خبز.","Baddé eshtré khebez.","Je veux acheter du pain."],
+["بيع","bi3","Vendre","Verbes"],
+["إفتح","ftah","Ouvre / Ouvrir","Verbes"],
+["سكّر","sakker","Ferme / Fermer","Verbes","سكّر الباب لو سمحت.","Sakker el beb law samaht.","Ferme la porte s'il te plaît."],
+["غسّل","ghassel","Laver","Verbes"],
+["نضّف","naddef","Nettoyer","Verbes"],
+["إطبخ","etbokh","Cuisiner","Verbes"],
+["سوق","sou2 (verbe)","Conduire","Verbes"],
+["إمشي","emshé","Marcher","Verbes"],
+["ركض","rkod","Courir","Verbes"],
+["سافر","séfer","Voyager","Verbes","رح سافر الشهر الجاي.","Rah séfer el shaher el jey.","Je vais voyager le mois prochain."],
+["وصل","wsel","Arriver","Verbes"],
+["طلع","tle3","Monter / Sortir","Verbes"],
+["نزل","nzel","Descendre","Verbes"],
+["فات","fét","Entrer","Verbes"],
+["ضل","dall","Rester","Verbes"],
+["رجع","rje3","Revenir / Rentrer","Verbes"],
+["غنّي","ghanné","Chanter","Verbes"],
+["رقص","r2os","Danser","Verbes"],
+["ضحك","dhek","Rire","Verbes"],
+["بكي","beké","Pleurer","Verbes"],
+["حب","habb","Aimer","Verbes","بحب البحر كتير.","Bheb el bahr ktir.","J'adore la mer."],
+["كره","kereh","Détester","Verbes"],
+["جرّب","jarreb","Essayer","Verbes","جرّب هيدا الأكل!","Jarreb hayda el akel !","Essaie ce plat !"],
+["خلّص","khalles","Finir / Terminer","Verbes"],
+["بلّش","ballesh","Commencer","Verbes"],
+["دفع","dfa3","Payer","Verbes","مين رح يدفع؟","Min rah yedfa3 ?","Qui va payer ?"],
+["بعت","b3at","Envoyer","Verbes","بعتلي الصورة.","B3atli el soura.","Envoie-moi la photo."],
+["حط","hatt","Poser / Mettre","Verbes"],
+
+// ── ADJECTIFS ──
+["حلو","helo / helwé","Beau / Belle, joli","Adjectifs","بيروت حلوة بالليل.","Beyrut helwé bil lel.","Beyrouth est belle la nuit."],
+["كبير","kbir","Grand","Adjectifs","البيت كبير.","El bet kbir.","La maison est grande."],
+["زغير","zghir","Petit","Adjectifs","بدّي قهوة زغيرة.","Baddé ahwé zghiré.","Je veux un petit café."],
+["جديد","jdid","Nouveau","Adjectifs","عندي شغل جديد.","3andé sheghel jdid.","J'ai un nouveau travail."],
+["قديم","2adim","Vieux / Ancien","Adjectifs","هالبناية قديمة بس حلوة.","Hal binéyé 2adimé bas helwé.","Ce bâtiment est ancien mais beau."],
+["غالي","ghalé","Cher (prix)","Adjectifs","كل شي صار غالي.","Kel shi sar ghalé.","Tout est devenu cher."],
+["رخيص","rkhis","Pas cher","Adjectifs","هون الأسعار رخيصة.","Hon el as3ar rkhisa.","Ici les prix sont bas."],
+["تعبان","ta3ben / ta3bené","Fatigué(e)","Adjectifs","أنا كتير تعبان اليوم.","Ana ktir ta3ben el yom.","Je suis très fatigué aujourd'hui."],
+["سهل","sahel","Facile","Adjectifs","العربي مش سهل بس حلو.","El 3arabé mish sahel bas helo.","L'arabe n'est pas facile mais c'est beau."],
+["صعب","s3ib","Difficile","Adjectifs","هالسؤال صعب.","Hal su2al s3ib.","Cette question est difficile."],
+["مش","mish","Ne… pas (négation)","Adjectifs","أنا مش جاهز بعد.","Ana mish jehez ba3d.","Je ne suis pas encore prêt."],
+["طويل","tawil","Long / Grand (taille)","Adjectifs"],
+["قصير","asir","Court / Petit (taille)","Adjectifs"],
+["سمين","smin","Gros","Adjectifs"],
+["ضعيف","d3if","Maigre / Faible","Adjectifs"],
+["قوي","awé","Fort","Adjectifs"],
+["سريع","sari3","Rapide","Adjectifs"],
+["بطيء","bati2","Lent","Adjectifs"],
+["نضيف","ndif","Propre","Adjectifs"],
+["وسخ","wesekh","Sale","Adjectifs"],
+["فاضي","fadé","Vide / Libre (pas occupé)","Adjectifs","إنت فاضي بكرا؟","Enta fadé bukra ?","Tu es libre demain ?"],
+["مليان","melyén","Plein","Adjectifs"],
+["مشغول","mashghoul","Occupé","Adjectifs","معليش، أنا مشغول هلّق.","Ma3lesh, ana mashghoul halla2.","Désolé, je suis occupé là."],
+["جاهز","jehez","Prêt","Adjectifs"],
+["مهم","muhem","Important","Adjectifs"],
+["غريب","gharib","Étrange / Bizarre","Adjectifs"],
+["ذكي","zaké","Intelligent","Adjectifs"],
+
+// ── SENTIMENTS ──
+["مبسوط","mabsout / mabsouta","Content(e)","Sentiments","مبسوط بالشغل الجديد؟","Mabsout bil sheghel el jdid ?","Content du nouveau travail ?"],
+["زعلان","za3len / za3lené","Triste / Fâché(e)","Sentiments","ليش زعلان؟","Lesh za3len ?","Pourquoi es-tu fâché ?"],
+["فرحان","farhan","Heureux / Joyeux","Sentiments"],
+["خايف","khayef","J'ai peur / Effrayé","Sentiments"],
+["قلقان","2al2an","Inquiet","Sentiments"],
+["زهقان","zah2an","Je m'ennuie / Lassé","Sentiments"],
+["مستغرب","mestaghreb","Surpris / Étonné","Sentiments"],
+["مشتاق","meshté2","Tu me manques","Sentiments","مشتقلك كتير!","Meshté2lak ktir !","Tu me manques beaucoup !"],
+["بحبك","bhebbak / bhebbik","Je t'aime (h. / f.)","Sentiments"],
+
+// ── EXPRESSIONS ──
+["شو في ما في","shu fi ma fi","Quoi de neuf ?","Expressions","شو في ما في معك؟","Shu fi ma fi ma3ak ?","Alors, quoi de neuf chez toi ?"],
+["ولو","walaw","Voyons ! / Bien sûr (entre amis)","Expressions","ولو، ما في مشكلة أبداً.","Walaw, ma fi mishkle abadan.","Voyons, aucun problème du tout."],
+["خلص","khalas","C'est fini / Ça suffit","Expressions","خلص، فهمت.","Khalas, fhemet.","C'est bon, j'ai compris."],
+["أكيد","akid","Bien sûr / Certainement","Expressions","أكيد جايي بكرا!","Akid jeyé bukra !","Bien sûr que je viens demain !"],
+["نهارك سعيد","nharak sa3id","Bonne journée","Expressions","نهارك سعيد، بشوفك!","Nharak sa3id, bshufak !","Bonne journée, à plus !"],
+["تصبح على خير","tesbah 3ala kher","Bonne nuit","Expressions","تصبح على خير حبيبي.","Tesbah 3ala kher habibi.","Bonne nuit mon cher."],
+["الله يساعدك","allah ysa3dak","Que Dieu t'aide / Bon courage","Expressions","عندك شغل كتير؟ الله يساعدك.","3andak sheghel ktir ? Allah ysa3dak.","Tu as beaucoup de travail ? Bon courage."],
+["مشكلة","mishkle","Problème","Expressions","ما في مشكلة!","Ma fi mishkle !","Pas de problème !"],
+["مجنون","majnoun / majnouné","Fou / Folle","Expressions","إنت مجنون؟!","Enta majnoun ?!","Tu es fou ?!"],
+["تفضّل","tfaddal / tfaddalé","Je t'en prie / Vas-y","Expressions","تفضّل، فوت!","Tfaddal, fout !","Je t'en prie, entre !"],
+["مبروك","mabrouk","Félicitations","Expressions","مبروك عالشغل الجديد!","Mabrouk 3al sheghel el jdid !","Félicitations pour le nouveau travail !"],
+["الحمد لله","hamdella","Dieu merci / Ça va","Expressions","كيفك؟ الحمد لله.","Kifak ? Hamdella.","Comment vas-tu ? Ça va, Dieu merci."],
+["يعني","ya3né","C'est-à-dire / Bof","Expressions","الفيلم منيح؟ يعني...","El film mnih ? Ya3né...","Le film est bien ? Bof..."],
+["والله","wallah","Je te jure / Vraiment","Expressions","والله ما بعرف!","Wallah ma ba3ref !","Je te jure que je ne sais pas !"],
+["يا حرام","ya haram","Le/la pauvre !","Expressions","يا حرام، مرض اليوم.","Ya haram, mered el yom.","Le pauvre, il est tombé malade."],
+["عنجد","3anjad","Sérieusement / Vraiment","Expressions","عنجد؟ ما صدّقت!","3anjad ? Ma sadda2et !","Sérieusement ? Je n'y crois pas !"],
+["تكرم","tikram / tikramé","Avec plaisir / À ton service","Expressions","فيك تجيبلي ميّ؟ تكرم!","Fik tjibli mayy ? Tikram !","Tu peux m'apporter de l'eau ? Avec plaisir !"],
+["خير؟","kher ?","Tout va bien ? / Qu'y a-t-il ?","Expressions","شو في؟ خير؟","Shu fi ? Kher ?","Qu'est-ce qu'il y a ? Tout va bien ?"],
+["على راسي","3a rasé","Avec grand plaisir (litt. sur ma tête)","Expressions","بتساعدني؟ على راسي!","Btsé3edné ? 3a rasé !","Tu m'aides ? Avec grand plaisir !"],
+["تقبرني","to2borné","Terme d'affection très libanais","Expressions","تقبرني شو حلو!","To2borné shu helo !","Qu'il est mignon ! (affection intense)"],
+["نشكر الله","neshkor allah","On remercie Dieu / Ça va","Expressions"],
+["بالهنا","bil hana","Avec plaisir (après un repas)","Expressions"],
+["يا ريت","ya ret","Si seulement / J'aimerais bien","Expressions","يا ريت فيّي إجي!","Ya ret fiyyé ejé !","Si seulement je pouvais venir !"],
+["مش معقول","mish ma32oul","Incroyable / Pas possible !","Expressions","مش معقول شو حلو هون!","Mish ma32oul shu helo hon !","Incroyable comme c'est beau ici !"],
+["بلا زحمة","bala zahmé","Sans déranger / Si ça ne dérange pas","Expressions"],
+["ما تواخذني","ma twékhezné","Excuse-moi / Ne m'en veux pas","Expressions"],
+["الله معك","allah ma3ak","Au revoir (que Dieu soit avec toi)","Expressions"],
+["بخاطرك","bkhatrak","Au revoir (en partant)","Expressions","بخاطرك، منشوفك بكرا!","Bkhatrak, mnshufak bukra !","Au revoir, on se voit demain !"]
+];
+
+// ════════════════════════════════════════════
+// MOTEUR — répétition espacée + état
+// ════════════════════════════════════════════
+const INTERVALS=[0,1,3,7,14,30];
+const DAILY_NEW=8, DAILY_MAX=16;
+const LVL_NAMES=["nouveau","découvert","en cours","connu","solide","maîtrisé"];
+const KEY="yalla-progress-v1";
+const wid=w=>w[3]+"|"+w[1]; // id stable: catégorie + translittération
+
+const today=()=>new Date().toISOString().slice(0,10);
+const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x.toISOString().slice(0,10)};
+
+let P={cards:{},streak:0,lastDay:null};
+let storageOk=true;
+try{const raw=localStorage.getItem(KEY);if(raw)P=JSON.parse(raw)}catch(e){storageOk=false}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(P))}catch(e){storageOk=false}}
+
+// ── audio
+let arVoice=null;
+// ordre de préférence : libanais → levantin (proche phonétiquement) → autre arabe
+const ACCENT_ORDER=["ar-lb","ar-sy","ar-jo","ar-ps","ar-eg","ar-sa","ar"];
+function pickVoice(){
+  try{
+    const v=window.speechSynthesis.getVoices().filter(x=>x.lang&&x.lang.toLowerCase().startsWith("ar"));
+    if(!v.length){arVoice=null;return;}
+    for(const pref of ACCENT_ORDER){
+      const hit=v.find(x=>x.lang.toLowerCase()===pref)||(pref==="ar"?v[0]:null);
+      if(hit){arVoice=hit;return;}
+    }
+    arVoice=v[0];
+  }catch(e){}
+}
+if("speechSynthesis" in window){pickVoice();window.speechSynthesis.onvoiceschanged=pickVoice;}
+function speak(t){
+  if(!("speechSynthesis" in window))return;
+  try{
+    window.speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(t);
+    // si aucune voix levantine n'est installée, on demande quand même ar-LB :
+    // certains systèmes résolvent dynamiquement la prononciation libanaise
+    u.lang=arVoice?arVoice.lang:"ar-LB";
+    if(arVoice)u.voice=arVoice;
+    u.rate=0.78;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+// ── deck du jour
+function dueCards(){
+  const t=today();
+  const due=W.filter(w=>{const c=P.cards[wid(w)];return c&&c.due<=t&&c.lvl<INTERVALS.length});
+  const fresh=W.filter(w=>!P.cards[wid(w)]).slice(0,DAILY_NEW);
+  return due.concat(fresh).slice(0,DAILY_MAX);
+}
+
+// ════════════════════════════════════════════
+// INTERFACE
+// ════════════════════════════════════════════
+const $=id=>document.getElementById(id);
+let session=null, flipped=false, wordsTab="all";
+
+function show(view){
+  ["home","study","words","dict"].forEach(v=>$("view-"+v).classList.toggle("hidden",v!==view));
+  $("nav-home").classList.toggle("on",view==="home"||view==="study");
+  $("nav-words").classList.toggle("on",view==="words");
+  $("nav-dict").classList.toggle("on",view==="dict");
+  if(view==="home")renderHome();
+  if(view==="words")renderWords();
+  if(view==="dict")renderDict($("dict-search").value);
+  window.scrollTo(0,0);
+}
+
+function renderHome(){
+  const due=dueCards();
+  const seen=Object.keys(P.cards).length;
+  const mastered=Object.values(P.cards).filter(c=>c.lvl>=4).length;
+  $("st-learning").textContent=seen-mastered;
+  $("st-mastered").textContent=mastered;
+  $("st-remaining").textContent=W.length-seen;
+  $("streakN").textContent=P.streak;
+  $("streakL").textContent=P.streak>1?"jours de suite":"jour de suite";
+  if(due.length>0){
+    $("home-msg").innerHTML="Tu as <strong>"+due.length+" carte"+(due.length>1?"s":"")+"</strong> à réviser aujourd'hui.";
+    $("start-btn").classList.remove("hidden");
+  }else{
+    $("home-msg").innerHTML="Tout est révisé pour aujourd'hui. Mabrouk ! 🎉";
+    $("start-btn").classList.add("hidden");
+  }
+}
+
+function startSession(){
+  const due=dueCards();
+  if(due.length===0)return;
+  session={queue:due.map(wid),done:0,total:due.length};
+  flipped=false;
+  $("study-done").classList.add("hidden");
+  $("study-card-zone").classList.remove("hidden");
+  show("study");
+  renderCard();
+}
+
+function renderCard(){
+  const w=W.find(x=>wid(x)===session.queue[0]);
+  $("pbar-fill").style.width=(session.done/session.total*100)+"%";
+  $("plabel").textContent=session.done+" / "+session.total;
+  $("fc-cat").textContent=w[3];
+  $("fc-ar").textContent=w[0];
+  $("fc-tr").textContent=w[1];
+  $("fc-fr").textContent=w[2];
+  const hasEx=!!w[4];
+  $("fc-ex").style.display=hasEx?"block":"none";
+  if(hasEx){$("fc-ex-ar").textContent=w[4];$("fc-ex-tr").textContent=w[5];$("fc-ex-fr").textContent=w[6];}
+  $("fc-back").classList.toggle("hidden",!flipped);
+  $("fc-hint").classList.toggle("hidden",flipped);
+  $("answers").classList.toggle("hidden",!flipped);
+}
+
+function flip(){if(!session||session.queue.length===0)return;flipped=!flipped;renderCard();}
+
+function answer(ok){
+  const id=session.queue.shift();
+  const cur=P.cards[id]||{lvl:0,due:today()};
+  if(ok){
+    const lvl=Math.min(cur.lvl+1,INTERVALS.length);
+    P.cards[id]={lvl,due:addDays(today(),INTERVALS[Math.min(lvl,INTERVALS.length-1)])};
+    session.done++;
+  }else{
+    P.cards[id]={lvl:0,due:today()};
+    session.queue.push(id);
+  }
+  if(session.queue.length===0){
+    const t=today();
+    if(P.lastDay!==t){P.streak=(P.lastDay===addDays(t,-1))?P.streak+1:1;P.lastDay=t;}
+    save();
+    $("study-card-zone").classList.add("hidden");
+    $("study-done").classList.remove("hidden");
+    $("done-msg").textContent="Session terminée : "+session.total+" carte"+(session.total>1?"s":"")+". Reviens demain, ta série continue.";
+    $("streakN").textContent=P.streak;
+    return;
+  }
+  save();
+  flipped=false;
+  renderCard();
+}
+
+function renderWords(){
+  const q=($("word-search").value||"").toLowerCase();
+  const list=W.filter(w=>P.cards[wid(w)])
+    .map(w=>({w,lvl:P.cards[wid(w)].lvl,due:P.cards[wid(w)].due}))
+    .filter(x=>wordsTab==="mastered"?x.lvl>=4:wordsTab==="learning"?x.lvl<4:true)
+    .filter(x=>!q||x.w[1].toLowerCase().includes(q)||x.w[2].toLowerCase().includes(q)||x.w[0].includes(q))
+    .sort((a,b)=>b.lvl-a.lvl);
+  const seen=Object.keys(P.cards).length;
+  const mastered=Object.values(P.cards).filter(c=>c.lvl>=4).length;
+  $("tab-all").textContent="Tous ("+seen+")";
+  $("tab-learning").textContent="En cours ("+(seen-mastered)+")";
+  $("tab-mastered").textContent="Maîtrisés ("+mastered+")";
+  const el=$("words-list");
+  if(list.length===0){
+    el.innerHTML='<div class="panel" style="margin-top:14px"><div class="hero-sub">Rien ici pour l\'instant. Fais ta session du jour pour découvrir tes premiers mots !</div></div>';
+    return;
+  }
+  el.innerHTML=list.map(({w,lvl,due})=>{
+    const segs=[0,1,2,3,4].map(i=>'<i style="background:'+(i<lvl?(lvl>=4?'var(--cedar)':'var(--terra)'):'var(--line)')+'"></i>').join("");
+    const next=lvl<INTERVALS.length?" · retour le "+due.slice(8,10)+"/"+due.slice(5,7):"";
+    return '<div class="word"><div class="word-top"><div style="flex:1;min-width:0">'+
+      '<span class="word-ar">'+w[0]+'</span><span class="word-tr">'+w[1]+'</span>'+
+      '<div class="word-fr">'+w[2]+'</div></div>'+
+      '<button class="mini-audio" data-say="'+w[0].replace(/"/g,"&quot;")+'" aria-label="Écouter">🔊</button></div>'+
+      '<div class="lvl-row"><div class="lvl-track">'+segs+'</div><span class="lvl-text">'+LVL_NAMES[Math.min(lvl,5)]+next+'</span></div></div>';
+  }).join("");
+}
+
+function renderDict(q){
+  q=(q||"").toLowerCase();
+  const cats=[...new Set(W.map(w=>w[3]))];
+  $("dict-list").innerHTML=cats.map(cat=>{
+    const rows=W.filter(w=>w[3]===cat)
+      .filter(w=>!q||w[1].toLowerCase().includes(q)||w[2].toLowerCase().includes(q)||w[0].includes(q))
+      .map(w=>{
+        const st=P.cards[wid(w)];
+        const dot=!st?'#E3DACB':st.lvl>=4?'var(--cedar)':'var(--terra)';
+        return '<div class="drow"><div class="ar">'+w[0]+'</div><div class="mid">'+
+          '<div class="tr">'+w[1]+'</div><div class="fr">'+w[2]+'</div></div>'+
+          '<button class="mini-audio" data-say="'+w[0].replace(/"/g,"&quot;")+'" aria-label="Écouter">🔊</button>'+
+          '<div class="dot" style="background:'+dot+'"></div></div>';
+      }).join("");
+    return rows?'<h2 class="cat">'+cat+'</h2>'+rows:"";
+  }).join("");
+}
+
+// ── événements
+$("nav-home").onclick=()=>show("home");
+$("nav-words").onclick=()=>show("words");
+$("nav-dict").onclick=()=>show("dict");
+$("start-btn").onclick=startSession;
+$("back-home-btn").onclick=()=>show("home");
+$("flashcard").onclick=flip;
+$("flashcard").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flip();}};
+$("btn-yes").onclick=()=>answer(true);
+$("btn-no").onclick=()=>answer(false);
+$("fc-audio").onclick=e=>{e.stopPropagation();const w=W.find(x=>wid(x)===session.queue[0]);speak(w[0]);};
+$("fc-ex-audio").onclick=e=>{e.stopPropagation();const w=W.find(x=>wid(x)===session.queue[0]);if(w[4])speak(w[4]);};
+document.addEventListener("click",e=>{const b=e.target.closest("[data-say]");if(b)speak(b.dataset.say);});
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{
+  wordsTab=b.dataset.tab;
+  document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x===b));
+  renderWords();
+});
+$("word-search").oninput=renderWords;
+$("dict-search").oninput=e=>renderDict(e.target.value);
+$("flashcard").setAttribute("tabindex","0");
+$("flashcard").setAttribute("role","button");
+
+$("footer").textContent=W.length+" mots · arabe levantin (libanais) · niveau A1-A2"+
+  (storageOk?" · progression enregistrée sur cet appareil":" · ⚠ sauvegarde indisponible (ouvre l'app depuis l'écran d'accueil)")+
+  (("speechSynthesis" in window)?"":" · audio indisponible");
+
+renderHome();
+</script>
+</body>
+</html>
