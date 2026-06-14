@@ -45,6 +45,11 @@ main{padding:18px 0 40px}
 .hero-sub{font-size:15px;color:var(--ink-soft);margin-top:16px;line-height:1.5}
 .big-btn{margin-top:22px;background:var(--terra);color:var(--paper);border-radius:999px;padding:15px 32px;font-size:16px;font-weight:600}
 .stats{display:flex;gap:11px;margin-top:15px}
+.setting{margin-top:15px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.setting-label{font-size:13px;color:var(--ink-soft);font-weight:500;margin-bottom:9px;text-align:center}
+.seg{display:flex;gap:6px}
+.seg button{flex:1;background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:9px 4px;font-size:14px;color:var(--ink-soft);font-weight:600}
+.seg button.on{background:var(--cedar);border-color:var(--cedar);color:var(--cream)}
 .stat{flex:1;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:15px 6px;text-align:center}
 .stat b{font-family:'Fraunces',serif;font-size:25px;font-weight:700;color:var(--cedar);display:block}
 .stat small{font-size:10.5px;color:var(--sand)}
@@ -127,6 +132,15 @@ footer{text-align:center;font-size:11px;color:var(--sand-light);padding:14px 20p
         <div class="stat"><b id="st-mastered">0</b><small>maîtrisés</small></div>
         <div class="stat"><b id="st-remaining">0</b><small>à découvrir</small></div>
       </div>
+      <div class="setting">
+        <div class="setting-label">Nouveaux mots par jour</div>
+        <div class="seg" id="newcount-seg">
+          <button data-n="10">10</button>
+          <button data-n="20">20</button>
+          <button data-n="40">40</button>
+          <button data-n="9999">Tous</button>
+        </div>
+      </div>
     </section>
 
     <!-- SESSION -->
@@ -152,7 +166,7 @@ footer{text-align:center;font-size:11px;color:var(--sand-light);padding:14px 20p
           </div>
         </div>
         <div class="answers hidden" id="answers">
-          <button class="btn-no" id="btn-no">Pas encore<small>à revoir</small></button>
+          <button class="btn-no" id="btn-no">En apprentissage<small>à revoir souvent</small></button>
           <button class="btn-yes" id="btn-yes">Je connais<small>mnih !</small></button>
         </div>
       </div>
@@ -618,7 +632,8 @@ const W = [
 // MOTEUR — répétition espacée + état
 // ════════════════════════════════════════════
 const INTERVALS=[0,1,3,7,14,30];
-const DAILY_NEW=8, DAILY_MAX=16;
+const DEFAULT_NEW=10;        // nouveaux mots par jour (modifiable dans l'app)
+const SESSION_HARD_CAP=60;   // garde-fou pour ne pas afficher 300 cartes d'un coup
 const LVL_NAMES=["nouveau","découvert","en cours","connu","solide","maîtrisé"];
 const KEY="yalla-progress-v1";
 const wid=w=>w[3]+"|"+w[1]; // id stable: catégorie + translittération
@@ -626,9 +641,10 @@ const wid=w=>w[3]+"|"+w[1]; // id stable: catégorie + translittération
 const today=()=>new Date().toISOString().slice(0,10);
 const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x.toISOString().slice(0,10)};
 
-let P={cards:{},streak:0,lastDay:null};
+let P={cards:{},streak:0,lastDay:null,dailyNew:DEFAULT_NEW};
 let storageOk=true;
 try{const raw=localStorage.getItem(KEY);if(raw)P=JSON.parse(raw)}catch(e){storageOk=false}
+if(typeof P.dailyNew!=="number")P.dailyNew=DEFAULT_NEW;
 function save(){try{localStorage.setItem(KEY,JSON.stringify(P))}catch(e){storageOk=false}}
 
 // ── audio
@@ -662,11 +678,14 @@ function speak(t){
 }
 
 // ── deck du jour
+// 1) les mots EN APPRENTISSAGE (déjà vus, pas encore maîtrisés) reviennent en priorité
+// 2) puis on complète avec de nouveaux mots, selon le réglage choisi
 function dueCards(){
   const t=today();
-  const due=W.filter(w=>{const c=P.cards[wid(w)];return c&&c.due<=t&&c.lvl<INTERVALS.length});
-  const fresh=W.filter(w=>!P.cards[wid(w)]).slice(0,DAILY_NEW);
-  return due.concat(fresh).slice(0,DAILY_MAX);
+  const learning=W.filter(w=>{const c=P.cards[wid(w)];return c&&c.due<=t&&c.lvl<INTERVALS.length});
+  const n=P.dailyNew||DEFAULT_NEW;
+  const fresh=W.filter(w=>!P.cards[wid(w)]).slice(0,n);
+  return learning.concat(fresh).slice(0,SESSION_HARD_CAP);
 }
 
 // ════════════════════════════════════════════
@@ -695,6 +714,7 @@ function renderHome(){
   $("st-remaining").textContent=W.length-seen;
   $("streakN").textContent=P.streak;
   $("streakL").textContent=P.streak>1?"jours de suite":"jour de suite";
+  document.querySelectorAll("#newcount-seg button").forEach(b=>b.classList.toggle("on",+b.dataset.n===P.dailyNew));
   if(due.length>0){
     $("home-msg").innerHTML="Tu as <strong>"+due.length+" carte"+(due.length>1?"s":"")+"</strong> à réviser aujourd'hui.";
     $("start-btn").classList.remove("hidden");
@@ -810,6 +830,11 @@ $("nav-home").onclick=()=>show("home");
 $("nav-words").onclick=()=>show("words");
 $("nav-dict").onclick=()=>show("dict");
 $("start-btn").onclick=startSession;
+document.querySelectorAll("#newcount-seg button").forEach(b=>b.onclick=()=>{
+  P.dailyNew=+b.dataset.n;
+  save();
+  renderHome();
+});
 $("back-home-btn").onclick=()=>show("home");
 $("flashcard").onclick=flip;
 $("flashcard").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flip();}};
