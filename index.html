@@ -36,8 +36,24 @@ header{display:flex;justify-content:space-between;align-items:flex-start;padding
 .streak b{font-family:'Fraunces',serif;font-size:25px;font-weight:700;line-height:1;display:block}
 .streak small{font-size:10px;opacity:.85}
 nav{display:flex;gap:8px;margin-top:14px}
-nav button{flex:1;border:1.5px solid #D8CDB8;border-radius:999px;padding:9px 4px;font-size:13px;color:var(--ink-soft);font-weight:500;background:none}
+nav button{flex:1;border:1.5px solid #D8CDB8;border-radius:999px;padding:9px 4px;font-size:12.5px;color:var(--ink-soft);font-weight:500;background:none}
 nav button.on{background:var(--cedar);border-color:var(--cedar);color:var(--cream)}
+.add-card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:24px 22px;box-shadow:0 4px 24px rgba(43,38,32,.06)}
+.add-title{font-family:'Fraunces',serif;font-size:20px;color:var(--cedar);text-align:center}
+.add-sub{font-size:13px;color:var(--sand);text-align:center;margin-top:6px;margin-bottom:6px}
+.fld-l{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500;margin-top:14px;margin-bottom:5px}
+.req{color:var(--terra)}
+.fld{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink)}
+.fld[dir=rtl]{font-family:'Amiri',serif;font-size:20px}
+.fld:focus{outline:none;border-color:var(--terra)}
+.add-err{font-size:13px;color:var(--terra-deep);margin-top:10px;min-height:1px;text-align:center}
+.add-ok{color:var(--cedar)!important}
+.backup{margin-top:22px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:4px 16px}
+.backup summary{cursor:pointer;font-size:14px;color:var(--ink-soft);font-weight:500;padding:12px 0}
+.bk-note{font-size:12.5px;color:var(--sand);line-height:1.5}
+.bk-area{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:12px;font-family:monospace;background:var(--cream);color:var(--ink);resize:vertical}
+.bk-row{display:flex;gap:8px;margin:10px 0}
+.bk-btn{flex:1;background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:10px 6px;font-size:13px;color:var(--ink-soft);font-weight:500}
 main{padding:18px 0 40px}
 .panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:32px 26px;text-align:center;box-shadow:0 4px 24px rgba(43,38,32,.06)}
 .hero-ar{font-family:'Amiri',serif;font-size:48px;color:var(--cedar);line-height:1.2}
@@ -115,7 +131,8 @@ footer{text-align:center;font-size:11px;color:var(--sand-light);padding:14px 20p
   <nav>
     <button id="nav-home" class="on">Aujourd'hui</button>
     <button id="nav-words">Mes mots</button>
-    <button id="nav-dict">Dictionnaire</button>
+    <button id="nav-dict">Dico</button>
+    <button id="nav-add">+ Ajouter</button>
   </nav>
 
   <main>
@@ -191,8 +208,44 @@ footer{text-align:center;font-size:11px;color:var(--sand-light);padding:14px 20p
 
     <!-- DICTIONNAIRE -->
     <section id="view-dict" class="hidden">
-      <input class="search" id="dict-search" type="search" placeholder="Chercher dans les 340 mots…" style="margin-top:0">
+      <input class="search" id="dict-search" type="search" placeholder="Chercher un mot…" style="margin-top:0">
       <div id="dict-list"></div>
+    </section>
+
+    <!-- AJOUTER -->
+    <section id="view-add" class="hidden">
+      <div class="add-card">
+        <div class="add-title">Ajouter un mot à mon dictionnaire</div>
+        <div class="add-sub">Tes mots rejoignent les cartes à réviser, comme les autres.</div>
+        <label class="fld-l">Mot en arabe <span class="req">*</span></label>
+        <input class="fld" id="add-ar" type="text" dir="rtl" placeholder="مثلاً: قلم" autocomplete="off">
+        <label class="fld-l">Phonétique <span class="req">*</span></label>
+        <input class="fld" id="add-tr" type="text" placeholder="ex : alam" autocomplete="off">
+        <label class="fld-l">Traduction française <span class="req">*</span></label>
+        <input class="fld" id="add-fr" type="text" placeholder="ex : stylo" autocomplete="off">
+        <label class="fld-l">Exemple en arabe (optionnel)</label>
+        <input class="fld" id="add-ex" type="text" dir="rtl" placeholder="مثلاً: وين القلم؟" autocomplete="off">
+        <label class="fld-l">Traduction de l'exemple (optionnel)</label>
+        <input class="fld" id="add-exfr" type="text" placeholder="ex : Où est le stylo ?" autocomplete="off">
+        <div class="add-err" id="add-err"></div>
+        <button class="big-btn" id="add-btn" style="margin-top:16px;width:100%">Ajouter à mon dictionnaire</button>
+      </div>
+
+      <div id="my-added-wrap" class="hidden">
+        <h2 class="cat">Mes mots ajoutés (<span id="my-added-count">0</span>)</h2>
+        <div id="my-added-list"></div>
+      </div>
+
+      <details class="backup">
+        <summary>Sauvegarder / restaurer mes mots</summary>
+        <p class="bk-note">Tes mots ajoutés sont enregistrés sur cet appareil. Pour les transférer ou les sauvegarder, copie ce texte et garde-le. Pour restaurer, colle un texte ici puis « Restaurer ».</p>
+        <textarea class="bk-area" id="bk-area" rows="4" placeholder="(la sauvegarde de tes mots apparaît ici)"></textarea>
+        <div class="bk-row">
+          <button class="bk-btn" id="bk-copy">Copier ma sauvegarde</button>
+          <button class="bk-btn" id="bk-restore">Restaurer depuis le texte</button>
+        </div>
+        <div class="add-err" id="bk-msg"></div>
+      </details>
     </section>
   </main>
 
@@ -641,10 +694,13 @@ const wid=w=>w[3]+"|"+w[1]; // id stable: catégorie + translittération
 const today=()=>new Date().toISOString().slice(0,10);
 const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x.toISOString().slice(0,10)};
 
-let P={cards:{},streak:0,lastDay:null,dailyNew:DEFAULT_NEW};
+let P={cards:{},streak:0,lastDay:null,dailyNew:DEFAULT_NEW,custom:[]};
 let storageOk=true;
 try{const raw=localStorage.getItem(KEY);if(raw)P=JSON.parse(raw)}catch(e){storageOk=false}
 if(typeof P.dailyNew!=="number")P.dailyNew=DEFAULT_NEW;
+if(!Array.isArray(P.custom))P.custom=[];
+// deck complet = mots intégrés + mots ajoutés par l'utilisatrice
+function deck(){return P.custom.length?W.concat(P.custom):W;}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(P))}catch(e){storageOk=false}}
 
 // ── audio
@@ -682,9 +738,12 @@ function speak(t){
 // 2) puis on complète avec de nouveaux mots, selon le réglage choisi
 function dueCards(){
   const t=today();
-  const learning=W.filter(w=>{const c=P.cards[wid(w)];return c&&c.due<=t&&c.lvl<INTERVALS.length});
+  const learning=deck().filter(w=>{const c=P.cards[wid(w)];return c&&c.due<=t&&c.lvl<INTERVALS.length});
   const n=P.dailyNew||DEFAULT_NEW;
-  const fresh=W.filter(w=>!P.cards[wid(w)]).slice(0,n);
+  // les mots ajoutés par l'utilisatrice passent devant les nouveaux mots intégrés
+  const freshCustom=P.custom.filter(w=>!P.cards[wid(w)]);
+  const freshBuiltin=W.filter(w=>!P.cards[wid(w)]);
+  const fresh=freshCustom.concat(freshBuiltin).slice(0,n);
   return learning.concat(fresh).slice(0,SESSION_HARD_CAP);
 }
 
@@ -695,13 +754,15 @@ const $=id=>document.getElementById(id);
 let session=null, flipped=false, wordsTab="all";
 
 function show(view){
-  ["home","study","words","dict"].forEach(v=>$("view-"+v).classList.toggle("hidden",v!==view));
+  ["home","study","words","dict","add"].forEach(v=>$("view-"+v).classList.toggle("hidden",v!==view));
   $("nav-home").classList.toggle("on",view==="home"||view==="study");
   $("nav-words").classList.toggle("on",view==="words");
   $("nav-dict").classList.toggle("on",view==="dict");
+  $("nav-add").classList.toggle("on",view==="add");
   if(view==="home")renderHome();
   if(view==="words")renderWords();
   if(view==="dict")renderDict($("dict-search").value);
+  if(view==="add")renderAdded();
   window.scrollTo(0,0);
 }
 
@@ -711,7 +772,7 @@ function renderHome(){
   const mastered=Object.values(P.cards).filter(c=>c.lvl>=4).length;
   $("st-learning").textContent=seen-mastered;
   $("st-mastered").textContent=mastered;
-  $("st-remaining").textContent=W.length-seen;
+  $("st-remaining").textContent=deck().length-seen;
   $("streakN").textContent=P.streak;
   $("streakL").textContent=P.streak>1?"jours de suite":"jour de suite";
   document.querySelectorAll("#newcount-seg button").forEach(b=>b.classList.toggle("on",+b.dataset.n===P.dailyNew));
@@ -736,7 +797,7 @@ function startSession(){
 }
 
 function renderCard(){
-  const w=W.find(x=>wid(x)===session.queue[0]);
+  const w=deck().find(x=>wid(x)===session.queue[0]);
   $("pbar-fill").style.width=(session.done/session.total*100)+"%";
   $("plabel").textContent=session.done+" / "+session.total;
   $("fc-cat").textContent=w[3];
@@ -781,7 +842,7 @@ function answer(ok){
 
 function renderWords(){
   const q=($("word-search").value||"").toLowerCase();
-  const list=W.filter(w=>P.cards[wid(w)])
+  const list=deck().filter(w=>P.cards[wid(w)])
     .map(w=>({w,lvl:P.cards[wid(w)].lvl,due:P.cards[wid(w)].due}))
     .filter(x=>wordsTab==="mastered"?x.lvl>=4:wordsTab==="learning"?x.lvl<4:true)
     .filter(x=>!q||x.w[1].toLowerCase().includes(q)||x.w[2].toLowerCase().includes(q)||x.w[0].includes(q))
@@ -809,9 +870,9 @@ function renderWords(){
 
 function renderDict(q){
   q=(q||"").toLowerCase();
-  const cats=[...new Set(W.map(w=>w[3]))];
+  const cats=[...new Set(deck().map(w=>w[3]))];
   $("dict-list").innerHTML=cats.map(cat=>{
-    const rows=W.filter(w=>w[3]===cat)
+    const rows=deck().filter(w=>w[3]===cat)
       .filter(w=>!q||w[1].toLowerCase().includes(q)||w[2].toLowerCase().includes(q)||w[0].includes(q))
       .map(w=>{
         const st=P.cards[wid(w)];
@@ -829,6 +890,7 @@ function renderDict(q){
 $("nav-home").onclick=()=>show("home");
 $("nav-words").onclick=()=>show("words");
 $("nav-dict").onclick=()=>show("dict");
+$("nav-add").onclick=()=>show("add");
 $("start-btn").onclick=startSession;
 document.querySelectorAll("#newcount-seg button").forEach(b=>b.onclick=()=>{
   P.dailyNew=+b.dataset.n;
@@ -840,8 +902,8 @@ $("flashcard").onclick=flip;
 $("flashcard").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flip();}};
 $("btn-yes").onclick=()=>answer(true);
 $("btn-no").onclick=()=>answer(false);
-$("fc-audio").onclick=e=>{e.stopPropagation();const w=W.find(x=>wid(x)===session.queue[0]);speak(w[0]);};
-$("fc-ex-audio").onclick=e=>{e.stopPropagation();const w=W.find(x=>wid(x)===session.queue[0]);if(w[4])speak(w[4]);};
+$("fc-audio").onclick=e=>{e.stopPropagation();const w=deck().find(x=>wid(x)===session.queue[0]);speak(w[0]);};
+$("fc-ex-audio").onclick=e=>{e.stopPropagation();const w=deck().find(x=>wid(x)===session.queue[0]);if(w[4])speak(w[4]);};
 document.addEventListener("click",e=>{const b=e.target.closest("[data-say]");if(b)speak(b.dataset.say);});
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{
   wordsTab=b.dataset.tab;
@@ -853,8 +915,87 @@ $("dict-search").oninput=e=>renderDict(e.target.value);
 $("flashcard").setAttribute("tabindex","0");
 $("flashcard").setAttribute("role","button");
 
-$("footer").textContent=W.length+" mots · arabe levantin (libanais) · niveau A1-A2"+
-  (storageOk?" · progression enregistrée sur cet appareil":" · ⚠ sauvegarde indisponible (ouvre l'app depuis l'écran d'accueil)")+
+// ── AJOUT DE MOTS PERSO ──
+const CUSTOM_CAT="Mes ajouts";
+function renderAdded(){
+  const wrap=$("my-added-wrap"), list=$("my-added-list");
+  if(!P.custom.length){wrap.classList.add("hidden");return;}
+  wrap.classList.remove("hidden");
+  $("my-added-count").textContent=P.custom.length;
+  list.innerHTML=P.custom.map((w,i)=>{
+    const st=P.cards[wid(w)];
+    const dot=!st?'#E3DACB':st.lvl>=4?'var(--cedar)':'var(--terra)';
+    return '<div class="drow"><div class="ar">'+esc(w[0])+'</div><div class="mid">'+
+      '<div class="tr">'+esc(w[1])+'</div><div class="fr">'+esc(w[2])+'</div></div>'+
+      '<button class="mini-audio" data-say="'+esc(w[0])+'" aria-label="Écouter">🔊</button>'+
+      '<div class="dot" style="background:'+dot+'"></div>'+
+      '<button class="mini-audio del-word" data-del="'+i+'" aria-label="Supprimer" style="color:var(--terra-deep)">✕</button></div>';
+  }).join("");
+}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+$("add-btn").onclick=()=>{
+  const ar=$("add-ar").value.trim(), tr=$("add-tr").value.trim(), fr=$("add-fr").value.trim();
+  const ex=$("add-ex").value.trim(), exfr=$("add-exfr").value.trim();
+  const err=$("add-err");
+  if(!ar||!tr||!fr){err.className="add-err";err.textContent="Remplis au moins l'arabe, la phonétique et le français.";return;}
+  // doublon ?
+  const newId=CUSTOM_CAT+"|"+tr;
+  if(deck().some(w=>wid(w)===newId)){err.className="add-err";err.textContent="Tu as déjà un mot avec cette phonétique.";return;}
+  P.custom.push([ar,tr,fr,CUSTOM_CAT,ex,"",exfr]);
+  save();
+  ["add-ar","add-tr","add-fr","add-ex","add-exfr"].forEach(id=>$(id).value="");
+  err.className="add-err add-ok";err.textContent="« "+fr+" » ajouté ✓ Il apparaîtra dans tes cartes à réviser.";
+  renderAdded();
+  $("add-ar").focus();
+};
+
+document.addEventListener("click",e=>{
+  const d=e.target.closest("[data-del]");
+  if(!d)return;
+  const i=+d.dataset.del, w=P.custom[i];
+  if(!w)return;
+  if(confirm("Supprimer « "+w[2]+" » de tes mots ?")){
+    delete P.cards[wid(w)];
+    P.custom.splice(i,1);
+    save();
+    renderAdded();
+  }
+});
+
+// ── SAUVEGARDE / RESTAURATION ──
+$("bk-copy").onclick=()=>{
+  const txt=JSON.stringify(P.custom);
+  $("bk-area").value=txt;
+  const msg=$("bk-msg");
+  try{
+    navigator.clipboard.writeText(txt);
+    msg.className="add-err add-ok";msg.textContent="Sauvegarde copiée. Colle-la dans une note pour la garder.";
+  }catch(e){
+    msg.className="add-err add-ok";msg.textContent="Sélectionne le texte ci-dessus et copie-le.";
+  }
+};
+$("bk-restore").onclick=()=>{
+  const msg=$("bk-msg");
+  try{
+    const arr=JSON.parse($("bk-area").value.trim());
+    if(!Array.isArray(arr))throw 0;
+    let added=0;
+    arr.forEach(w=>{
+      if(Array.isArray(w)&&w[1]&&!deck().some(x=>wid(x)===CUSTOM_CAT+"|"+w[1])){
+        const e=[w[0]||"",w[1],w[2]||"",CUSTOM_CAT,w[4]||"",w[5]||"",w[6]||""];
+        P.custom.push(e);added++;
+      }
+    });
+    save();renderAdded();
+    msg.className="add-err add-ok";msg.textContent=added+" mot(s) restauré(s).";
+  }catch(e){
+    msg.className="add-err";msg.textContent="Texte de sauvegarde invalide.";
+  }
+};
+
+$("footer").textContent=deck().length+" mots ("+W.length+" intégrés"+(P.custom.length?" + "+P.custom.length+" perso":"")+") · libanais · A1-A2"+
+  (storageOk?" · enregistré sur cet appareil":" · ⚠ sauvegarde indisponible (ouvre l'app depuis l'écran d'accueil)")+
   (("speechSynthesis" in window)?"":" · audio indisponible");
 
 renderHome();
