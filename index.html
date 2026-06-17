@@ -705,7 +705,7 @@ const W = [
 // MOTEUR — répétition espacée + état
 // ════════════════════════════════════════════
 const INTERVALS=[0,1,3,7,14,30];
-const DEFAULT_NEW=10;        // nouveaux mots par jour (modifiable dans l'app)
+const DEFAULT_NEW=20;        // nouveaux mots par jour (modifiable dans l'app)
 const SESSION_HARD_CAP=60;   // garde-fou pour ne pas afficher 300 cartes d'un coup
 const LVL_NAMES=["nouveau","découvert","en cours","connu","solide","maîtrisé"];
 const KEY="yalla-progress-v1";
@@ -718,6 +718,7 @@ let P={cards:{},streak:0,lastDay:null,dailyNew:DEFAULT_NEW,custom:[]};
 let storageOk=true;
 try{const raw=localStorage.getItem(KEY);if(raw)P=JSON.parse(raw)}catch(e){storageOk=false}
 if(typeof P.dailyNew!=="number")P.dailyNew=DEFAULT_NEW;
+if(!P._mig20){if(P.dailyNew<20)P.dailyNew=20;P._mig20=true;}
 if(!Array.isArray(P.custom))P.custom=[];
 // deck complet = mots intégrés + mots ajoutés par l'utilisatrice
 function deck(){return P.custom.length?W.concat(P.custom):W;}
@@ -770,7 +771,8 @@ async function playId(id,fallback){
   if(id&&clipIds.has(id)){
     try{const blob=await clipGet(id);if(blob){const url=URL.createObjectURL(blob);if(curAudio){try{curAudio.pause();}catch(e){}}curAudio=new Audio(url);curAudio.onended=()=>URL.revokeObjectURL(url);await curAudio.play();return;}}catch(e){}
   }
-  if(fallback)speak(fallback);
+  // plus de synthèse vocale (la voix Fusha sonnait faux) : on n'invite qu'à enregistrer la vraie prononciation
+  toast("Pas encore d'enregistrement — appuie sur 🎙 pour enregistrer la prononciation");
 }
 
 // enregistreur partagé
@@ -795,9 +797,9 @@ function handleRecToggle(id,btn){
 }
 
 function audioBtns(id,ar){const i=esc(id),a=esc(ar),has=clipIds.has(id);
-  return '<button class="mini-audio'+(has?' has-clip':'')+'" data-wid="'+i+'" data-say="'+a+'" aria-label="Écouter">🔊</button>'+
+  return (has?'<button class="mini-audio has-clip" data-wid="'+i+'" data-say="'+a+'" aria-label="Écouter">🔊</button>':'')+
          '<button class="mini-audio mini-rec" data-rec="'+i+'" data-reclabel="🎙" data-recon="●" aria-label="Enregistrer ma voix">🎙</button>';}
-function setPlay(btn,id,text,idleLabel,clipLabel){if(!btn)return;btn.dataset.wid=id;btn.dataset.say=text||"";const has=clipIds.has(id);btn.classList.toggle("has-clip",has);btn.textContent=(has&&clipLabel)?clipLabel:idleLabel;}
+function setPlay(btn,id,text,idleLabel,clipLabel){if(!btn)return;btn.dataset.wid=id;btn.dataset.say=text||"";const has=clipIds.has(id);btn.classList.toggle("has-clip",has);btn.style.display=has?"":"none";btn.textContent=(has&&clipLabel)?clipLabel:idleLabel;}
 
 function currentView(){for(const v of ["home","study","words","dict","add"])if(!$("view-"+v).classList.contains("hidden"))return v;return "home";}
 function rerenderCurrent(){const v=currentView();if(v==="words")renderWords();else if(v==="dict")renderDict($("dict-search").value);else if(v==="add")renderAdded();else if(v==="study"&&session&&session.queue.length)renderCard();}
@@ -811,13 +813,14 @@ let addClipBlob=null;
 // 2) puis on complète avec de nouveaux mots, selon le réglage choisi
 function dueCards(){
   const t=today();
+  // tous les mots en apprentissage du jour (jamais coupés) ...
   const learning=deck().filter(w=>{const c=P.cards[wid(w)];return c&&c.due<=t&&c.lvl<INTERVALS.length});
   const n=P.dailyNew||DEFAULT_NEW;
-  // les mots ajoutés par l'utilisatrice passent devant les nouveaux mots intégrés
+  // ... + N nouveaux mots (les mots ajoutés par l'utilisatrice passent devant)
   const freshCustom=P.custom.filter(w=>!P.cards[wid(w)]);
   const freshBuiltin=W.filter(w=>!P.cards[wid(w)]);
   const fresh=freshCustom.concat(freshBuiltin).slice(0,n);
-  return learning.concat(fresh).slice(0,SESSION_HARD_CAP);
+  return learning.concat(fresh);
 }
 
 // ════════════════════════════════════════════
@@ -899,8 +902,10 @@ function answer(ok){
     P.cards[id]={lvl,due:addDays(today(),INTERVALS[Math.min(lvl,INTERVALS.length-1)])};
     session.done++;
   }else{
-    P.cards[id]={lvl:0,due:today()};
-    session.queue.push(id);
+    // « En apprentissage » : on ne bloque PAS la session.
+    // Le mot revient demain, et chaque jour, tant qu'il n'est pas marqué « Je connais ».
+    P.cards[id]={lvl:0,due:addDays(today(),1)};
+    session.done++;
   }
   if(session.queue.length===0){
     const t=today();
@@ -1086,8 +1091,7 @@ $("bk-restore").onclick=()=>{
 };
 
 $("footer").textContent=deck().length+" mots ("+W.length+" intégrés"+(P.custom.length?" + "+P.custom.length+" perso":"")+") · libanais · A1-A2"+
-  (storageOk?" · enregistré sur cet appareil":" · ⚠ sauvegarde indisponible (ouvre l'app depuis l'écran d'accueil)")+
-  ((("speechSynthesis" in window))?"":" · audio indisponible");
+  (storageOk?" · enregistré sur cet appareil":" · ⚠ sauvegarde indisponible (ouvre l'app depuis l'écran d'accueil)");
 
 // raccourcis clavier pendant la révision
 document.addEventListener("keydown",e=>{
