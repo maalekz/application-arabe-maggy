@@ -113,6 +113,20 @@ h2.cat{font-family:'Fraunces',serif;font-size:19px;color:var(--cedar);border-bot
 .drow .mid{flex:1;min-width:0}
 .drow .tr{font-family:'Fraunces',serif;font-style:italic;font-size:14.5px;color:var(--terra)}
 .drow .fr{font-size:12.5px;color:var(--ink-soft)}
+.conj{margin-top:15px;background:var(--cream);border:1px solid var(--line);border-radius:14px;padding:12px 14px;width:100%}
+.conj-title{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--terra);font-weight:600;margin-bottom:8px}
+.conj-row{display:flex;align-items:baseline;gap:8px;padding:5px 0;border-bottom:1px solid var(--line2)}
+.conj-row:last-child{border-bottom:none}
+.conj-ar{font-family:'Amiri',serif;font-size:19px;color:var(--cedar);direction:rtl;flex:0 0 auto;min-width:96px;text-align:right}
+.conj-tr{font-family:'Fraunces',serif;font-style:italic;font-size:13.5px;color:var(--ink-soft);flex:1}
+.conj-fr{font-size:11px;color:var(--sand);flex:0 0 auto}
+.mark-btn{border:1px solid var(--line);background:var(--cream);border-radius:8px;padding:5px 8px;font-size:12px;flex-shrink:0;color:var(--ink-soft);font-weight:600}
+.mark-btn.mark-mas{color:var(--cedar)}
+.mark-btn.mark-learn{color:var(--terra)}
+.mark-btn.active-mas{background:var(--cedar);color:var(--cream);border-color:var(--cedar)}
+.mark-btn.active-learn{background:var(--terra);color:var(--paper);border-color:var(--terra)}
+.dict-legend{font-size:12px;color:var(--sand);background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:12px;line-height:1.5}
+.dict-legend b{color:var(--ink-soft)}
 .dot{width:10px;height:10px;border-radius:99px;flex-shrink:0;background:#E3DACB}
 footer{text-align:center;font-size:11px;color:var(--sand-light);padding:14px 20px 26px}
 .hidden{display:none}
@@ -194,6 +208,7 @@ footer{text-align:center;font-size:11px;color:var(--sand-light);padding:14px 20p
                 <button class="rec-btn" id="fc-ex-rec" data-reclabel="🎙 enregistrer" data-recon="● arrêter">🎙 enregistrer</button>
               </div>
             </div>
+            <div id="fc-conj" style="display:none"></div>
           </div>
         </div>
         <div class="answers hidden" id="answers">
@@ -698,7 +713,93 @@ const W = [
 ["بلا زحمة","bala zahmé","Sans déranger / Si ça ne dérange pas","Expressions"],
 ["ما تواخذني","ma twékhezné","Excuse-moi / Ne m'en veux pas","Expressions"],
 ["الله معك","allah ma3ak","Au revoir (que Dieu soit avec toi)","Expressions"],
-["بخاطرك","bkhatrak","Au revoir (en partant)","Expressions","بخاطرك، منشوفك بكرا!","Bkhatrak, mnshufak bukra !","Au revoir, on se voit demain !"]
+["بخاطرك","bkhatrak","Au revoir (en partant)","Expressions","بخاطرك، منشوفك بكرا!","Bkhatrak, mnshufak bukra !","Au revoir, on se voit demain !"],
+["موعد", "maw3ad", "Rendez-vous", "Vie quotidienne +", "عندي موعد الساعة تلاتة", "3andé maw3ad el se3a tleté", "J'ai un rendez-vous à trois heures"],
+["فاتورة", "fatoura", "Facture", "Vie quotidienne +", "لازم إدفع الفاتورة", "Lézem edfa3 el fatoura", "Je dois payer la facture"],
+["مصروف", "masrouf", "Dépenses / argent de poche", "Vie quotidienne +"],
+["حساب", "hseb", "Compte / addition", "Vie quotidienne +", "لو سمحت الحساب", "Law samaht el hseb", "L'addition s'il vous plaît"],
+["سعر", "se3er", "Prix", "Vie quotidienne +", "شو سعر هيدا؟", "Shu se3er hayda ?", "Quel est le prix de ça ?"],
+["قرار", "2arar", "Décision", "Vie quotidienne +", "خدت قرار", "Khadet 2arar", "J'ai pris une décision"],
+["فرصة", "forsa", "Occasion / opportunité", "Vie quotidienne +", "هيدي فرصة حلوة", "Haydé forsa helwé", "C'est une belle opportunité"],
+["عادة", "3adé (habitude)", "Habitude", "Vie quotidienne +", "صارت عادة", "Saret 3adé", "C'est devenu une habitude"],
+["هدف", "hadaf", "Objectif / but", "Vie quotidienne +"],
+["رأي", "ra2é", "Avis / opinion", "Vie quotidienne +", "شو رأيك؟", "Shu ra2yak ?", "Quel est ton avis ?"],
+["سبب", "sabab", "Raison / cause", "Vie quotidienne +", "شو السبب؟", "Shu el sabab ?", "Quelle est la raison ?"],
+["نتيجة", "natijé", "Résultat", "Vie quotidienne +"],
+["حل", "hall", "Solution", "Vie quotidienne +", "لازم نلاقي حل", "Lézem nlé2é hall", "Il faut trouver une solution"],
+["تجربة", "tajrebé", "Expérience / essai", "Vie quotidienne +"],
+["علاقة", "3ala2a", "Relation", "Vie quotidienne +"],
+["شعور", "shou3our", "Sentiment", "Vie quotidienne +"],
+["فكرة", "fekra", "Idée", "Vie quotidienne +", "عندي فكرة", "3andé fekra", "J'ai une idée"],
+["حقيقة", "ha2i2a", "Vérité", "Vie quotidienne +"],
+["نصيحة", "nasiha", "Conseil", "Vie quotidienne +", "بعطيك نصيحة", "Ba3tik nasiha", "Je te donne un conseil"],
+["خدمة", "khedmé", "Service / faveur", "Vie quotidienne +", "بدّي منك خدمة", "Baddé minnak khedmé", "J'ai besoin d'un service"],
+["خبر", "khabar", "Nouvelle / information", "Vie quotidienne +", "عندي خبر منيح", "3andé khabar mnih", "J'ai une bonne nouvelle"],
+["ذكرى", "zekra", "Souvenir", "Vie quotidienne +"],
+["مستقبل", "mosta2bal", "Avenir / futur", "Vie quotidienne +"],
+["وضع", "wade3", "Situation", "Vie quotidienne +", "الوضع صعب", "El wade3 s3ib", "La situation est difficile"],
+["حكومة", "hukoumé", "Gouvernement", "Vie quotidienne +"],
+["قانون", "2anoun", "Loi", "Vie quotidienne +"],
+["حق", "ha2", "Droit (ce qui est dû)", "Vie quotidienne +", "هيدا حقّك", "Hayda ha22ak", "C'est ton droit"],
+["مسؤولية", "mas2ouliyé", "Responsabilité", "Vie quotidienne +"],
+["ضغط", "daghet", "Pression / stress", "Vie quotidienne +", "في ضغط بالشغل", "Fi daghet bil sheghel", "Il y a de la pression au travail"],
+["صحة", "sehha", "Santé", "Vie quotidienne +", "صحتك أهم شي", "Sehhtak ahamm shi", "Ta santé est le plus important"],
+["ضروري", "darouré", "Nécessaire", "Adjectifs +", "هيدا ضروري", "Hayda darouré", "C'est nécessaire"],
+["ممكن", "momken", "Possible / peut-être", "Adjectifs +"],
+["مستحيل", "mostahil", "Impossible", "Adjectifs +"],
+["واضح", "wédeh", "Clair / évident", "Adjectifs +"],
+["معقّد", "m3a22ad", "Compliqué", "Adjectifs +"],
+["مفيد", "mfid", "Utile", "Adjectifs +"],
+["خطير", "khatir", "Dangereux / grave", "Adjectifs +"],
+["آمن", "émen", "Sûr / sécurisé", "Adjectifs +"],
+["مسؤول", "mas2oul", "Responsable", "Adjectifs +"],
+["مشهور", "mashhour", "Célèbre", "Adjectifs +"],
+["غني", "ghané", "Riche", "Adjectifs +"],
+["فقير", "fa2ir", "Pauvre", "Adjectifs +"],
+["كريم", "krim", "Généreux", "Adjectifs +"],
+["بخيل", "bkhil", "Avare / radin", "Adjectifs +"],
+["صادق", "sade2", "Honnête / sincère", "Adjectifs +"],
+["لطيف", "latif", "Gentil / agréable", "Adjectifs +"],
+["قاسي", "2asé", "Dur / sévère", "Adjectifs +"],
+["هادئ", "hédé", "Calme", "Adjectifs +"],
+["عصبي", "3asabé", "Nerveux / colérique", "Adjectifs +"],
+["فخور", "fakhour", "Fier", "Adjectifs +"],
+["واثق", "wése2", "Confiant", "Adjectifs +"],
+["عادي", "3adé (normal)", "Normal / ordinaire", "Adjectifs +"],
+["مختلف", "mokhtalef", "Différent", "Adjectifs +"],
+["كافي", "kéfé", "Suffisant", "Adjectifs +"],
+["ناقص", "né2es", "Manquant / incomplet", "Adjectifs +"],
+["مهذّب", "mhazzab", "Poli / bien élevé", "Adjectifs +"],
+["غبي", "ghabé", "Bête / stupide", "Adjectifs +"],
+["حقيقي", "ha2i2é", "Vrai / réel", "Adjectifs +"],
+["حساس", "hassés", "Sensible", "Adjectifs +"],
+["خفيف", "khafif", "Léger", "Adjectifs +"],
+["تقيل", "t2il", "Lourd", "Adjectifs +"],
+["ممل", "momell", "Ennuyeux", "Adjectifs +"],
+["مسلّي", "msallé", "Amusant / divertissant", "Adjectifs +"],
+["كتب", "katab", "écrire", "Verbes (conjugaison)", "", "", "", [["أنا بكتب", "ana bektob", "je — présent"], ["إنت بتكتب", "inta btektob", "tu — présent"], ["هو بيكتب", "huwwe byektob", "il — présent"], ["أنا كتبت", "ana katabt", "j'ai … — passé"], ["أنا رح إكتب", "ana rah ektob", "je … — futur"]]],
+["أكل", "akal", "manger", "Verbes (conjugaison)", "", "", "", [["أنا بآكل", "ana bekol", "je — présent"], ["إنت بتاكل", "inta btekol", "tu — présent"], ["هو بياكل", "huwwe byekol", "il — présent"], ["أنا أكلت", "ana akalt", "j'ai … — passé"], ["أنا رح آكل", "ana rah ekol", "je … — futur"]]],
+["شرب", "shereb", "boire", "Verbes (conjugaison)", "", "", "", [["أنا بشرب", "ana beshrab", "je — présent"], ["إنت بتشرب", "inta bteshrab", "tu — présent"], ["هو بيشرب", "huwwe byeshrab", "il — présent"], ["أنا شربت", "ana shrebet", "j'ai … — passé"], ["أنا رح إشرب", "ana rah eshrab", "je … — futur"]]],
+["راح", "rah", "aller / partir", "Verbes (conjugaison)", "", "", "", [["أنا بروح", "ana brouh", "je — présent"], ["إنت بتروح", "inta btrouh", "tu — présent"], ["هو بيروح", "huwwe byrouh", "il — présent"], ["أنا رحت", "ana reht", "j'ai … — passé"], ["أنا رح روح", "ana rah rouh", "je … — futur"]]],
+["إجا", "eja", "venir", "Verbes (conjugaison)", "", "", "", [["أنا بجي", "ana bejé", "je — présent"], ["إنت بتجي", "inta btejé", "tu — présent"], ["هو بيجي", "huwwe byejé", "il — présent"], ["أنا إجيت", "ana ejit", "j'ai … — passé"], ["أنا رح إجي", "ana rah ejé", "je … — futur"]]],
+["عمل", "3emel", "faire", "Verbes (conjugaison)", "", "", "", [["أنا بعمل", "ana ba3mel", "je — présent"], ["إنت بتعمل", "inta bta3mel", "tu — présent"], ["هو بيعمل", "huwwe bya3mel", "il — présent"], ["أنا عملت", "ana 3emelt", "j'ai … — passé"], ["أنا رح إعمل", "ana rah a3mel", "je … — futur"]]],
+["قال", "2al", "dire", "Verbes (conjugaison)", "", "", "", [["أنا بقول", "ana b2oul", "je — présent"], ["إنت بتقول", "inta bt2oul", "tu — présent"], ["هو بيقول", "huwwe by2oul", "il — présent"], ["أنا قلت", "ana 2elt", "j'ai … — passé"], ["أنا رح قول", "ana rah 2oul", "je … — futur"]]],
+["شاف", "shef", "voir", "Verbes (conjugaison)", "", "", "", [["أنا بشوف", "ana bshouf", "je — présent"], ["إنت بتشوف", "inta btshouf", "tu — présent"], ["هو بيشوف", "huwwe byshouf", "il — présent"], ["أنا شفت", "ana sheft", "j'ai … — passé"], ["أنا رح شوف", "ana rah shouf", "je … — futur"]]],
+["عرف", "3eref", "savoir / connaître", "Verbes (conjugaison)", "", "", "", [["أنا بعرف", "ana ba3ref", "je — présent"], ["إنت بتعرف", "inta bta3ref", "tu — présent"], ["هو بيعرف", "huwwe bya3ref", "il — présent"], ["أنا عرفت", "ana 3reft", "j'ai … — passé"], ["أنا رح إعرف", "ana rah a3ref", "je … — futur"]]],
+["فهم", "fehem", "comprendre", "Verbes (conjugaison)", "", "", "", [["أنا بفهم", "ana befham", "je — présent"], ["إنت بتفهم", "inta btefham", "tu — présent"], ["هو بيفهم", "huwwe byefham", "il — présent"], ["أنا فهمت", "ana fhemet", "j'ai … — passé"], ["أنا رح إفهم", "ana rah efham", "je … — futur"]]],
+["حكى", "haka", "parler", "Verbes (conjugaison)", "", "", "", [["أنا بحكي", "ana behké", "je — présent"], ["إنت بتحكي", "inta btehké", "tu — présent"], ["هو بيحكي", "huwwe byehké", "il — présent"], ["أنا حكيت", "ana hkit", "j'ai … — passé"], ["أنا رح إحكي", "ana rah ehké", "je … — futur"]]],
+["سمع", "seme3", "entendre / écouter", "Verbes (conjugaison)", "", "", "", [["أنا بسمع", "ana besma3", "je — présent"], ["إنت بتسمع", "inta btesma3", "tu — présent"], ["هو بيسمع", "huwwe byesma3", "il — présent"], ["أنا سمعت", "ana sme3t", "j'ai … — passé"], ["أنا رح إسمع", "ana rah esma3", "je … — futur"]]],
+["إشترى", "eshtara", "acheter", "Verbes (conjugaison)", "", "", "", [["أنا بشتري", "ana beshtré", "je — présent"], ["إنت بتشتري", "inta bteshtré", "tu — présent"], ["هو بيشتري", "huwwe byeshtré", "il — présent"], ["أنا إشتريت", "ana eshtarayt", "j'ai … — passé"], ["أنا رح إشتري", "ana rah eshtré", "je … — futur"]]],
+["دفع", "dafa3", "payer", "Verbes (conjugaison)", "", "", "", [["أنا بدفع", "ana bedfa3", "je — présent"], ["إنت بتدفع", "inta btedfa3", "tu — présent"], ["هو بيدفع", "huwwe byedfa3", "il — présent"], ["أنا دفعت", "ana dafa3t", "j'ai … — passé"], ["أنا رح إدفع", "ana rah edfa3", "je … — futur"]]],
+["نام", "nem (dormir)", "dormir", "Verbes (conjugaison)", "", "", "", [["أنا بنام", "ana bnem", "je — présent"], ["إنت بتنام", "inta btnem", "tu — présent"], ["هو بينام", "huwwe bynem", "il — présent"], ["أنا نمت", "ana nemt", "j'ai … — passé"], ["أنا رح نام", "ana rah nem", "je … — futur"]]],
+["لقى", "la2a", "trouver", "Verbes (conjugaison)", "", "", "", [["أنا بلاقي", "ana blé2é", "je — présent"], ["إنت بتلاقي", "inta btlé2é", "tu — présent"], ["هو بيلاقي", "huwwe bylé2é", "il — présent"], ["أنا لقيت", "ana l2it", "j'ai … — passé"], ["أنا رح لاقي", "ana rah lé2é", "je … — futur"]]],
+["نسي", "nesé", "oublier", "Verbes (conjugaison)", "", "", "", [["أنا بنسى", "ana bensa", "je — présent"], ["إنت بتنسى", "inta btensa", "tu — présent"], ["هو بينسى", "huwwe byensa", "il — présent"], ["أنا نسيت", "ana nsit", "j'ai … — passé"], ["أنا رح إنسى", "ana rah ensa", "je … — futur"]]],
+["تذكّر", "tzakkar", "se souvenir", "Verbes (conjugaison)", "", "", "", [["أنا بتذكّر", "ana betzakkar", "je — présent"], ["إنت بتتذكّر", "inta btetzakkar", "tu — présent"], ["هو بيتذكّر", "huwwe byetzakkar", "il — présent"], ["أنا تذكّرت", "ana tzakkaret", "j'ai … — passé"], ["أنا رح إتذكّر", "ana rah etzakkar", "je … — futur"]]],
+["سأل", "sa2al", "demander", "Verbes (conjugaison)", "", "", "", [["أنا بسأل", "ana bes2al", "je — présent"], ["إنت بتسأل", "inta btes2al", "tu — présent"], ["هو بيسأل", "huwwe byes2al", "il — présent"], ["أنا سألت", "ana sa2alt", "j'ai … — passé"], ["أنا رح إسأل", "ana rah es2al", "je … — futur"]]],
+["جاوب", "jéwab", "répondre", "Verbes (conjugaison)", "", "", "", [["أنا بجاوب", "ana bjéweb", "je — présent"], ["إنت بتجاوب", "inta btjéweb", "tu — présent"], ["هو بيجاوب", "huwwe byjéweb", "il — présent"], ["أنا جاوبت", "ana jéwabt", "j'ai … — passé"], ["أنا رح جاوب", "ana rah jéweb", "je … — futur"]]],
+["ساعد", "sé3ad", "aider", "Verbes (conjugaison)", "", "", "", [["أنا بساعد", "ana bsé3ed", "je — présent"], ["إنت بتساعد", "inta btsé3ed", "tu — présent"], ["هو بيساعد", "huwwe bysé3ed", "il — présent"], ["أنا ساعدت", "ana sé3adt", "j'ai … — passé"], ["أنا رح ساعد", "ana rah sé3ed", "je … — futur"]]],
+["تعلّم", "t3allam", "apprendre", "Verbes (conjugaison)", "", "", "", [["أنا بتعلّم", "ana bet3allam", "je — présent"], ["إنت بتتعلّم", "inta btet3allam", "tu — présent"], ["هو بيتعلّم", "huwwe byet3allam", "il — présent"], ["أنا تعلّمت", "ana t3allamt", "j'ai … — passé"], ["أنا رح إتعلّم", "ana rah et3allam", "je … — futur"]]],
+["إشتغل", "eshtaghal", "travailler", "Verbes (conjugaison)", "", "", "", [["أنا بشتغل", "ana beshtghel", "je — présent"], ["إنت بتشتغل", "inta bteshtghel", "tu — présent"], ["هو بيشتغل", "huwwe byeshtghel", "il — présent"], ["أنا إشتغلت", "ana eshtaghalt", "j'ai … — passé"], ["أنا رح إشتغل", "ana rah eshtghel", "je … — futur"]]]
 ];
 
 // ════════════════════════════════════════════
@@ -720,6 +821,14 @@ try{const raw=localStorage.getItem(KEY);if(raw)P=JSON.parse(raw)}catch(e){storag
 if(typeof P.dailyNew!=="number")P.dailyNew=DEFAULT_NEW;
 if(!P._mig20){if(P.dailyNew<20)P.dailyNew=20;P._mig20=true;}
 if(!Array.isArray(P.custom))P.custom=[];
+// Les basics du tout premier cours sont considérés comme déjà connus (une seule fois,
+// sans écraser un mot déjà commencé) → ils ne reviennent plus comme nouveaux.
+if(!P._mig_basics){
+  const basic=new Set(["Essentiels","Nombres","Couleurs"]);
+  W.forEach(w=>{ if(basic.has(w[3]) && !P.cards[wid(w)]) P.cards[wid(w)]={lvl:5,due:addDays(today(),60)}; });
+  P._mig_basics=true;
+}
+save();
 // deck complet = mots intégrés + mots ajoutés par l'utilisatrice
 function deck(){return P.custom.length?W.concat(P.custom):W;}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(P))}catch(e){storageOk=false}}
@@ -883,6 +992,14 @@ function renderCard(){
   const hasEx=!!w[4];
   $("fc-ex").style.display=hasEx?"block":"none";
   if(hasEx){$("fc-ex-ar").textContent=w[4];$("fc-ex-tr").textContent=w[5];$("fc-ex-fr").textContent=w[6];}
+  const conj=w[7];
+  const cbox=$("fc-conj");
+  if(conj&&conj.length){
+    cbox.style.display="block";
+    cbox.className="conj";
+    cbox.innerHTML='<div class="conj-title">Conjugaison</div>'+conj.map(r=>
+      '<div class="conj-row"><span class="conj-ar">'+r[0]+'</span><span class="conj-tr">'+r[1]+'</span><span class="conj-fr">'+r[2]+'</span></div>').join("");
+  }else{cbox.style.display="none";cbox.innerHTML="";}
   const _wi=wid(w);
   setPlay($("fc-audio"),_wi,w[0],"🔊 écouter","🔊 ta voix");
   $("fc-rec").dataset.rec=_wi;$("fc-rec").dataset.reclabel="🎙 enregistrer";$("fc-rec").dataset.recon="● arrêter";setRecUI($("fc-rec"),false);
@@ -953,16 +1070,18 @@ function renderWords(){
 function renderDict(q){
   q=(q||"").toLowerCase();
   const cats=[...new Set(deck().map(w=>w[3]))];
-  $("dict-list").innerHTML=cats.map(cat=>{
+  const legend='<div class="dict-legend">Touche <b>✓</b> si tu connais déjà un mot (maîtrisé) · <b>+</b> pour le mettre à apprendre.</div>';
+  $("dict-list").innerHTML=legend+cats.map(cat=>{
     const rows=deck().filter(w=>w[3]===cat)
       .filter(w=>!q||w[1].toLowerCase().includes(q)||w[2].toLowerCase().includes(q)||w[0].includes(q))
       .map(w=>{
-        const st=P.cards[wid(w)];
-        const dot=!st?'#E3DACB':st.lvl>=4?'var(--cedar)':'var(--terra)';
+        const id=wid(w), st=P.cards[id];
+        const isMas=st&&st.lvl>=4, isLearn=st&&st.lvl<4;
         return '<div class="drow"><div class="ar">'+w[0]+'</div><div class="mid">'+
-          '<div class="tr">'+w[1]+'</div><div class="fr">'+w[2]+'</div></div>'+
-          audioBtns(wid(w),w[0])+
-          '<div class="dot" style="background:'+dot+'"></div></div>';
+          '<div class="tr">'+esc(w[1])+'</div><div class="fr">'+esc(w[2])+'</div></div>'+
+          '<button class="mark-btn mark-learn'+(isLearn?' active-learn':'')+'" data-mark="learn" data-id="'+esc(id)+'" aria-label="À apprendre">+</button>'+
+          '<button class="mark-btn mark-mas'+(isMas?' active-mas':'')+'" data-mark="mas" data-id="'+esc(id)+'" aria-label="Maîtrisé">✓</button>'+
+          '</div>';
       }).join("");
     return rows?'<h2 class="cat">'+cat+'</h2>'+rows:"";
   }).join("");
@@ -1001,6 +1120,16 @@ document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{
 });
 $("word-search").oninput=renderWords;
 $("dict-search").oninput=e=>renderDict(e.target.value);
+// tri du dictionnaire : maîtrisé / à apprendre
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-mark]");
+  if(!b)return;
+  const id=b.dataset.id, act=b.dataset.mark;
+  if(act==="mas")P.cards[id]={lvl:5,due:addDays(today(),60)};
+  else P.cards[id]={lvl:0,due:today()};
+  save();
+  renderDict($("dict-search").value);
+});
 $("flashcard").setAttribute("tabindex","0");
 $("flashcard").setAttribute("role","button");
 
