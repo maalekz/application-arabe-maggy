@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Yalla — Libanais</title>
 <!-- ── Mode application iPhone ── -->
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -116,6 +116,14 @@ h2.cat{font-family:'Fraunces',serif;font-size:19px;color:var(--cedar);border-bot
 .dot{width:10px;height:10px;border-radius:99px;flex-shrink:0;background:#E3DACB}
 footer{text-align:center;font-size:11px;color:var(--sand-light);padding:14px 20px 26px}
 .hidden{display:none}
+.audio-row{display:flex;gap:8px;justify-content:center;align-items:center;margin-top:10px;flex-wrap:wrap}
+.rec-btn{background:var(--cream);border:1px solid #E0D6C2;border-radius:999px;padding:8px 16px;font-size:13px;color:var(--ink-soft)}
+.rec-btn.recording,.mini-audio.recording{background:var(--terra)!important;color:var(--paper)!important;border-color:var(--terra)!important;animation:recpulse 1s ease-in-out infinite}
+@keyframes recpulse{0%,100%{box-shadow:0 0 0 0 rgba(199,91,57,.5)}50%{box-shadow:0 0 0 7px rgba(199,91,57,0)}}
+.mini-audio.has-clip,.audio-btn.has-clip{background:var(--cedar);color:var(--cream);border-color:var(--cedar)}
+.mini-rec{font-size:12.5px}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--cream);padding:11px 18px;border-radius:12px;font-size:13.5px;line-height:1.4;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:50;max-width:88%;text-align:center;box-shadow:0 8px 30px rgba(43,38,32,.25)}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
@@ -169,7 +177,10 @@ footer{text-align:center;font-size:11px;color:var(--sand-light);padding:14px 20p
           <div class="chip" id="fc-cat"></div>
           <div class="card-ar" id="fc-ar"></div>
           <div class="card-tr" id="fc-tr"></div>
-          <button class="audio-btn" id="fc-audio">🔊 écouter</button>
+          <div class="audio-row">
+            <button class="audio-btn" id="fc-audio">🔊 écouter</button>
+            <button class="rec-btn" id="fc-rec" data-reclabel="🎙 enregistrer" data-recon="● arrêter">🎙 enregistrer</button>
+          </div>
           <div class="hint" id="fc-hint">touche la carte pour voir la traduction</div>
           <div id="fc-back" class="hidden" style="width:100%">
             <div class="divider" style="margin-left:auto;margin-right:auto"></div>
@@ -178,7 +189,10 @@ footer{text-align:center;font-size:11px;color:var(--sand-light);padding:14px 20p
               <div class="ex-ar" id="fc-ex-ar"></div>
               <div class="ex-tr" id="fc-ex-tr"></div>
               <div class="ex-fr" id="fc-ex-fr"></div>
-              <button class="audio-btn" id="fc-ex-audio" style="margin-top:8px">🔊 écouter l'exemple</button>
+              <div class="audio-row" style="margin-top:8px">
+                <button class="audio-btn" id="fc-ex-audio">🔊 écouter l'exemple</button>
+                <button class="rec-btn" id="fc-ex-rec" data-reclabel="🎙 enregistrer" data-recon="● arrêter">🎙 enregistrer</button>
+              </div>
             </div>
           </div>
         </div>
@@ -227,6 +241,12 @@ footer{text-align:center;font-size:11px;color:var(--sand-light);padding:14px 20p
         <input class="fld" id="add-ex" type="text" dir="rtl" placeholder="مثلاً: وين القلم؟" autocomplete="off">
         <label class="fld-l">Traduction de l'exemple (optionnel)</label>
         <input class="fld" id="add-exfr" type="text" placeholder="ex : Où est le stylo ?" autocomplete="off">
+        <label class="fld-l">Audio — ta prononciation (optionnel)</label>
+        <div class="audio-row" style="justify-content:flex-start;margin-top:5px">
+          <button class="rec-btn" id="add-rec" type="button" data-reclabel="🎙 enregistrer" data-recon="● arrêter">🎙 enregistrer</button>
+          <button class="audio-btn" id="add-play" type="button" style="display:none">🔊 écouter</button>
+          <span id="add-rec-status" class="add-sub" style="margin:0"></span>
+        </div>
         <div class="add-err" id="add-err"></div>
         <button class="big-btn" id="add-btn" style="margin-top:16px;width:100%">Ajouter à mon dictionnaire</button>
       </div>
@@ -733,6 +753,59 @@ function speak(t){
   }catch(e){}
 }
 
+// ════════════════════════════════════════════
+// AUDIO PERSO — enregistrer sa voix + lecture (IndexedDB)
+// ════════════════════════════════════════════
+const ADB_NAME="yalla-audio", ASTORE="clips";
+let clipIds=new Set(), curAudio=null;
+const canRecord=!!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&window.MediaRecorder);
+
+function aDB(){return new Promise((res,rej)=>{const r=indexedDB.open(ADB_NAME,1);r.onupgradeneeded=()=>{if(!r.result.objectStoreNames.contains(ASTORE))r.result.createObjectStore(ASTORE);};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
+async function clipPut(id,blob){const db=await aDB();return new Promise((res,rej)=>{const tx=db.transaction(ASTORE,"readwrite");tx.objectStore(ASTORE).put(blob,id);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error);});}
+async function clipGet(id){const db=await aDB();return new Promise((res,rej)=>{const tx=db.transaction(ASTORE,"readonly");const q=tx.objectStore(ASTORE).get(id);q.onsuccess=()=>res(q.result||null);q.onerror=()=>rej(q.error);});}
+async function clipDel(id){try{const db=await aDB();await new Promise(res=>{const tx=db.transaction(ASTORE,"readwrite");tx.objectStore(ASTORE).delete(id);tx.oncomplete=res;tx.onerror=res;});clipIds.delete(id);}catch(e){}}
+async function loadClipIds(){try{const db=await aDB();await new Promise(res=>{const tx=db.transaction(ASTORE,"readonly");const q=tx.objectStore(ASTORE).getAllKeys();q.onsuccess=()=>{clipIds=new Set(q.result);res();};q.onerror=()=>res();});}catch(e){}}
+
+async function playId(id,fallback){
+  if(id&&clipIds.has(id)){
+    try{const blob=await clipGet(id);if(blob){const url=URL.createObjectURL(blob);if(curAudio){try{curAudio.pause();}catch(e){}}curAudio=new Audio(url);curAudio.onended=()=>URL.revokeObjectURL(url);await curAudio.play();return;}}catch(e){}
+  }
+  if(fallback)speak(fallback);
+}
+
+// enregistreur partagé
+let _rec=null,_stream=null,_chunks=[];
+function isRecording(){return _rec&&_rec.state==="recording";}
+function setRecUI(btn,on){if(!btn)return;btn.classList.toggle("recording",on);const idle=btn.dataset.reclabel||"🎙";const onLbl=btn.dataset.recon||"● arrêter";btn.textContent=on?onLbl:idle;}
+async function recStart(btn,onstop){
+  if(!canRecord){toast("Enregistrement audio non disponible sur ce navigateur");return;}
+  try{_stream=await navigator.mediaDevices.getUserMedia({audio:true});}
+  catch(e){toast("Micro non autorisé — active le micro pour enregistrer ta voix");return;}
+  _chunks=[];
+  try{_rec=new MediaRecorder(_stream);}catch(e){toast("Enregistrement impossible sur ce navigateur");try{_stream.getTracks().forEach(t=>t.stop());}catch(_){}return;}
+  _rec.ondataavailable=e=>{if(e.data&&e.data.size)_chunks.push(e.data);};
+  _rec.onstop=()=>{const blob=new Blob(_chunks,{type:(_rec&&_rec.mimeType)||"audio/webm"});try{_stream.getTracks().forEach(t=>t.stop());}catch(e){}setRecUI(btn,false);_rec=null;if(onstop)onstop(blob);};
+  _rec.start();setRecUI(btn,true);
+}
+function recStop(){try{if(_rec&&_rec.state!=="inactive")_rec.stop();}catch(e){}}
+function handleRecToggle(id,btn){
+  if(!id)return;
+  if(isRecording()){recStop();return;}
+  recStart(btn,async blob=>{if(blob&&blob.size){try{await clipPut(id,blob);clipIds.add(id);}catch(e){}rerenderCurrent();playId(id);toast("Voix enregistrée ✓ — réenregistre quand tu veux");}});
+}
+
+function audioBtns(id,ar){const i=esc(id),a=esc(ar),has=clipIds.has(id);
+  return '<button class="mini-audio'+(has?' has-clip':'')+'" data-wid="'+i+'" data-say="'+a+'" aria-label="Écouter">🔊</button>'+
+         '<button class="mini-audio mini-rec" data-rec="'+i+'" data-reclabel="🎙" data-recon="●" aria-label="Enregistrer ma voix">🎙</button>';}
+function setPlay(btn,id,text,idleLabel,clipLabel){if(!btn)return;btn.dataset.wid=id;btn.dataset.say=text||"";const has=clipIds.has(id);btn.classList.toggle("has-clip",has);btn.textContent=(has&&clipLabel)?clipLabel:idleLabel;}
+
+function currentView(){for(const v of ["home","study","words","dict","add"])if(!$("view-"+v).classList.contains("hidden"))return v;return "home";}
+function rerenderCurrent(){const v=currentView();if(v==="words")renderWords();else if(v==="dict")renderDict($("dict-search").value);else if(v==="add")renderAdded();else if(v==="study"&&session&&session.queue.length)renderCard();}
+
+let _toastT=null;
+function toast(msg){let t=$("toast");if(!t){t=document.createElement("div");t.id="toast";document.body.appendChild(t);}t.textContent=msg;t.classList.add("on");clearTimeout(_toastT);_toastT=setTimeout(()=>t.classList.remove("on"),2800);}
+let addClipBlob=null;
+
 // ── deck du jour
 // 1) les mots EN APPRENTISSAGE (déjà vus, pas encore maîtrisés) reviennent en priorité
 // 2) puis on complète avec de nouveaux mots, selon le réglage choisi
@@ -807,6 +880,10 @@ function renderCard(){
   const hasEx=!!w[4];
   $("fc-ex").style.display=hasEx?"block":"none";
   if(hasEx){$("fc-ex-ar").textContent=w[4];$("fc-ex-tr").textContent=w[5];$("fc-ex-fr").textContent=w[6];}
+  const _wi=wid(w);
+  setPlay($("fc-audio"),_wi,w[0],"🔊 écouter","🔊 ta voix");
+  $("fc-rec").dataset.rec=_wi;$("fc-rec").dataset.reclabel="🎙 enregistrer";$("fc-rec").dataset.recon="● arrêter";setRecUI($("fc-rec"),false);
+  if(hasEx){setPlay($("fc-ex-audio"),_wi+"::ex",w[4],"🔊 écouter l'exemple","🔊 ta voix");$("fc-ex-rec").dataset.rec=_wi+"::ex";$("fc-ex-rec").dataset.reclabel="🎙 enregistrer";$("fc-ex-rec").dataset.recon="● arrêter";setRecUI($("fc-ex-rec"),false);}
   $("fc-back").classList.toggle("hidden",!flipped);
   $("fc-hint").classList.toggle("hidden",flipped);
   $("answers").classList.toggle("hidden",!flipped);
@@ -863,7 +940,7 @@ function renderWords(){
     return '<div class="word"><div class="word-top"><div style="flex:1;min-width:0">'+
       '<span class="word-ar">'+w[0]+'</span><span class="word-tr">'+w[1]+'</span>'+
       '<div class="word-fr">'+w[2]+'</div></div>'+
-      '<button class="mini-audio" data-say="'+w[0].replace(/"/g,"&quot;")+'" aria-label="Écouter">🔊</button></div>'+
+      audioBtns(wid(w),w[0])+'</div>'+
       '<div class="lvl-row"><div class="lvl-track">'+segs+'</div><span class="lvl-text">'+LVL_NAMES[Math.min(lvl,5)]+next+'</span></div></div>';
   }).join("");
 }
@@ -879,7 +956,7 @@ function renderDict(q){
         const dot=!st?'#E3DACB':st.lvl>=4?'var(--cedar)':'var(--terra)';
         return '<div class="drow"><div class="ar">'+w[0]+'</div><div class="mid">'+
           '<div class="tr">'+w[1]+'</div><div class="fr">'+w[2]+'</div></div>'+
-          '<button class="mini-audio" data-say="'+w[0].replace(/"/g,"&quot;")+'" aria-label="Écouter">🔊</button>'+
+          audioBtns(wid(w),w[0])+
           '<div class="dot" style="background:'+dot+'"></div></div>';
       }).join("");
     return rows?'<h2 class="cat">'+cat+'</h2>'+rows:"";
@@ -902,9 +979,16 @@ $("flashcard").onclick=flip;
 $("flashcard").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flip();}};
 $("btn-yes").onclick=()=>answer(true);
 $("btn-no").onclick=()=>answer(false);
-$("fc-audio").onclick=e=>{e.stopPropagation();const w=deck().find(x=>wid(x)===session.queue[0]);speak(w[0]);};
-$("fc-ex-audio").onclick=e=>{e.stopPropagation();const w=deck().find(x=>wid(x)===session.queue[0]);if(w[4])speak(w[4]);};
-document.addEventListener("click",e=>{const b=e.target.closest("[data-say]");if(b)speak(b.dataset.say);});
+$("fc-audio").onclick=e=>{e.stopPropagation();playId($("fc-audio").dataset.wid,$("fc-audio").dataset.say);};
+$("fc-ex-audio").onclick=e=>{e.stopPropagation();playId($("fc-ex-audio").dataset.wid,$("fc-ex-audio").dataset.say);};
+$("fc-rec").onclick=e=>{e.stopPropagation();handleRecToggle($("fc-rec").dataset.rec,$("fc-rec"));};
+$("fc-ex-rec").onclick=e=>{e.stopPropagation();handleRecToggle($("fc-ex-rec").dataset.rec,$("fc-ex-rec"));};
+document.addEventListener("click",e=>{
+  const r=e.target.closest("[data-rec]");
+  if(r){e.stopPropagation();handleRecToggle(r.dataset.rec,r);return;}
+  const b=e.target.closest("[data-wid]");
+  if(b){e.stopPropagation();playId(b.dataset.wid,b.dataset.say);}
+});
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{
   wordsTab=b.dataset.tab;
   document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x===b));
@@ -927,14 +1011,14 @@ function renderAdded(){
     const dot=!st?'#E3DACB':st.lvl>=4?'var(--cedar)':'var(--terra)';
     return '<div class="drow"><div class="ar">'+esc(w[0])+'</div><div class="mid">'+
       '<div class="tr">'+esc(w[1])+'</div><div class="fr">'+esc(w[2])+'</div></div>'+
-      '<button class="mini-audio" data-say="'+esc(w[0])+'" aria-label="Écouter">🔊</button>'+
+      audioBtns(wid(w),w[0])+
       '<div class="dot" style="background:'+dot+'"></div>'+
       '<button class="mini-audio del-word" data-del="'+i+'" aria-label="Supprimer" style="color:var(--terra-deep)">✕</button></div>';
   }).join("");
 }
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 
-$("add-btn").onclick=()=>{
+$("add-btn").onclick=async()=>{
   const ar=$("add-ar").value.trim(), tr=$("add-tr").value.trim(), fr=$("add-fr").value.trim();
   const ex=$("add-ex").value.trim(), exfr=$("add-exfr").value.trim();
   const err=$("add-err");
@@ -944,11 +1028,17 @@ $("add-btn").onclick=()=>{
   if(deck().some(w=>wid(w)===newId)){err.className="add-err";err.textContent="Tu as déjà un mot avec cette phonétique.";return;}
   P.custom.push([ar,tr,fr,CUSTOM_CAT,ex,"",exfr]);
   save();
+  if(addClipBlob){try{await clipPut(newId,addClipBlob);clipIds.add(newId);}catch(e){}addClipBlob=null;$("add-play").style.display="none";$("add-rec-status").textContent="";setRecUI($("add-rec"),false);}
   ["add-ar","add-tr","add-fr","add-ex","add-exfr"].forEach(id=>$(id).value="");
   err.className="add-err add-ok";err.textContent="« "+fr+" » ajouté ✓ Il apparaîtra dans tes cartes à réviser.";
   renderAdded();
   $("add-ar").focus();
 };
+$("add-rec").onclick=()=>{
+  if(isRecording()){recStop();return;}
+  recStart($("add-rec"),blob=>{if(blob&&blob.size){addClipBlob=blob;$("add-play").style.display="";$("add-rec-status").textContent="Audio prêt ✓";}});
+};
+$("add-play").onclick=()=>{if(addClipBlob){const u=URL.createObjectURL(addClipBlob);const a=new Audio(u);a.onended=()=>URL.revokeObjectURL(u);a.play();}};
 
 document.addEventListener("click",e=>{
   const d=e.target.closest("[data-del]");
@@ -957,6 +1047,7 @@ document.addEventListener("click",e=>{
   if(!w)return;
   if(confirm("Supprimer « "+w[2]+" » de tes mots ?")){
     delete P.cards[wid(w)];
+    clipDel(wid(w));clipDel(wid(w)+"::ex");
     P.custom.splice(i,1);
     save();
     renderAdded();
@@ -996,9 +1087,21 @@ $("bk-restore").onclick=()=>{
 
 $("footer").textContent=deck().length+" mots ("+W.length+" intégrés"+(P.custom.length?" + "+P.custom.length+" perso":"")+") · libanais · A1-A2"+
   (storageOk?" · enregistré sur cet appareil":" · ⚠ sauvegarde indisponible (ouvre l'app depuis l'écran d'accueil)")+
-  (("speechSynthesis" in window)?"":" · audio indisponible");
+  ((("speechSynthesis" in window))?"":" · audio indisponible");
+
+// raccourcis clavier pendant la révision
+document.addEventListener("keydown",e=>{
+  if($("view-study").classList.contains("hidden")||!session||!session.queue.length)return;
+  if(!flipped){if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();flip();}return;}
+  if(e.key==="ArrowLeft"){e.preventDefault();answer(false);}
+  else if(e.key==="ArrowRight"){e.preventDefault();answer(true);}
+});
 
 renderHome();
+loadClipIds().then(()=>{
+  if(clipIds.size){const f=$("footer");f.textContent=f.textContent.replace(" · libanais"," · "+clipIds.size+" voix perso · libanais");}
+  rerenderCurrent();
+});
 </script>
 </body>
 </html>
