@@ -37,6 +37,47 @@ nav::-webkit-scrollbar{display:none}
 nav button{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;padding:9px 15px;font-size:13.5px;color:var(--ink2);font-weight:500;white-space:nowrap}
 nav button.on{background:var(--navy);border-color:var(--navy);color:#F3F1EA}
 main{padding:20px 0 48px}
+/* ── ACCUEIL ── */
+.hero{background:linear-gradient(150deg,var(--navy) 0%,#1d3b56 100%);color:#F3F1EA;border-radius:24px;padding:26px 24px;box-shadow:0 18px 44px rgba(20,38,58,.22)}
+.hero-greet{font-family:'Fraunces',serif;font-size:27px;font-weight:600}
+.hero-tag{font-size:13.5px;color:#bcd0db;margin-top:6px;line-height:1.5}
+.hero-stats{display:flex;gap:10px;margin-top:20px}
+.hstat{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:13px 8px;text-align:center}
+.hstat b{font-family:'Fraunces',serif;font-size:24px;display:block;color:#fff}
+.hstat small{font-size:10.5px;color:#aac1cd}
+.hero-prog{height:7px;background:rgba(255,255,255,.14);border-radius:99px;margin-top:18px;overflow:hidden}
+.hero-prog #hero-prog-fill{height:7px;background:linear-gradient(90deg,var(--gold),#e0b765);border-radius:99px;width:0;transition:width .5s ease}
+.hero-prog-label{font-size:11.5px;color:#aac1cd;margin-top:7px}
+.hero-cta{margin-top:18px;width:100%;background:var(--gold);color:var(--navy);border-radius:14px;padding:14px;font-size:15px;font-weight:600}
+.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:16px}
+.home-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;text-align:left}
+.home-card .hc-ic{font-size:20px}
+.home-card .hc-t{font-family:'Fraunces',serif;font-size:15.5px;font-weight:600;color:var(--navy);margin-top:8px}
+.home-card .hc-d{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.4}
+.home-word{margin-top:16px;background:var(--gold-soft);border:1px solid #ecdcc0;border-radius:16px;padding:16px}
+.home-word .hw-label{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--gold);font-weight:600}
+.home-word .hw-ar{font-family:'Amiri',serif;font-size:28px;color:var(--navy);direction:rtl;text-align:right;margin-top:4px}
+.home-word .hw-tr{font-style:italic;font-size:13px;color:var(--gold);text-align:right}
+.home-word .hw-fr{font-size:14px;color:var(--ink);font-weight:500;margin-top:3px}
+.home-word .hw-ex{font-family:'Amiri',serif;font-size:17px;color:var(--ink2);direction:rtl;text-align:right;margin-top:8px;line-height:1.5}
+/* bouton audio */
+.say{border:1px solid var(--line);background:var(--panel);border-radius:999px;width:30px;height:30px;flex-shrink:0;color:var(--teal);font-size:14px;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle}
+.say:active{background:var(--teal2)}
+/* écoute */
+.listen{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}
+.listen-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.listen-src{font-size:11px;letter-spacing:.4px;text-transform:uppercase;color:var(--gold);font-weight:600}
+.listen-t{font-family:'Fraunces',serif;font-size:16.5px;color:var(--navy);font-weight:600;margin-top:3px;line-height:1.3}
+.listen-ar{font-family:'Amiri',serif;font-size:17px;color:var(--teal);direction:rtl;text-align:right;margin-top:3px}
+.listen-badge{flex-shrink:0;background:var(--gold-soft);color:var(--gold);font-size:10.5px;font-weight:600;padding:4px 9px;border-radius:99px}
+.listen-d{font-size:13px;color:var(--ink2);line-height:1.55;margin-top:9px}
+.listen-tips{margin-top:10px;background:var(--bg);border-radius:12px;padding:10px 13px}
+.listen-tips .lt-h{font-size:10.5px;letter-spacing:.4px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px}
+.listen-tip{display:flex;align-items:baseline;gap:8px;padding:3px 0}
+.listen-tip .a{font-family:'Amiri',serif;font-size:17px;color:var(--navy);direction:rtl;min-width:90px;text-align:right}
+.listen-tip .t{font-style:italic;font-size:12px;color:var(--gold);flex:1}
+.listen-tip .f{font-size:11.5px;color:var(--ink2)}
+.listen-go{display:inline-block;margin-top:12px;background:var(--navy);color:#F3F1EA;border-radius:12px;padding:11px 18px;font-size:14px;font-weight:600;text-decoration:none}
 h2.sec{font-family:'Fraunces',serif;font-size:22px;color:var(--navy);margin:0 0 4px}
 .lead{font-size:14px;color:var(--ink2);line-height:1.55;margin-bottom:16px}
 .search{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;font-family:'Inter',sans-serif;background:var(--panel);color:var(--ink);margin-bottom:14px}
@@ -123,15 +164,34 @@ footer{text-align:center;font-size:11px;color:var(--muted);padding:16px 20px 28p
   </header>
 
   <nav>
-    <button id="nav-themes" class="on">Thèmes</button>
+    <button id="nav-home" class="on">Accueil</button>
+    <button id="nav-themes">Thèmes</button>
     <button id="nav-arg">Argumenter</button>
     <button id="nav-struct">Structures</button>
     <button id="nav-debate">Débats</button>
+    <button id="nav-ecoute">Écoute</button>
     <button id="nav-rev">Réviser</button>
   </nav>
 
   <main>
-    <section id="view-themes">
+    <section id="view-home">
+      <div class="hero">
+        <div class="hero-greet" id="hero-greet">Bonjour</div>
+        <div class="hero-tag">Parler avec précision, pas seulement correctement.</div>
+        <div class="hero-stats">
+          <div class="hstat"><b id="hs-streak">0</b><small>jours de suite</small></div>
+          <div class="hstat"><b id="hs-mastered">0</b><small>maîtrisés</small></div>
+          <div class="hstat"><b id="hs-total">0</b><small>au total</small></div>
+        </div>
+        <div class="hero-prog"><div id="hero-prog-fill"></div></div>
+        <div class="hero-prog-label" id="hero-prog-label"></div>
+        <button class="hero-cta" id="hero-cta">Continuer la révision →</button>
+      </div>
+      <div class="home-grid" id="home-grid"></div>
+      <div class="home-word" id="home-word"></div>
+    </section>
+
+    <section id="view-themes" class="hidden">
       <h2 class="sec">Lexique avancé</h2>
       <p class="lead">Vocabulaire de spécialité, surtout en arabe standard (فصحى) — la langue des médias, du droit et du débat. À l'oral tu peux le greffer sur ta base libanaise.</p>
       <input class="search" id="theme-search" type="search" placeholder="Chercher un terme (français ou arabe)…">
@@ -157,6 +217,13 @@ footer{text-align:center;font-size:11px;color:var(--muted);padding:16px 20px 28p
       <div id="debate-list"></div>
     </section>
 
+    <section id="view-ecoute" class="hidden">
+      <h2 class="sec">Écoute &amp; immersion</h2>
+      <p class="lead">Apprendre par imitation (le « shadowing ») : écoute un passage, mets sur pause, et répète à voix haute en imitant le rythme et l'intonation. Refais-le jusqu'à ce que ça coule.</p>
+      <div class="note">Pour la traduction française : sur TED, active les sous-titres puis choisis « Français ». Pour France 24 et DW, le même sujet existe en français sur leur site — écoute en arabe, vérifie en français. Les chaînes d'info te donnent le registre du débat ; les podcasts, l'arabe vivant.</div>
+      <div id="ecoute-list"></div>
+    </section>
+
     <section id="view-rev" class="hidden">
       <h2 class="sec">Réviser</h2>
       <div class="note">Auto-test sur le lexique et les formules. Choisis le sens, retourne la carte, et dis si tu maîtrises. Ce que tu maîtrises est mis de côté (enregistré sur l'appareil).</div>
@@ -180,16 +247,54 @@ const ARG=[{"fn": "Exprimer une opinion", "items": [["في رأيي / برأيي
 const STRUCT=[["L'emphase avec إنّ", "إنّ + [nom] + [attribut]", "إنّ الإصلاح ضرورةٌ لا خيار.", "inna l-islāha darūratun lā khiyār", "La réforme est une nécessité, non un choix.", "إنّ en tête renforce l'affirmation (« assurément, en vérité »)."], ["Le passif (المبني للمجهول)", "[verbe au passif] + [complément]", "اتُّخِذ القرار دون نقاش.", "uttukhidha l-qarāru dūna niqāsh", "La décision a été prise sans débat.", "On efface l'agent ; la vocalisation interne change (kataba → kutiba)."], ["Comparatif & superlatif", "أكثر/أهمّ + [nom indéfini accusatif] + من", "هذا الملفّ أكثر تعقيداً من سابقه.", "hādhā l-milaffu aktharu taʿqīdan min sābiqih", "Ce dossier est plus complexe que le précédent.", "اسم التفضيل : comparatif avec من ; superlatif par l'annexion."], ["Le conditionnel irréel (لو)", "لو + [passé] + لـ + [passé]", "لو استمعوا للخبراء لتفادوا الأزمة.", "law istamaʿū li-l-khubarāʾi la-tafādaw l-azma", "S'ils avaient écouté les experts, ils auraient évité la crise.", "لو = hypothèse non réalisée (irréel du passé)."], ["Le conditionnel réel (إذا / إنْ)", "إذا + [passé] + [réponse]", "إذا توفّرت الإرادة تحقّق الإصلاح.", "idhā tawaffarati l-irāda tahaqqaqa l-islāh", "Si la volonté existe, la réforme se réalise.", "إذا = condition réalisable."], ["La relative (جملة الصلة)", "[nom défini] + الذي/التي + [phrase]", "البلد الذي يعاني من الانقسام لا ينهض.", "al-baladu lladhī yuʿānī mina l-inqisāmi lā yanhad", "Le pays qui souffre de division ne se relève pas.", "الذي/التي s'accordent ; pas de pronom relatif si l'antécédent est indéfini."], ["La circonstancielle (الحال)", "[verbe] + [sujet] + [حال indéfini accusatif]", "خرج الوزير غاضباً.", "kharaja l-wazīru ghādiban", "Le ministre est sorti, furieux.", "Le حال décrit l'état du sujet au moment de l'action."], ["L'annexion (الإضافة)", "[nom sans article] + [nom au génitif]", "سياسة الحكومة الاقتصادية", "siyāsatu l-hukūmati l-iqtisādiyya", "La politique économique du gouvernement", "Le 1er nom perd article et tanwīn ; le 2e est au génitif."], ["La négation du passé (لم)", "لم + [présent apocopé]", "لم يتغيّر شيءٌ يُذكر.", "lam yataghayyar shayʾun yudhkar", "Rien de notable n'a changé.", "لم + مضارع مجزوم = négation du passé (plus soutenu que ما)."], ["La négation du futur (لن)", "لن + [présent subjonctif]", "لن نقبل بأنصاف الحلول.", "lan naqbala bi-ansāfi l-hulūl", "Nous n'accepterons pas de demi-mesures.", "لن exprime un refus catégorique pour l'avenir."], ["Le subjonctif après أنْ", "يجب/يمكن + أنْ + [présent subjonctif]", "يجب أنْ نعالج الجذور لا الأعراض.", "yajibu an nuʿālija l-judhūra lā l-aʿrād", "Il faut traiter les racines, pas les symptômes.", "أنْ + مضارع منصوب remplace l'infinitif français."], ["Le but (لـ / كي / حتّى)", "[verbe] + لـ/كي/حتّى + [subjonctif]", "نناضل كي تُصان الكرامة.", "nunādilu kay tusāna l-karāma", "Nous luttons pour que la dignité soit préservée.", "Exprime la finalité ; le verbe passe au subjonctif."], ["L'accusatif de cause (المفعول لأجله)", "[verbe] + [nom verbal accusatif]", "سكت احتراماً للحاضرين.", "sakata ihtirāman li-l-hādirīn", "Il s'est tu par respect pour l'assistance.", "Indique le motif de l'action (« par… »)."], ["L'exception (الاستثناء بـ إلّا)", "ما + [phrase] + إلّا + [exception]", "ما نجح إلّا القلّة.", "mā najaha illā l-qilla", "Seule une minorité a réussi.", "ما … إلّا = tournure restrictive (« ne … que »)."], ["La proportion (كلّما)", "كلّما + [passé] … [passé]", "كلّما تأخّر الحلّ تعمّقت الأزمة.", "kullamā taʾakhkhara l-hallu taʿammaqati l-azma", "Plus la solution tarde, plus la crise s'aggrave.", "كلّما = « plus … plus » (corrélation)."], ["L'emphase par le المفعول المطلق", "[verbe] + [nom verbal accusatif]", "رفض المقترح رفضاً قاطعاً.", "rafada l-muqtaraha rafdan qātiʿan", "Il a rejeté la proposition catégoriquement.", "Le مفعول مطلق renforce ou qualifie le verbe."], ["Les verbes d'imminence (كاد)", "كاد + [présent]", "كاد المشروع أن ينهار.", "kāda l-mashrūʿu an yanhār", "Le projet a failli s'effondrer.", "كاد exprime que l'action a presque eu lieu."], ["La concession (مهما / أيّاً كان)", "مهما + [verbe] … [réponse]", "مهما اشتدّت الضغوط لن نتراجع.", "mahmā ishtaddati d-dughūtu lan natarājaʿ", "Quelles que soient les pressions, nous ne reculerons pas.", "مهما = « quoi que / quel que soit »."], ["L'interrogation rhétorique", "أليس + [phrase] + ؟", "أليس من حقّنا أن نعرف الحقيقة؟", "a-laysa min haqqinā an naʿrifa l-haqīqa", "N'avons-nous pas le droit de connaître la vérité ?", "Question oratoire dont la réponse est sous-entendue."], ["La restriction (إنّما)", "إنّما + [phrase]", "إنّما يُقاس التقدّم بالعدالة.", "innamā yuqāsu t-taqaddumu bi-l-ʿadāla", "Le progrès ne se mesure qu'à l'aune de la justice.", "إنّما = « ne … que / c'est seulement »."], ["La négation absolue (لا النافية للجنس)", "لا + [nom indéfini accusatif] + …", "لا حلَّ عسكريّاً لهذا النزاع.", "lā halla ʿaskariyyan li-hādhā n-nizāʿ", "Il n'existe aucune solution militaire à ce conflit.", "Nie l'existence de toute la catégorie."], ["L'apposition (البدل)", "[nom] + [nom qui le précise]", "تحدّث الرئيسُ القائدُ بحزم.", "tahaddatha r-raʾīsu l-qāʾidu bi-hazm", "Le président, le chef, a parlé avec fermeté.", "Le 2e nom remplace/précise le 1er."], ["Le moyen (الباء)", "[verbe] + بـ + [moyen]", "عالج الأزمة بالحوار.", "ʿālaja l-azmata bi-l-hiwār", "Il a traité la crise par le dialogue.", "La préposition بـ exprime l'instrument/le moyen."], ["L'insistance (التوكيد)", "[nom] + نفسه / كلّه", "الشعبُ نفسُه رفض المشروع.", "ash-shaʿbu nafsuhu rafada l-mashrūʿ", "Le peuple lui-même a rejeté le projet.", "نفس/عين/كلّ renforcent le mot précédent."], ["Le souhait & l'espoir (لعلّ / ليت)", "لعلّ / ليت + [nom] + [phrase]", "لعلّ الحوار يفتح أفقاً جديداً.", "laʿalla l-hiwāra yaftahu ufuqan jadīdan", "Peut-être le dialogue ouvrira-t-il un horizon nouveau.", "لعلّ = espoir ; ليت = souhait (souvent irréel)."], ["La condition négative (لولا)", "لولا + [nom] + لـ + [passé]", "لولا الضغط الشعبي لما تراجعت الحكومة.", "lawlā d-daghtu sh-shaʿbiyyu lamā tarājaʿati l-hukūma", "Sans la pression populaire, le gouvernement n'aurait pas reculé.", "لولا = « sans … , ne … pas »."], ["La concession (على الرغم من)", "على الرغم من + [nom] + [phrase]", "على الرغم من العقبات، استمرّ المسار.", "ʿalā r-raghmi mina l-ʿaqabāt, istamarra l-masār", "Malgré les obstacles, le processus s'est poursuivi.", "Introduit une concession."], ["L'exclamation (التعجّب)", "ما أفعلَ + [nom accusatif]", "ما أصعبَ اتّخاذ القرار!", "mā asʿaba ttikhādha l-qarār", "Comme la décision est difficile à prendre !", "Forme figée d'admiration/étonnement."], ["La coordination graduée (بل)", "[phrase] + بل + [rectification]", "المشكلة ليست تقنية بل سياسية.", "al-mushkilatu laysat taqniyyatan bal siyāsiyya", "Le problème n'est pas technique mais politique.", "بل rectifie/renforce après une négation."], ["La cause explicite (إذ / حيث)", "[phrase] + إذ / حيث + [phrase]", "تأجّل القرار، إذ لم يكتمل النصاب.", "taʾajjala l-qarāru, idh lam yaktamili n-nisāb", "La décision a été reportée, car le quorum n'était pas atteint.", "إذ = « car / étant donné que »."], ["Le but négatif (لئلّا)", "[verbe] + لئلّا + [subjonctif]", "نتحرّك بسرعة لئلّا تتفاقم الأزمة.", "nataharraku bi-surʿatin liʾallā tatafāqama l-azma", "Nous agissons vite pour que la crise ne s'aggrave pas.", "لئلّا = « afin que … ne … pas »."], ["L'emphase par antéposition", "[complément en tête] + [verbe] + [sujet]", "بالحوار وحده يُحَلّ النزاع.", "bi-l-hiwāri wahdahu yuhallu n-nizāʿ", "C'est par le seul dialogue que le conflit se résout.", "Mettre le complément en tête le met en relief."]];
 const DEBATES=[{"fr": "Le système confessionnel libanais : le réformer ou l'abolir ?", "ar": "النظام الطائفي في لبنان: إصلاحه أم إلغاؤه؟", "theme": "Liban · institutions", "pour": [["الطائفية تكرّس الانقسام وتعرقل دولة المواطنة.", "at-tāʾifiyya tukarrisu l-inqisāma wa-tuʿarqilu dawlata l-muwātana", "Le confessionnalisme entérine la division et empêche l'État de citoyenneté."], ["المحاصصة تفرّخ الفساد وتشلّ القرار.", "al-muhāsasa tufarrikhu l-fasāda wa-tushillu l-qarār", "Le partage des quotas engendre la corruption et paralyse la décision."], ["لا مساواة ما دامت الحقوق مرتبطة بالطائفة.", "lā musāwāta mā dāmati l-huqūqu murtabitatan bi-t-tāʾifa", "Pas d'égalité tant que les droits dépendent de la communauté."]], "contre": [["الطائفية ضمانة للتوازن وحماية للأقليات.", "at-tāʾifiyya damānatun li-t-tawāzuni wa-himāyatun li-l-aqalliyyāt", "Le confessionnalisme garantit l'équilibre et protège les minorités."], ["الإلغاء المفاجئ قد يفجّر صراعاً أهلياً.", "al-ilghāʾu l-mufājiʾu qad yufajjiru sirāʿan ahliyyan", "Une abolition brutale risque de déclencher un conflit civil."], ["البديل غير ناضج في غياب ثقافة الدولة.", "al-badīlu ghayru nādijin fī ghiyābi thaqāfati d-dawla", "L'alternative n'est pas mûre faute de culture de l'État."]], "lex": [["المحاصصة", "al-muhāsasa", "quotas"], ["المواطنة", "al-muwātana", "citoyenneté"], ["الأقليات", "al-aqalliyyāt", "minorités"], ["التوازن", "at-tawāzun", "équilibre"]]}, {"fr": "Neutralité ou alignement régional ?", "ar": "الحياد أم الاصطفاف الإقليمي؟", "theme": "Géopolitique", "pour": [["الحياد يجنّب البلاد أن تصبح ساحة صراع.", "al-hiyādu yujannibu l-bilāda an tusbiha sāhata sirāʿ", "La neutralité évite au pays de devenir un champ de bataille."], ["يحرّر الاقتصاد من تبعات المحاور.", "yuharriru l-iqtisāda min tabaʿāti l-mahāwir", "Il libère l'économie des retombées des axes régionaux."]], "contre": [["الحياد وهمٌ في منطقةٍ مشتعلة.", "al-hiyādu wahmun fī mintaqatin mushtaʿila", "La neutralité est une illusion dans une région embrasée."], ["الاصطفاف قد يوفّر حمايةً ودعماً.", "al-istifāfu qad yuwaffiru himāyatan wa-daʿman", "L'alignement peut offrir protection et soutien."]], "lex": [["الحياد", "al-hiyād", "neutralité"], ["المحاور", "al-mahāwir", "axes"], ["النفوذ", "an-nufūdh", "influence"], ["السيادة", "as-siyāda", "souveraineté"]]}, {"fr": "Les sanctions économiques : outil efficace ou punition collective ?", "ar": "العقوبات الاقتصادية: أداةٌ فعّالة أم عقابٌ جماعي؟", "theme": "Géopolitique · économie", "pour": [["العقوبات تضغط على الأنظمة دون حرب.", "al-ʿuqūbātu tadghatu ʿalā l-anzimati dūna harb", "Les sanctions font pression sur les régimes sans guerre."], ["تجفّف مصادر تمويل الانتهاكات.", "tujaffifu masādira tamwīli l-intihākāt", "Elles assèchent les sources de financement des abus."]], "contre": [["العقوبات تعاقب الشعب قبل الحاكم.", "al-ʿuqūbātu tuʿāqibu sh-shaʿba qabla l-hākim", "Les sanctions punissent le peuple avant le dirigeant."], ["نادراً ما تغيّر سلوك الأنظمة فعلياً.", "nādiran mā tughayyiru sulūka l-anzimati fiʿliyyan", "Elles changent rarement le comportement réel des régimes."]], "lex": [["العقوبات", "al-ʿuqūbāt", "sanctions"], ["الحصار", "al-hisār", "blocus"], ["التمويل", "at-tamwīl", "financement"], ["الانتهاكات", "al-intihākāt", "violations"]]}, {"fr": "L'IA et la souveraineté numérique", "ar": "الذكاء الاصطناعي والسيادة الرقمية", "theme": "Technique · société", "pour": [["السيادة الرقمية تحمي البيانات الوطنية.", "as-siyāda r-raqmiyya tahmī l-bayānāti l-wataniyya", "La souveraineté numérique protège les données nationales."], ["الاستثمار في الذكاء الاصطناعي يقلّص التبعية.", "al-istithmāru fī dh-dhakāʾi l-istināʿiyyi yuqallisu t-tabaʿiyya", "Investir dans l'IA réduit la dépendance."]], "contre": [["العزلة الرقمية تكبح الابتكار.", "al-ʿuzla r-raqmiyya takbahu l-ibtikār", "L'isolement numérique freine l'innovation."], ["كلفة البنية التحتية باهظة على دولٍ هشّة.", "kulfatu l-binya t-tahtiyya bāhizatun ʿalā duwalin hashsha", "Le coût de l'infrastructure est exorbitant pour des États fragiles."]], "lex": [["السيادة الرقمية", "as-siyāda r-raqmiyya", "souveraineté numérique"], ["البيانات", "al-bayānāt", "données"], ["التبعية", "at-tabaʿiyya", "dépendance"], ["الابتكار", "al-ibtikār", "innovation"]]}, {"fr": "L'émigration : un fardeau ou une opportunité ?", "ar": "الهجرة: عبءٌ أم فرصة؟", "theme": "Société", "pour": [["تحويلات المغتربين تسند الاقتصاد.", "tahwīlātu l-mughtaribīna tasnudu l-iqtisād", "Les transferts des expatriés soutiennent l'économie."], ["الانفتاح على الخارج ينقل الخبرات.", "al-infitāhu ʿalā l-khāriji yanqulu l-khibarāt", "L'ouverture sur l'extérieur transfère les compétences."]], "contre": [["هجرة الكفاءات تنزف البلاد.", "hijratu l-kafāʾāti tanzifu l-bilād", "La fuite des cerveaux saigne le pays."], ["تفكّك العائلات كلفة اجتماعية باهظة.", "tafakkuku l-ʿāʾilāti kulfatun ijtimāʿiyya bāhiza", "L'éclatement des familles est un coût social élevé."]], "lex": [["التحويلات", "at-tahwīlāt", "transferts"], ["هجرة الكفاءات", "hijrat al-kafāʾāt", "fuite des cerveaux"], ["الاغتراب", "al-ightirāb", "expatriation"], ["الانفتاح", "al-infitāh", "ouverture"]]}, {"fr": "La décentralisation administrative au Liban", "ar": "اللامركزية الإدارية في لبنان", "theme": "Liban · institutions", "pour": [["اللامركزية تقرّب القرار من المواطن.", "al-lāmarkaziyya tuqarribu l-qarāra mina l-muwātin", "La décentralisation rapproche la décision du citoyen."], ["تحفّز التنمية المحلّية المتوازنة.", "tuhaffizu t-tanmiyata l-mahalliyyata l-mutawāzina", "Elle stimule un développement local équilibré."]], "contre": [["قد تكرّس الانقسام الطائفي جغرافياً.", "qad tukarrisu l-inqisāma t-tāʾifiyya jughrāfiyyan", "Elle risque d'ancrer géographiquement la division confessionnelle."], ["ضعف الرقابة قد يضاعف الفساد المحلّي.", "duʿfu r-raqābati qad yudāʿifu l-fasāda l-mahallī", "La faiblesse du contrôle peut aggraver la corruption locale."]], "lex": [["اللامركزية", "al-lāmarkaziyya", "décentralisation"], ["التنمية المحلّية", "at-tanmiya l-mahalliyya", "développement local"], ["الرقابة", "ar-raqāba", "contrôle"], ["الصلاحيات", "as-salāhiyyāt", "prérogatives"]]}, {"fr": "La transition vers les énergies renouvelables", "ar": "التحوّل إلى الطاقة المتجدّدة", "theme": "Énergie · économie", "pour": [["الطاقة المتجدّدة تخفّض الكلفة والانبعاثات.", "at-tāqa l-mutajaddida tukhaffidu l-kulfata wa-l-inbiʿāthāt", "Le renouvelable réduit le coût et les émissions."], ["تعزّز الأمن الطاقوي وتقلّل الاستيراد.", "tuʿazzizu l-amna t-tāqawiyya wa-tuqallilu l-istīrād", "Il renforce la sécurité énergétique et réduit les importations."]], "contre": [["الاستثمار الأوّلي مرتفع والتمويل شحيح.", "al-istithmāru l-awwaliyyu murtafiʿun wa-t-tamwīlu shahīh", "L'investissement initial est élevé et le financement rare."], ["تذبذب الإنتاج يتطلّب بنية تخزين متطوّرة.", "tadhabdhubu l-intāji yatatallabu binyata takhzīnin mutatawwira", "L'intermittence exige une infrastructure de stockage avancée."]], "lex": [["الطاقة المتجدّدة", "at-tāqa l-mutajaddida", "énergie renouvelable"], ["الانبعاثات", "al-inbiʿāthāt", "émissions"], ["الأمن الطاقوي", "al-amn at-tāqawī", "sécurité énergétique"], ["التخزين", "at-takhzīn", "stockage"]]}, {"fr": "Le rôle de la communauté internationale dans les crises", "ar": "دور المجتمع الدولي في الأزمات", "theme": "Géopolitique", "pour": [["التدخّل الدولي قد يوقف المجازر.", "at-tadakhkhulu d-duwaliyyu qad yūqifu l-majāzir", "L'intervention internationale peut arrêter les massacres."], ["الضغط الدبلوماسي يفتح باب التسوية.", "ad-daghtu d-diblūmāsiyyu yaftahu bāba t-taswiya", "La pression diplomatique ouvre la voie au règlement."]], "contre": [["كثيراً ما يخدم التدخّل مصالح القوى الكبرى.", "kathīran mā yakhdimu t-tadakhkhulu masāliha l-quwā l-kubrā", "L'intervention sert souvent les intérêts des grandes puissances."], ["ازدواجية المعايير تقوّض المصداقية.", "izdiwājiyyatu l-maʿāyīri tuqawwidu l-misdāqiyya", "Le deux poids deux mesures sape la crédibilité."]], "lex": [["التدخّل", "at-tadakhkhul", "intervention"], ["التسوية", "at-taswiya", "règlement"], ["ازدواجية المعايير", "izdiwājiyyat al-maʿāyīr", "deux poids deux mesures"], ["المصداقية", "al-misdāqiyya", "crédibilité"]]}, {"fr": "Réseaux sociaux : espace démocratique ou menace ?", "ar": "وسائل التواصل: فضاءٌ ديمقراطي أم تهديد؟", "theme": "Médias · société", "pour": [["تمنح المنصّات صوتاً للمهمّشين.", "tamnahu l-minassātu sawtan li-l-muhammashīn", "Les plateformes donnent une voix aux marginalisés."], ["تكسر احتكار السلطة للمعلومة.", "taksiru htikāra s-sultati li-l-maʿlūma", "Elles brisent le monopole du pouvoir sur l'information."]], "contre": [["تسرّع المنصّات انتشار التضليل.", "tusarriʿu l-minassātu intishāra t-tadlīl", "Les plateformes accélèrent la propagation de la désinformation."], ["تغذّي الاستقطاب وخطاب الكراهية.", "tughadhdhī l-istiqtāba wa-khitāba l-karāhiya", "Elles nourrissent la polarisation et le discours de haine."]], "lex": [["التضليل", "at-tadlīl", "désinformation"], ["الاستقطاب", "al-istiqtāb", "polarisation"], ["خطاب الكراهية", "khitāb al-karāhiya", "discours de haine"], ["حرية التعبير", "hurriyat at-taʿbīr", "liberté d'expression"]]}, {"fr": "Libre-échange ou protectionnisme ?", "ar": "حرية التجارة أم الحماية؟", "theme": "Économie", "pour": [["حرية التجارة تخفّض الأسعار وتوسّع الخيارات.", "hurriyatu t-tijārati tukhaffidu l-asʿāra wa-tuwassiʿu l-khiyārāt", "Le libre-échange baisse les prix et élargit les choix."], ["تحفّز المنافسة على رفع الجودة.", "tuhaffizu l-munāfasata ʿalā rafʿi l-jawda", "Elle pousse la concurrence à élever la qualité."]], "contre": [["الحماية تصون الصناعة الناشئة.", "al-himāyatu tasūnu s-sināʿata n-nāshiʾa", "Le protectionnisme préserve l'industrie naissante."], ["الانفتاح المفرط يهدّد الإنتاج المحلّي.", "al-infitāhu l-mufritu yuhaddidu l-intāja l-mahallī", "L'ouverture excessive menace la production locale."]], "lex": [["حرية التجارة", "hurriyat at-tijāra", "libre-échange"], ["الحماية", "al-himāya", "protectionnisme"], ["المنافسة", "al-munāfasa", "concurrence"], ["الصناعة الناشئة", "as-sināʿa an-nāshiʾa", "industrie naissante"]]}, {"fr": "La laïcité de l'État", "ar": "علمانية الدولة", "theme": "Société · institutions", "pour": [["العلمانية تضمن الحياد تجاه جميع المعتقدات.", "al-ʿalmāniyya tadmanu l-hiyāda tujāha jamīʿi l-muʿtaqadāt", "La laïcité garantit la neutralité envers toutes les croyances."], ["تفصل الدين عن إدارة الشأن العام.", "tafsilu d-dīna ʿan idārati sh-shaʾni l-ʿāmm", "Elle sépare la religion de la gestion des affaires publiques."]], "contre": [["قد تُفهم كإقصاءٍ للهويّة الدينية.", "qad tufhamu ka-iqsāʾin li-l-huwiyyati d-dīniyya", "Elle peut être perçue comme une exclusion de l'identité religieuse."], ["فرضها قسراً يثير مقاومةً مجتمعية.", "fardhuhā qasran yuthīru muqāwamatan mujtamaʿiyya", "L'imposer de force suscite une résistance sociale."]], "lex": [["العلمانية", "al-ʿalmāniyya", "laïcité"], ["الحياد", "al-hiyād", "neutralité"], ["الهوية", "al-huwiyya", "identité"], ["المعتقد", "al-muʿtaqad", "croyance"]]}, {"fr": "La diaspora doit-elle voter et peser dans la vie politique ?", "ar": "هل يحقّ للمغتربين التصويت والتأثير سياسياً؟", "theme": "Liban · société", "pour": [["المغتربون جزءٌ من الوطن ويستحقّون صوتاً.", "al-mughtaribūna juzʾun mina l-watani wa-yastahiqqūna sawtan", "Les expatriés font partie de la nation et méritent une voix."], ["تحويلاتهم تسند الاقتصاد فمن حقّهم القرار.", "tahwīlātuhum tasnudu l-iqtisāda fa-min haqqihim al-qarār", "Leurs transferts soutiennent l'économie, la décision leur revient donc aussi."]], "contre": [["البعيد عن الواقع اليومي قد يقرّر بمعزلٍ عنه.", "al-baʿīdu ʿani l-wāqiʿi l-yawmiyyi qad yuqarriru bi-maʿzilin ʿanh", "Éloigné du quotidien, il peut décider en décalage avec lui."], ["تنظيم اقتراع الخارج معقّد ومكلف.", "tanzīmu qtirāʿi l-khāriji muʿaqqadun wa-mukallif", "Organiser le vote de l'étranger est complexe et coûteux."]], "lex": [["المغتربون", "al-mughtaribūn", "expatriés"], ["الاقتراع", "al-iqtirāʿ", "scrutin"], ["التمثيل", "at-tamthīl", "représentation"], ["الانتماء", "al-intimāʾ", "appartenance"]]}, {"fr": "La peine de mort : la maintenir ou l'abolir ?", "ar": "عقوبة الإعدام: الإبقاء عليها أم إلغاؤها؟", "theme": "Justice · société", "pour": [["الإعدام لا يردع الجريمة فعلياً.", "al-iʿdāmu lā yardaʿu l-jarīmata fiʿliyyan", "La peine de mort ne dissuade pas réellement le crime."], ["الخطأ القضائي لا رجعة فيه.", "al-khataʾu l-qadāʾiyyu lā rajʿata fīh", "L'erreur judiciaire est irréversible."]], "contre": [["بعض الجرائم تستوجب أقصى العقوبة.", "baʿdu l-jarāʾimi tastawjibu aqsā l-ʿuqūba", "Certains crimes appellent la peine maximale."], ["الإعدام يحقّق العدالة للضحايا.", "al-iʿdāmu yuhaqqiqu l-ʿadālata li-d-dahāyā", "La peine de mort rend justice aux victimes."]], "lex": [["الإعدام", "al-iʿdām", "peine de mort"], ["الردع", "ar-radʿ", "dissuasion"], ["الخطأ القضائي", "al-khataʾ al-qadāʾī", "erreur judiciaire"], ["العدالة", "al-ʿadāla", "justice"]]}, {"fr": "Les quotas de femmes en politique", "ar": "الكوتا النسائية في السياسة", "theme": "Société · institutions", "pour": [["الكوتا تصحّح خللاً تاريخياً.", "al-kūtā tusahhihu khalalan tārīkhiyyan", "Les quotas corrigent un déséquilibre historique."], ["التمثيل العادل يثري القرار.", "at-tamthīlu l-ʿādilu yuthrī l-qarār", "Une représentation équitable enrichit la décision."]], "contre": [["الكفاءة يجب أن تسبق الجنس.", "al-kafāʾatu yajibu an tasbiqa l-jins", "La compétence doit primer sur le genre."], ["الكوتا قد تكرّس وصايةً شكلية.", "al-kūtā qad tukarrisu wisāyatan shakliyya", "Les quotas peuvent entériner une représentation de façade."]], "lex": [["الكوتا", "al-kūtā", "quotas"], ["التمثيل", "at-tamthīl", "représentation"], ["المساواة", "al-musāwā", "égalité"], ["الكفاءة", "al-kafāʾa", "compétence"]]}, {"fr": "L'énergie nucléaire civile", "ar": "الطاقة النووية المدنية", "theme": "Énergie · environnement", "pour": [["النووي يوفّر طاقةً وفيرة منخفضة الكربون.", "an-nawawiyyu yuwaffiru tāqatan wafīratan munkhafidata l-karbūn", "Le nucléaire fournit une énergie abondante et bas-carbone."], ["يقلّل الاعتماد على الوقود الأحفوري.", "yuqallilu l-iʿtimāda ʿalā l-waqūdi l-ahfūrī", "Il réduit la dépendance aux énergies fossiles."]], "contre": [["مخاطر الحوادث كارثية.", "makhātiru l-hawādithi kārithiyya", "Les risques d'accident sont catastrophiques."], ["النفايات المشعّة تبقى لقرون.", "an-nifāyātu l-mushiʿʿatu tabqā li-qurūn", "Les déchets radioactifs persistent des siècles."]], "lex": [["الطاقة النووية", "at-tāqa an-nawawiyya", "énergie nucléaire"], ["الكربون", "al-karbūn", "carbone"], ["النفايات المشعّة", "an-nifāyāt al-mushiʿʿa", "déchets radioactifs"], ["الأمان", "al-amān", "sûreté"]]}, {"fr": "Surveillance numérique : sécurité ou atteinte aux libertés ?", "ar": "المراقبة الرقمية: أمنٌ أم انتهاكٌ للحرّيات؟", "theme": "Technique · société", "pour": [["المراقبة تساعد على إحباط التهديدات.", "al-murāqabatu tusāʿidu ʿalā ihbāti t-tahdīdāt", "La surveillance aide à déjouer les menaces."], ["الأمن مصلحةٌ عامّة تبرّر بعض القيود.", "al-amnu maslahatun ʿāmmatun tubarriru baʿda l-quyūd", "La sécurité est un intérêt public qui justifie certaines restrictions."]], "contre": [["المراقبة الشاملة تنتهك الخصوصية.", "al-murāqabatu sh-shāmilatu tantahiku l-khusūsiyya", "La surveillance de masse viole la vie privée."], ["قد تُوظَّف لقمع المعارضة.", "qad tuwazzafu li-qamʿi l-muʿārada", "Elle peut servir à réprimer l'opposition."]], "lex": [["المراقبة", "al-murāqaba", "surveillance"], ["الخصوصية", "al-khusūsiyya", "vie privée"], ["الأمن", "al-amn", "sécurité"], ["الحرّيات", "al-hurriyyāt", "libertés"]]}, {"fr": "La dollarisation de l'économie libanaise", "ar": "دولرة الاقتصاد اللبناني", "theme": "Liban · économie", "pour": [["الدولرة تكبح التضخّم الجامح.", "ad-dawlaratu takbahu t-tadakhkhuma l-jāmih", "La dollarisation freine l'inflation galopante."], ["تعيد بعض الثقة إلى المعاملات.", "tuʿīdu baʿda th-thiqati ilā l-muʿāmalāt", "Elle restaure une certaine confiance dans les transactions."]], "contre": [["الدولرة تُفقد الدولة سيادتها النقدية.", "ad-dawlaratu tufqidu d-dawlata siyādatahā n-naqdiyya", "La dollarisation prive l'État de sa souveraineté monétaire."], ["تعمّق التفاوت بين الفئات.", "tuʿammiqu t-tafāwuta bayna l-fiʾāt", "Elle aggrave les inégalités entre catégories sociales."]], "lex": [["الدولرة", "ad-dawlara", "dollarisation"], ["السيادة النقدية", "as-siyāda an-naqdiyya", "souveraineté monétaire"], ["التضخّم", "at-tadakhkhum", "inflation"], ["العملة", "al-ʿumla", "monnaie"]]}, {"fr": "L'intervention humanitaire face à la souveraineté", "ar": "التدخّل الإنساني في مواجهة السيادة", "theme": "Géopolitique", "pour": [["حماية المدنيين واجبٌ يعلو على السيادة.", "himāyatu l-madaniyyīna wājibun yaʿlū ʿalā s-siyāda", "Protéger les civils est un devoir supérieur à la souveraineté."], ["الصمت أمام المجازر تواطؤ.", "as-samtu amāma l-majāziri tawātuʾ", "Le silence face aux massacres est une complicité."]], "contre": [["التدخّل ذريعةٌ للهيمنة أحياناً.", "at-tadakhkhulu dharīʿatun li-l-haymanati ahyānan", "L'intervention est parfois un prétexte à la domination."], ["انتهاك السيادة يفتح باب الفوضى.", "intihāku s-siyādati yaftahu bāba l-fawdā", "Violer la souveraineté ouvre la voie au chaos."]], "lex": [["التدخّل الإنساني", "at-tadakhkhul al-insānī", "intervention humanitaire"], ["السيادة", "as-siyāda", "souveraineté"], ["الهيمنة", "al-haymana", "domination"], ["المدنيون", "al-madaniyyūn", "civils"]]}, {"fr": "Gratuité de l'enseignement supérieur", "ar": "مجّانية التعليم العالي", "theme": "Éducation · société", "pour": [["المجّانية تكافئ الفرص بين الطبقات.", "al-majjāniyyatu tukāfiʾu l-furasa bayna t-tabaqāt", "La gratuité égalise les chances entre les classes."], ["التعليم استثمارٌ في رأس المال البشري.", "at-taʿlīmu stithmārun fī raʾsi l-māli l-basharī", "L'éducation est un investissement dans le capital humain."]], "contre": [["المجّانية تثقل الموازنة العامّة.", "al-majjāniyyatu tuthqilu l-muwāzanata l-ʿāmma", "La gratuité alourdit le budget de l'État."], ["قد تتراجع الجودة مع التوسّع.", "qad tatarājaʿu l-jawdatu maʿa t-tawassuʿ", "La qualité peut baisser avec la massification."]], "lex": [["المجّانية", "al-majjāniyya", "gratuité"], ["تكافؤ الفرص", "takāfuʾ al-furas", "égalité des chances"], ["رأس المال البشري", "raʾs al-māl al-basharī", "capital humain"], ["الجودة", "al-jawda", "qualité"]]}, {"fr": "Patrimoine ou développement urbain ?", "ar": "التراث أم التنمية العمرانية؟", "theme": "Urbanisme · société", "pour": [["الحفاظ على التراث يصون الهوية.", "al-hifāzu ʿalā t-turāthi yasūnu l-huwiyya", "Préserver le patrimoine sauvegarde l'identité."], ["التراث مورد سياحي واقتصادي.", "at-turāthu mawridun siyāhiyyun wa-qtisādī", "Le patrimoine est une ressource touristique et économique."]], "contre": [["الجمود يعيق حاجات المدينة المتنامية.", "al-jumūdu yuʿīqu hājāti l-madīnati l-mutanāmiya", "L'immobilisme entrave les besoins croissants de la ville."], ["التنمية توفّر سكناً وفرص عمل.", "at-tanmiyatu tuwaffiru saksanan wa-furasa ʿamal", "Le développement fournit logements et emplois."]], "lex": [["التراث", "at-turāth", "patrimoine"], ["الهوية", "al-huwiyya", "identité"], ["التنمية العمرانية", "at-tanmiya al-ʿumrāniyya", "développement urbain"], ["السياحة", "as-siyāha", "tourisme"]]}, {"fr": "Réfugiés : intégration ou retour ?", "ar": "اللاجئون: الاندماج أم العودة؟", "theme": "Société · géopolitique", "pour": [["الاندماج يحوّل العبء إلى طاقة منتجة.", "al-indimāju yuhawwilu l-ʿibʾa ilā tāqatin muntija", "L'intégration transforme le fardeau en force productive."], ["العودة القسرية تخالف القانون الدولي.", "al-ʿawdatu l-qasriyyatu tukhālifu l-qānūna d-duwalī", "Le retour forcé viole le droit international."]], "contre": [["الاندماج يثقل البنى التحتية الهشّة.", "al-indimāju yuthqilu l-bunā t-tahtiyyata l-hashsha", "L'intégration alourdit des infrastructures fragiles."], ["العودة حقٌّ وكرامةٌ للّاجئين.", "al-ʿawdatu haqqun wa-karāmatun li-l-lājiʾīn", "Le retour est un droit et une dignité pour les réfugiés."]], "lex": [["الاندماج", "al-indimāj", "intégration"], ["العودة", "al-ʿawda", "retour"], ["اللجوء", "al-lujūʾ", "asile"], ["القانون الدولي", "al-qānūn ad-duwalī", "droit international"]]}, {"fr": "Tourisme : moteur de croissance ou dépendance fragile ?", "ar": "السياحة: محرّك نموّ أم تبعيّة هشّة؟", "theme": "Économie · société", "pour": [["السياحة تخلق فرص عملٍ واسعة.", "as-siyāhatu takhluqu furasa ʿamalin wāsiʿa", "Le tourisme crée de nombreux emplois."], ["تنشّط قطاعاتٍ مترابطة كثيرة.", "tunashshitu qitāʿātin mutarābitatan kathīra", "Il dynamise de multiples secteurs interconnectés."]], "contre": [["الاعتماد على السياحة يعرّض للصدمات.", "al-iʿtimādu ʿalā s-siyāhati yuʿarridu li-s-sadamāt", "La dépendance au tourisme expose aux chocs."], ["قد تُلحق ضرراً بالبيئة والتراث.", "qad tulhiqu dararan bi-l-bīʾati wa-t-turāth", "Il peut nuire à l'environnement et au patrimoine."]], "lex": [["السياحة", "as-siyāha", "tourisme"], ["التبعية", "at-tabaʿiyya", "dépendance"], ["الصدمات", "as-sadamāt", "chocs"], ["الموسمية", "al-mawsimiyya", "saisonnalité"]]}, {"fr": "Le salaire minimum : protection ou frein à l'emploi ?", "ar": "الحدّ الأدنى للأجور: حمايةٌ أم عائقٌ للتوظيف؟", "theme": "Économie · travail", "pour": [["الحدّ الأدنى يصون كرامة العامل.", "al-haddu l-adnā yasūnu karāmata l-ʿāmil", "Le salaire minimum préserve la dignité du travailleur."], ["يحفّز الاستهلاك ويقلّص الفقر.", "yuhaffizu l-istihlāka wa-yuqallisu l-faqr", "Il stimule la consommation et réduit la pauvreté."]], "contre": [["قد يدفع الشركات إلى تقليص التوظيف.", "qad yadfaʿu sh-sharikāti ilā taqlīsi t-tawzīf", "Il peut pousser les entreprises à réduire l'embauche."], ["يوسّع رقعة العمل غير الرسمي.", "yuwassiʿu ruqʿata l-ʿamali ghayri r-rasmī", "Il étend la zone du travail informel."]], "lex": [["الحدّ الأدنى للأجور", "al-hadd al-adnā li-l-ujūr", "salaire minimum"], ["التوظيف", "at-tawzīf", "emploi"], ["القطاع غير الرسمي", "al-qitāʿ ghayr ar-rasmī", "secteur informel"], ["القدرة الشرائية", "al-qudra ash-shirāʾiyya", "pouvoir d'achat"]]}, {"fr": "Liberté d'expression et discours de haine : où tracer la limite ?", "ar": "حرية التعبير وخطاب الكراهية: أين الحدّ؟", "theme": "Société · droit", "pour": [["حرية التعبير أساس المجتمع الحرّ.", "hurriyatu t-taʿbīri asāsu l-mujtamaʿi l-hurr", "La liberté d'expression est le socle d'une société libre."], ["تقييدها يفتح باب الرقابة التعسّفية.", "taqyīduhā yaftahu bāba r-raqābati t-taʿassufiyya", "La restreindre ouvre la porte à la censure arbitraire."]], "contre": [["خطاب الكراهية يحرّض على العنف.", "khitābu l-karāhiyati yuharridu ʿalā l-ʿunf", "Le discours de haine incite à la violence."], ["حماية الكرامة تستوجب بعض الحدود.", "himāyatu l-karāmati tastawjibu baʿda l-hudūd", "Protéger la dignité impose certaines limites."]], "lex": [["حرية التعبير", "hurriyat at-taʿbīr", "liberté d'expression"], ["خطاب الكراهية", "khitāb al-karāhiya", "discours de haine"], ["التحريض", "at-tahrīd", "incitation"], ["الرقابة", "ar-raqāba", "censure"]]}];
 
-// ════════════════ UI ════════════════
+// Écoute & immersion : ressources réelles pour le shadowing
+const LISTEN=[
+{src:"TED · conférences", t:"TED بالعربية", ar:"أفكار تستحقّ الانتشار", badge:"B2–C1 · sous-titres FR",
+ url:"https://www.ted.com/talks?language=ar",
+ d:"Des conférences d'idées en arabe standard, claires et bien articulées (10 à 18 min). Idéal pour le shadowing : choisis un talk, active les sous-titres et bascule-les en français pour vérifier. La diction nette en fait le meilleur point de départ.",
+ tips:[["فكرة","fikra","idée"],["برأيي","bi-raʾyī","à mon avis"],["لنتخيّل","li-natakhayyal","imaginons"]]},
+{src:"Chaîne d'info · YouTube", t:"الجزيرة (Al Jazeera)", ar:"الاتّجاه المعاكس · بلا حدود", badge:"C1 · registre du débat",
+ url:"https://www.youtube.com/@aljazeera",
+ d:"La meilleure source gratuite d'arabe standard formel parlé : journaux, analyses et surtout les émissions de débat (« الاتّجاه المعاكس », « بلا حدود ») où l'on argumente en direct. C'est exactement le registre que tu vises pour débattre.",
+ tips:[["في المقابل","fī l-muqābil","en revanche"],["دعني أوضّح","daʿnī uwaddih","laisse-moi clarifier"],["هذا غير دقيق","hādhā ghayru daqīq","ce n'est pas exact"]]},
+{src:"Chaîne d'info · YouTube", t:"BBC News عربي", ar:"تقارير ومقابلات", badge:"B2–C1 · MSA clair",
+ url:"https://www.youtube.com/bbcarabic",
+ d:"Reportages et interviews en arabe standard, au débit un peu plus posé qu'Al Jazeera : bonne transition vers l'écoute des chaînes d'info. Beaucoup de sujets existent aussi côté BBC en français pour recouper.",
+ tips:[["وفقاً للتقارير","wifqan li-t-taqārīr","selon les rapports"],["تجدر الإشارة","tajduru l-ishāra","il convient de noter"],["من جهةٍ أخرى","min jihatin ukhrā","par ailleurs"]]},
+{src:"Chaîne d'info · même rédaction FR", t:"France 24 بالعربية", ar:"الأخبار والتحليلات", badge:"B2–C1 · version FR dispo",
+ url:"https://www.france24.com/ar/",
+ d:"L'atout ici : la même rédaction publie en français. Écoute un sujet en arabe, puis lis ou regarde l'équivalent sur france24.com/fr — c'est ta « traduction » prête à l'emploi, sur l'actualité du jour.",
+ tips:[["على الصعيد الدولي","ʿalā s-saʿīdi d-duwalī","sur le plan international"],["تصريحات","tasrīhāt","déclarations"],["تطوّرات","tatawwurāt","développements"]]},
+{src:"Documentaires · version FR dispo", t:"DW عربية (Deutsche Welle)", ar:"وثائقيات وتقارير معمّقة", badge:"B2–C1 · technique",
+ url:"https://www.dw.com/ar",
+ d:"Documentaires et reportages de fond en arabe standard très clair (économie, sciences, environnement) — parfait pour ton vocabulaire technique. Tout le contenu DW existe aussi en français sur dw.com/fr.",
+ tips:[["البنية التحتية","al-binya t-tahtiyya","l'infrastructure"],["التنمية المستدامة","at-tanmiya l-mustadāma","le développement durable"],["وفق دراسة","wifqa dirāsa","selon une étude"]]},
+{src:"Podcasts · YouTube", t:"Sowt (صوت)", ar:"صحافة وسرد بالعربية", badge:"C1+ · arabe authentique",
+ url:"https://www.youtube.com/@Sowt",
+ d:"Le réseau de podcasts de référence pour le niveau avancé : journalisme d'auteur et récits, arabe vivant et soutenu pensé pour des locuteurs natifs (pas de traduction). À garder pour quand tu comprends déjà l'essentiel à la première écoute.",
+ tips:[["في هذه الحلقة","fī hādhihi l-halqa","dans cet épisode"],["نتناول قضية","natanāwalu qadiyya","nous abordons une question"],["بصراحة","bi-saraha","franchement"]]},
+{src:"Plateforme d'apprentissage", t:"تعلّم العربية مع الجزيرة", ar:"لغة الإعلام بالتدرّج", badge:"B1–C1 · gradué",
+ url:"https://learning.aljazeera.net",
+ d:"La plateforme d'Al Jazeera dédiée à l'arabe des médias, classée par niveau, avec extraits commentés et exercices. Le pont idéal entre ton lexique ici et l'écoute des vraies émissions.",
+ tips:[["العنوان الرئيسي","al-ʿunwān ar-raʾīsī","le gros titre"],["المراسل","al-murāsil","le correspondant"],["نقلاً عن","naqlan ʿan","d'après / citant"]]},
+{src:"Levantin · pour entretenir l'oral", t:"Libanais / levantin parlé", ar:"محكيّة لبنانية", badge:"oral · ta base",
+ url:"https://www.youtube.com/results?search_query=arabic+with+sam+lebanese",
+ d:"Pour ne pas perdre ton libanais pendant que tu montes en standard : des chaînes comme « Arabic with Sam » (levantin) ou les interviews libanaises de Carol Haidar. Écoute, imite l'accent, garde le naturel de l'oral.",
+ tips:[["شو القصّة؟","shu l-2essa","c'est quoi l'histoire ?"],["يعني","yaʿne","c'est-à-dire / genre"],["عنجد","3anjad","vraiment / sérieux"]]},
+];
+
+
 const $=id=>document.getElementById(id);
-const VIEWS=["themes","arg","struct","debate","rev"];
+const VIEWS=["home","themes","arg","struct","debate","ecoute","rev"];
 function show(v){
   VIEWS.forEach(x=>$("view-"+x).classList.toggle("hidden",x!==v));
   VIEWS.forEach(x=>$("nav-"+x).classList.toggle("on",x===v));
+  if(v==="home")renderHome();
   if(v==="themes")renderThemes();
   if(v==="arg")renderArg();
   if(v==="struct")renderStruct();
   if(v==="debate")renderDebate();
+  if(v==="ecoute")renderEcoute();
   if(v==="rev")startRev();
   window.scrollTo(0,0);
 }
@@ -216,8 +321,10 @@ function termHtml(w){
   let ex="";
   if(w[3])ex='<div class="term-ex"><div class="a">'+w[3]+'</div><div class="extr">'+w[4]+'</div><div class="f">'+w[5]+'</div></div>';
   return '<div class="term"><div class="term-top"><div><div class="term-ar">'+w[0]+'</div><div class="term-tr">'+w[1]+'</div></div>'+
-    '<div class="term-fr">'+w[2]+'</div></div>'+ex+'</div>';
+    '<div style="display:flex;align-items:center;gap:8px"><div class="term-fr">'+w[2]+'</div>'+
+    '<button class="say" data-say="'+esc(w[0])+'" aria-label="Écouter">🔊</button></div></div>'+ex+'</div>';
 }
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 $("theme-search").oninput=renderThemes;
 document.addEventListener("click",e=>{const b=e.target.closest("[data-th]");if(b){activeTheme=+b.dataset.th;$("theme-search").value="";renderThemes();}});
 
@@ -255,11 +362,82 @@ function renderDebate(){
 }
 document.addEventListener("click",e=>{const h=e.target.closest(".debate-head");if(h)h.parentElement.classList.toggle("open");});
 
-// RÉVISER
-const RKEY="niqach-mastered";
+// ÉCOUTE
+function renderEcoute(){
+  $("ecoute-list").innerHTML=LISTEN.map(r=>
+    '<div class="listen"><div class="listen-top"><div style="flex:1">'+
+      '<div class="listen-src">'+r.src+'</div>'+
+      '<div class="listen-t">'+r.t+'</div>'+
+      '<div class="listen-ar">'+r.ar+'</div></div>'+
+      '<div class="listen-badge">'+r.badge+'</div></div>'+
+    '<div class="listen-d">'+r.d+'</div>'+
+    '<div class="listen-tips"><div class="lt-h">À repérer / imiter</div>'+
+      r.tips.map(t=>'<div class="listen-tip"><span class="a">'+t[0]+'</span><span class="t">'+t[1]+'</span><span class="f">'+t[2]+'</span></div>').join("")+'</div>'+
+    '<a class="listen-go" href="'+r.url+'" target="_blank" rel="noopener">Ouvrir ↗</a></div>'
+  ).join("");
+}
+
+// ── ÉTAT (maîtrisés + série) ──
+const RKEY="niqach-mastered", SKEY="niqach-stats";
 let mastered=new Set();
 try{const r=localStorage.getItem(RKEY);if(r)mastered=new Set(JSON.parse(r));}catch(e){}
+let stats={streak:0,lastDay:null};
+try{const r=localStorage.getItem(SKEY);if(r)stats=JSON.parse(r);}catch(e){}
 function saveMastered(){try{localStorage.setItem(RKEY,JSON.stringify([...mastered]));}catch(e){}}
+function saveStats(){try{localStorage.setItem(SKEY,JSON.stringify(stats));}catch(e){}}
+const today=()=>new Date().toISOString().slice(0,10);
+const addD=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x.toISOString().slice(0,10);};
+function markActivity(){ // appelé quand l'utilisateur révise
+  const t=today();
+  if(stats.lastDay!==t){ stats.streak=(stats.lastDay===addD(t,-1))?stats.streak+1:1; stats.lastDay=t; saveStats(); }
+}
+// ── AUDIO (arabe standard) ──
+function speak(txt){
+  if(!("speechSynthesis" in window))return;
+  try{
+    window.speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(txt);
+    const v=window.speechSynthesis.getVoices().find(x=>x.lang&&x.lang.toLowerCase().startsWith("ar"));
+    u.lang=v?v.lang:"ar-SA"; if(v)u.voice=v; u.rate=0.85;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+if("speechSynthesis" in window){try{window.speechSynthesis.onvoiceschanged=()=>{};}catch(e){}}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-say]");if(b){e.stopPropagation();speak(b.dataset.say);}});
+
+// ── ACCUEIL ──
+function renderHome(){
+  const h=new Date().getHours();
+  const g=h<12?"Bonjour Malek":h<18?"Bon après-midi Malek":"Bonsoir Malek";
+  $("hero-greet").textContent=g;
+  const total=pool().length, done=mastered.size;
+  $("hs-streak").textContent=stats.streak;
+  $("hs-mastered").textContent=done;
+  $("hs-total").textContent=THEMES.reduce((n,t)=>n+t.words.length,0);
+  const pct=total?Math.round(done/total*100):0;
+  $("hero-prog-fill").style.width=pct+"%";
+  $("hero-prog-label").textContent=done+" / "+total+" éléments maîtrisés · "+pct+"%";
+  $("hero-cta").textContent=done>=total?"Tout est maîtrisé 👏 — revoir":"Continuer la révision →";
+  const cards=[
+    ["◫","Lexique","254 termes · 18 champs","themes"],
+    ["◎","Argumenter","100 formules de débat","arg"],
+    ["◇","Structures","32 patrons de phrase","struct"],
+    ["◌","Débats","24 motions argumentées","debate"],
+    ["▷","Écoute","discours & podcasts à imiter","ecoute"],
+  ];
+  $("home-grid").innerHTML=cards.map(c=>'<button class="home-card" data-go="'+c[3]+'"><div class="hc-ic">'+c[0]+'</div><div class="hc-t">'+c[1]+'</div><div class="hc-d">'+c[2]+'</div></button>').join("");
+  // mot du jour (déterministe sur la date)
+  const all=pool();
+  const seed=parseInt(today().replace(/-/g,""),10)%all.length;
+  const w=all[seed];
+  $("home-word").innerHTML='<div class="hw-label">Terme du jour</div>'+
+    '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><div style="flex:1"><div class="hw-ar">'+w.ar+'</div><div class="hw-tr">'+w.tr+'</div></div>'+
+    '<button class="say" data-say="'+esc(w.ar)+'" aria-label="Écouter">🔊</button></div>'+
+    '<div class="hw-fr">'+w.fr+'</div>'+
+    (w.ex?'<div class="hw-ex">'+w.ex+'</div><div class="hw-tr" style="text-align:right">'+w.exTr+'</div><div class="hc-d" style="text-align:right;margin-top:2px">'+w.exFr+'</div>':'');
+}
+$("hero-cta").onclick=()=>show("rev");
+document.addEventListener("click",e=>{const b=e.target.closest("[data-go]");if(b)show(b.dataset.go);});
 function pool(){
   const p=[];
   THEMES.forEach(t=>t.words.forEach(w=>p.push({id:"t|"+w[1],ar:w[0],tr:w[1],fr:w[2],ex:w[3],exTr:w[4],exFr:w[5]})));
@@ -301,14 +479,13 @@ function renderRev(){
   $("flash").onclick=()=>{revFlipped=!revFlipped;renderRev();};
   if(revFlipped){
     $("rev-again").onclick=()=>{revQueue.push(revQueue.shift());revFlipped=false;renderRev();};
-    $("rev-known").onclick=()=>{mastered.add(revQueue.shift().id);saveMastered();revFlipped=false;renderRev();};
+    $("rev-known").onclick=()=>{markActivity();mastered.add(revQueue.shift().id);saveMastered();revFlipped=false;renderRev();};
   }
 }
 
 // init
-let totalTerms=pool().length;
 $("footer").textContent=THEMES.reduce((n,t)=>n+t.words.length,0)+" termes · "+ARG.reduce((n,g)=>n+g.items.length,0)+" formules · "+STRUCT.length+" structures · "+DEBATES.length+" débats";
-renderThemes();
+show("home");
 </script>
 </body>
 </html>
